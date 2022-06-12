@@ -1,4 +1,4 @@
-#version 1.2
+#version 1.3
 #latest update of 12 jun 6:20 pm
 import os
 import time
@@ -41,7 +41,7 @@ def update(repo,tempdir,filename):
 
 def printer():
     print("Hello what's up");
-in=input("1.Check update\n2.Print")
-if input=="1":update(repo,".temp","auto");
-elif input=="2":printer();
+number=input("1.Check update\n2.Print")
+if number=="1":update(repo,".temp","auto");
+elif number=="2":printer();
 
