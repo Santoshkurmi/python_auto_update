@@ -20,9 +20,9 @@ def check_update(repo,tempdir,filename):
 
     if current>=1 and latest>=1:
         if current<latest:
-            time=time.time();
+            time1=time.time();
             print("Update is available,updating");
-            if os.system(f"cp {filename}.py .{filename}_{time}"):
+            if os.system(f"cp {filename}.py .{filename}_{time1}"):
                 if os.system(f"cp {tempdir}/{filename}.py ."):
                     print("Successfully updated the program");
                 
