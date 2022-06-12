@@ -1,7 +1,7 @@
 #version 1.1
 #latest update of 12 jun 6:20 pm
 import os
-from time
+import time
 
 
 repo="https://github.com/Santoshkurmi/python_auto_update"
