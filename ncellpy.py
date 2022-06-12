@@ -1,4 +1,4 @@
-#version 1.1
+#version 1.2
 from datetime import datetime
 time=int( datetime.now().hour)
 
