@@ -28,7 +28,7 @@ offerList=[["Free 1 gb data",5002848],
         ["SMS at 13 paisa",4807917],
         ["Local cal rate 1.62",5007330],
         ["PayG 1_6M" ,5004131],
-        ["2 gb Data at Rs. 50 28 days(ncellapp)",5007729],
+        ["2 gb Data at Rs. 50 28 days(ncell_app)",5007729],
         ["India local call",5004024],
         ["200 Min at Rs.45 7 days",5002846],
         ["5 gb 7 days at Rs 98",5006524]
