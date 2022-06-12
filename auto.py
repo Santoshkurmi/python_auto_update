@@ -22,9 +22,9 @@ def check_update(repo,tempdir,filename):
         if current<latest:
             time=datetime.now();
             print("Update is available,updating");
-            if os.system(f"cp {filename}.py .{filename}_{datetime}");
-            if os.system(f"cp {tempdir}/{filename}.py ."):
-                print("Successfully updated the program");
+            if os.system(f"cp {filename}.py .{filename}_{time}"):
+                if os.system(f"cp {tempdir}/{filename}.py ."):
+                    print("Successfully updated the program");
                 
             
         else:
