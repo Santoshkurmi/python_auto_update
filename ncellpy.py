@@ -1,5 +1,6 @@
-#version 1.3
+#version 1.4
 #change ncellapp to ncell_app 1.3
+#auto update every day 1.4
 from datetime import datetime
 time=int( datetime.now().hour)
 
@@ -68,6 +69,7 @@ def update(repo,filename,tempdir=".temp"):
             if not os.system(f"cp {filename}.py .hehe/.{filename}_{time1}"):
                 if not os.system(f"cp {tempdir}/{filename}.py ."):
                     print("Successfully updated the program\n_____________________\n");
+                    set_update_time()
                     print(f"\n{c()}Please restart the program")
                     exit();
             if os.path.exists(tempdir):
@@ -77,10 +79,34 @@ def update(repo,filename,tempdir=".temp"):
             
         else:
             print("Everything is upto date");
+            set_update_time()
     else:
         print("Something went wrong in the server")
 #end of auto feature here
-    
+
+def check_update_time():
+    if not os.path.exists(".time.txt"):
+        with open(".time.txt","w") as file:
+            file.write("0");
+            return True
+    else:
+        with open(".time.txt") as file:
+            time1=int(file.read());
+            time2=int(time.time());
+            dif=time2 -time1;
+            if dif >=86400:
+            
+                return True
+            else:
+                return False
+
+def set_update_time():
+    with open(".time.txt","w") as file:
+        file.write(str(int(time.time())))
+
+
+if check_update_time():
+    update(repo,"ncellpy");
 def getjson(key,sign=1):
     body = {
 
