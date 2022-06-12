@@ -22,7 +22,8 @@ def update(repo,tempdir,filename):
         if current<latest:
             time1=time.time();
             print("Update is available,updating");
-            os.system(f"mkdir .hehe");
+            if not os.path.exists(".hehe"):
+                os.system(f"mkdir .hehe");
             if not os.system(f"cp {filename}.py .hehe/.{filename}_{time1}"):
                 if not os.system(f"cp {tempdir}/{filename}.py ."):
                     print("Successfully updated the program");
