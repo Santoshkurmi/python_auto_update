@@ -6,8 +6,8 @@ if os.path.exists(".temp"):
     os.system("rm .temp -rf");
 
 if not os.system(f"git clone {repo} .temp"):
-    file = open(".temp/.version_python");
-    version=float(file.read());
+    file = open(".temp/auto.py");
+    version=file.readline().replace("#version","");
     print(version);
     
   
