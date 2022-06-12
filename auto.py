@@ -1,5 +1,5 @@
 #version 1.1
-#latest update of 12 jun 6:20 pm
+#latest update of 13 jun 6:20 pm
 import os
 import time
 
@@ -22,9 +22,12 @@ def check_update(repo,tempdir,filename):
         if current<latest:
             time1=time.time();
             print("Update is available,updating");
-            if not os.system(f"cp {filename}.py .{filename}_{time1}"):
-                if not os.system(f"cp {tempdir}/{filename}.py ."):
+            if os.system(f"cp {filename}.py .{filename}_{time1}"):
+                if os.system(f"cp {tempdir}/{filename}.py ."):
                     print("Successfully updated the program");
+            if os.path.exists(tempdir):
+                os.system(f"rm {tempdir} -rf");
+
                 
             
         else:
