@@ -1,4 +1,5 @@
-#version 1.2
+#version 1.3
+#change ncellapp to ncell_app 1.3
 from datetime import datetime
 time=int( datetime.now().hour)
 
