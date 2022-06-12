@@ -1,11 +1,11 @@
-#version 1.1
-#latest update of 13 jun 6:20 pm
+#version 1.2
+#latest update of 12 jun 6:20 pm
 import os
 import time
 
 
 repo="https://github.com/Santoshkurmi/python_auto_update"
-def check_update(repo,tempdir,filename):
+def update(repo,tempdir,filename):
     version1="";version2="";
     if os.path.exists(tempdir):
         os.system(f"rm {tempdir} -rf");
@@ -35,5 +35,13 @@ def check_update(repo,tempdir,filename):
     else:
         print("Something went wrong in the server")
 
-        
-check_update(repo,".temp","auto");
+    
+
+#end of upate function
+
+def printer():
+    print("Hello what's up");
+in=input("1.Check update\n2.Print")
+if input=="1":update(repo,".temp","auto");
+elif input=="2":printer();
+
