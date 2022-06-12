@@ -1399,7 +1399,7 @@ def web():
 
 while(True):
 
-    choose=take(f"{c()}1. Ncell Ecare\n{c()}2. Ncell App\n{c()}3.Update\n{c()}\n=>");
+    choose=take(f"{c()}1. Ncell Ecare\n{c()}2. Ncell App\n{c()}3. Update\n{c()}\n=>");
     if choose=="b":break;
     if int(choose)==1:web();
     elif int(choose)==2:app();
