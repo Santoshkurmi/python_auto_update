@@ -1,6 +1,7 @@
-#version 1.4
+#version 1.5
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
+#finally done some fixes and update goes to 2 days every
 from datetime import datetime
 time=int( datetime.now().hour)
 
@@ -93,8 +94,8 @@ def check_update_time():
         with open(".time.txt") as file:
             time1=int(file.read());
             time2=int(time.time());
-            dif=time2 -time1;
-            if dif >=86400:
+            dif=abs(time2 -time1);
+            if dif >=86400*2:
             
                 return True
             else:
