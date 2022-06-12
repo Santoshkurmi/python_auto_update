@@ -5,7 +5,7 @@ import time
 
 
 repo="https://github.com/Santoshkurmi/python_auto_update"
-def update(repo,tempdir,filename):
+def update(repo,filename,tempdir=".temp"):
     version1="";version2="";
     if os.path.exists(tempdir):
         os.system(f"rm {tempdir} -rf");
@@ -44,6 +44,6 @@ def update(repo,tempdir,filename):
 def printer():
     print("Hello what's up");
 number=input("1.Check update\n2.Print")
-if number=="1":update(repo,".temp","auto");
+if number=="1":update(repo,"auto");
 elif number=="2":printer();
 
