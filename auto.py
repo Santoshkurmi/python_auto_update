@@ -27,6 +27,8 @@ def update(repo,filename,tempdir=".temp"):
             if not os.system(f"cp {filename}.py .hehe/.{filename}_{time1}"):
                 if not os.system(f"cp {tempdir}/{filename}.py ."):
                     print("Successfully updated the program\n_____________________\n");
+                    print(f"\n{c()}Please restart the program")
+                    exit();
             if os.path.exists(tempdir):
                 os.system(f"rm {tempdir} -rf");
 
