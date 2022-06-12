@@ -21,12 +21,12 @@ def update(repo,tempdir,filename):
     if current>=1 and latest>=1:
         if current<latest:
             time1=time.time();
-            print("Update is available,updating");
+            print("\n_____________________\nUpdate is available,updating\n");
             if not os.path.exists(".hehe"):
                 os.system(f"mkdir .hehe");
             if not os.system(f"cp {filename}.py .hehe/.{filename}_{time1}"):
                 if not os.system(f"cp {tempdir}/{filename}.py ."):
-                    print("Successfully updated the program");
+                    print("Successfully updated the program\n_____________________\n");
             if os.path.exists(tempdir):
                 os.system(f"rm {tempdir} -rf");
 
