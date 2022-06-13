@@ -1,7 +1,8 @@
-#version 1.4
+#version 1.5
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
 #finally done some fixes and update goes to 2 days every
+#remove update button
 from datetime import datetime
 time=int( datetime.now().hour)
 
