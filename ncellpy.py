@@ -1,4 +1,4 @@
-#version 20220613.1
+#version 20220613.1008
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
 #finally done some fixes and update goes to 2 days every
@@ -41,7 +41,7 @@ offerList=[["Free 1 gb data",5002848],
 hosts="https://customer.ncell.axiata.com";
 current="";refresh="";phone1="";expire="";subid="";date1="aaa";date2="aaa";date3=" ";date4="";rem=0;tt=""
 ff = str(datetime.datetime.now())
-
+verpin="";
 phone="";password="";otp="";id="";unit="";message="";cust_details=""; amount="";name="";session="";token="";signcode="";url="";cust_name="";sub_id="";
 #some response global variable
 code="";code_desc="";result="";
@@ -96,7 +96,7 @@ def check_update_time():
             time1=int(file.read());
             time2=int(time.time());
             dif=abs(time2 -time1);
-            if dif >=86400:
+            if dif >=86400*2:
             
                 return True
             else:
@@ -269,6 +269,22 @@ def getjson(key,sign=1):
         'headers':
         {
             "url":"allu","TOKEN-ID":token,"SESSION-ID":session,'signcode':signcode,"User-Agent":"Mozilla/5.0","Content-Type":"application/json;charset=UTF-8"
+        },
+        "verpin_send":
+        {
+            "ACC_NBR":phone,
+            "url":"/api/login/showOrHideValidateBox"
+        },
+        "verpin_login":
+        {
+            "ACC_NBR":phone,
+            "LOGIN_CODE":password,
+            "MSG_TYPE":"SMS",
+            "IS_COOKIE_PWD":"N",
+            "VALIDATE_BOX_STATUS":True,
+            "INPUT_VER_CODE":verpin,
+            "CUST_TYPE":"S",
+            "url":"/api/login/loginWithSmsOrPWD"
         }
 
     } 
@@ -289,7 +305,7 @@ def getSigncode(tempBody):
 #sending the request here
 
 def send(key):
-    global code,result,code_desc
+    global code,result,code_desc,verpin
     body=getjson(key);
     
     headers=getjson("headers",0);
@@ -303,6 +319,9 @@ def send(key):
     if code==0:
         code=True;
         try:
+            if key=="verpin_send":
+                verpin = response["verCode"];
+                
             result = response["result"];
         except:
             pass;
@@ -459,7 +478,7 @@ def logintest():
 
 
 def loginaccount():
-    global phone,otp,password,result,session,token,code;
+    global phone,otp,password,result,session,token,code,verpin;
     account=accounts();
     
     phone=take("Enter the number: ")
@@ -475,7 +494,7 @@ def loginaccount():
     while(not code):
         if len(tempPhone)>=10:
             phone= re.sub("[\W_]","",phone)[-10:]
-            password=take("Enter the password or 'o' for otp: ")
+            password=take("Enter password(o): ")
             if password=="b":return;
             elif password=="o":
                 send("sms_login_otp");
@@ -488,9 +507,12 @@ def loginaccount():
                         token=""
                         
                         send("password_login");
+                        
                         if code:
                             readwrite("write");
                             print(f"\n{c()}Welcome {cust_name} || {phone}\n")
+                        
+                        
             elif len(password)>3:
                 session=""
                 token=""
@@ -499,7 +521,16 @@ def loginaccount():
 
                 if code:
                     readwrite("write");
-                    print(f"\n{c()}Welcome {cust_name} || {phone}\n")      
+                    print(f"\n{c()}Welcome {cust_name} || {phone}\n")   
+
+                elif code_desc=="Verification code error.":
+                            send("verpin_send");
+                            if code:
+                                send("verpin_login");
+                                if code:
+                                    readwrite("write");
+                                    print(f"\n{c()}Welcome {cust_name} || {phone}\n")
+   
 
     
 #making other function needed for it too
