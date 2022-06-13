@@ -1,9 +1,11 @@
 import requests
 import json
 token="";phone="";password="";
-header={
+headerweb={
 "Host": "webapi.ncell.axiata.com",
-"Authorization": "Bearer 1463|M3mPt30dHTHhdJODOgcMOpdzC7alZbykhHHumkTf",
+"Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJnaGd4eGM5NzZoaiIsImlhdCI6MTY1NTA5NTQ5MywibmJmIjoxNjU1MDk1NDkzLCJleHAiOjE2NTUwOTkwOTMsInVpZCI6IjU3OGpmZkBoZ2hoaiIsInN1YiI6Im5jZWxsX3B3YSJ9.FKbL7QEF1cpQBm8N8A1bGwfvnX1ako9scMbFX_sk7q8",
+"Content-Type": "application/json;charset=UTF-8",
+"Accept": "application/json, text/plain, */*"
         }
 host="https://webapi.ncell.axiata.com";
 
@@ -31,17 +33,34 @@ def getdata():
 
 def getsend():
     url=host+"/v1/account/dashboard";
-    response=requests.get(url,headers=header).json();
+    response=requests.get(url,headers=headerweb).json();
     return response["data"]
+
 def postsend():
     url=host+"/v1/account/update-profile";
     data=json.dumps(getdata());
-    response=requests.post(url,data=data,headers=header).json()
+    response=requests.post(url,data=data,headers=headerweb).json()
     print()
     print(response["message"])
     print()
 
-def printer():
+def weblogin():
+    url=host + "/v1/account/login/request"
+    phone=input("Enter the phone: ");
+    if not  len(phone)==10:
+        exit();
+    password = input("Enter the password: " );
+    data =json.dumps({
+  "phoneNumber":phone,
+  "password": password,
+  "redirectTo": " ",
+  "url":"/v1/account/login/request"
+        })
+    response =requests.post(url,headers=headerweb,data=data).json();
+    print(response);
+
+
+def printerweb():
     
     response=getsend()
     balance= response["balanceInfo"]["currentBalance"]
@@ -61,10 +80,12 @@ def printer():
 def gettype(key):
     types={"dataPack":"MB","voicePack":"Min","smsPack":"SMS"}
     return types[key]
+
+weblogin()
 while True:
     phone=input("Enter the phone: ");
     if len(phone)==10:
         postsend()
-        printer()
+        printerweb()
     else:
-        printer();
+        printerweb();
