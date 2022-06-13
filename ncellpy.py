@@ -96,7 +96,7 @@ def check_update_time():
             time1=int(file.read());
             time2=int(time.time());
             dif=abs(time2 -time1);
-            if dif >=86400*2:
+            if dif >=86400:
             
                 return True
             else:
