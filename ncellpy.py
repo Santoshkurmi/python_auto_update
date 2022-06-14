@@ -49,7 +49,7 @@ code="";code_desc="";result="";
 #auto update features here 
 repo="https://github.com/Santoshkurmi/python_auto_update"
 
-def update(repo,filename,tempdir=".temp"):
+def update(repo,filename,tempdir=".temp",dust=0):
     version1="";version2="";
     if os.path.exists(tempdir):
         os.system(f"rm {tempdir} -rf");
@@ -61,29 +61,47 @@ def update(repo,filename,tempdir=".temp"):
     
     if os.path.exists(f"{filename}.py"):
         current=float(open(f"{filename}.py").readline().replace("#version",""));
+    if dust==0:
+        if current>=1 and latest>=1:
+            if current<latest:
+                time1=time.time();
+                print("\n_____________________\nUpdate is available,updating\n");
+                if not os.path.exists(".hehe"):
+                    os.system(f"mkdir .hehe");
+                if not os.system(f"cp {filename}.py .hehe/.{filename}_{time1}"):
+                    if not os.system(f"cp {tempdir}/{filename}.py ."):
+                        print("Successfully updated the program\n_____________________\n");
+                        set_update_time()
+                        print(f"\n{c()}Please restart the program")
+                        exit();
+                if os.path.exists(tempdir):
+                    os.system(f"rm {tempdir} -rf");
 
-    if current>=1 and latest>=1:
-        if current<latest:
-            time1=time.time();
-            print("\n_____________________\nUpdate is available,updating\n");
-            if not os.path.exists(".hehe"):
-                os.system(f"mkdir .hehe");
-            if not os.system(f"cp {filename}.py .hehe/.{filename}_{time1}"):
-                if not os.system(f"cp {tempdir}/{filename}.py ."):
-                    print("Successfully updated the program\n_____________________\n");
-                    set_update_time()
-                    print(f"\n{c()}Please restart the program")
-                    exit();
-            if os.path.exists(tempdir):
-                os.system(f"rm {tempdir} -rf");
+                    
+                
+            else:
+                print("Everything is upto date");
+                set_update_time()
+        else:
+            print("Something went wrong in the server")
+    elif dust==1:
+        
+                time1=time.time();
+                print("\n_____________________\nUpdate is available,updating\n");
+                if not os.path.exists(".hehe"):
+                    os.system(f"mkdir .hehe");
+                if not os.system(f"cp {filename}.py .hehe/.{filename}_{time1}"):
+                    if not os.system(f"cp {tempdir}/{filename}.py ."):
+                        print("Successfully updated the program\n_____________________\n");
+                        set_update_time()
+                        print(f"\n{c()}Please restart the program")
+                        exit();
+                if os.path.exists(tempdir):
+                    os.system(f"rm {tempdir} -rf");
 
                 
             
-        else:
-            print("Everything is upto date");
-            set_update_time()
-    else:
-        print("Something went wrong in the server")
+            
 #end of auto feature here
 
 def check_update_time():
@@ -1649,7 +1667,9 @@ while(True):
 
     choose=take(f"\n{c()}1. Ncell Ecare\n{c()}2. Ncell App{c()}\n3. Ncell Web\n{c()}4. Update\n{c()}=>");
     if choose=="b":break;
-    if int(choose)==1:web();
+    elif choose=="4f":update(repo,"ncellpy",dust=1)
+    elif int(choose)==1:web();
     elif int(choose)==2:app();
-    elif int(choose)==4:update(repo,"ncellpy");
+    elif int(choose)==4:update(repo,"ncellpy",dust=0);
+    
     elif int(choose)==3:webaxiata();
