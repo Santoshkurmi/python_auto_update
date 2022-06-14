@@ -1,4 +1,4 @@
-#version 20220613.1008
+#version 20220614.1008
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
 #finally done some fixes and update goes to 2 days every
@@ -28,7 +28,7 @@ def c():
 #global variavle for activating the services
 
 
-offerList=[["Free 1 gb data",5002848],
+offerList=[[" 1 gb data at Rs. 500😊",5002848],
         ["SMS at 13 paisa",4807917],
         ["Local cal rate 1.62",5007330],
         ["PayG 1_6M" ,5004131],
