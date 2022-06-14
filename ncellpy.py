@@ -1604,12 +1604,13 @@ def printnumbers():
         phone2 = web_numbers[int(in_number)-1];
         if temp==phone2:
                 printerweb();
+                return
             
-        else:
+        
             
-            res=postsend()
-            if not res ==12 and not res==10:printerweb()
-            if res==10:weblogin(); 
+    res=postsend()
+    if not res ==12 and not res==10:printerweb()
+    if res==10:weblogin(); 
 
 
 
