@@ -1,4 +1,4 @@
-#version 20220614.6390213
+#version 20220614.888390213
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
 #finally done some fixes and update goes to 2 days every
@@ -1544,26 +1544,73 @@ def gettype(key):
 
 
 def readwrite1( mode=0):
-    global token,phone2,default,password2;
-    if mode==0:
-        if not os.path.exists("ncellweb.json"):
+    global token,phone2,default,password2,web_numbers;
+    if not os.path.exists("ncellweb.json"):
             with open("ncellweb.json","w")as fp:
-                fp.write('{"phone":"","token":"","default":"","password":""}');
+                fp.write('{"phone":"","token":"","default":"", "password":"", "numbers":[] }');
 
-        else:
-            with open("ncellweb.json") as fp:
-                data = json.loads(fp.read());
-                phone2 = data["phone"]
-                token =data["token"]
-                default=data["default"]
-                password2 = data["password"]
+    if mode==0:
+                    with open("ncellweb.json") as fp:
+                        dd = fp.read();
+                        
+                        data = json.loads(dd);
+                        phone2 = data["phone"]
+                        token =data["token"]
+                        default=data["default"]
+                        password2 = data["password"]
+                        web_numbers=data["numbers"];
+                        
+                        
     elif mode==1:
+        
+         
         with open("ncellweb.json","w") as writef:
-            data ={"phone":phone2,"token":token,"default":default,"password":password2}
+            
+            if not phone2 in web_numbers:
+                web_numbers.append(phone2);
+            data ={"phone":phone2,"token":token,"default":default,"password":password2,"numbers":web_numbers}
             
             data1=json.dumps(data,indent=4);
             writef.write(data1)
             
+def printnumbers():
+    global web_numbers,phone2,default
+    readwrite1();
+   
+    count=1
+    temp = phone2;
+    
+    
+    print(f"{c()}\n___________________________\n")
+    for web_number in web_numbers:
+        if phone2 ==web_number:
+            web_status=" #"
+        else:web_status=""
+        if default ==web_number:
+            web_status2=" (default)"
+        else:
+            web_status2=""
+        print(f'{c()}{count}. {web_number}{web_status}{web_status2}')
+        count +=1;
+    print(f"{c()}___________________________\n")
+
+    in_number= input("Enter the number: ");
+    if in_number=="b":return;
+    elif in_number=="e":exit();
+    elif len(in_number)==10:
+        phone2 = in_number
+        
+    else:
+        phone2 = web_numbers[int(in_number)-1];
+        if temp==phone2:
+                printerweb();
+            
+        else:
+            
+            res=postsend()
+            if not res ==12 and not res==10:printerweb()
+            if res==10:weblogin(); 
+
 
 
 def setdefault():
@@ -1583,7 +1630,7 @@ def webaxiata():
     global phone2
     while True:
     
-        aa=input(f"{c()}1. Login\n{c()}2. AutoLogin\n{c()}3. Set Default\n{c()}4. Print\n{c()}=>");
+        aa=input(f"{c()}1. Login\n{c()}2. AutoLogin\n{c()}3. Set Default\n{c()}4. Print\n{c()}5. Choose number\n{c()}=>");
         if aa=="b":
             break;
         elif aa=="e":
@@ -1593,6 +1640,7 @@ def webaxiata():
             weblogin();
         elif int(aa)==2:weblogin(1);
         elif int(aa)==3:setdefault();
+        elif int(aa)==5:printnumbers();
         elif len(aa)==10:
             phone2=aa;
             
