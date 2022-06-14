@@ -50,7 +50,7 @@ code="";code_desc="";result="";
 repo="https://github.com/Santoshkurmi/python_auto_update"
 
 def update(repo,filename,tempdir=".temp",dust=0):
-    version1="";version2=""latest="";current="";
+    version1="";version2="";latest="";current="";
     if os.path.exists(tempdir):
         os.system(f"rm {tempdir} -rf");
 
