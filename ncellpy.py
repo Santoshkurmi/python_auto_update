@@ -50,7 +50,7 @@ code="";code_desc="";result="";
 repo="https://github.com/Santoshkurmi/python_auto_update"
 
 def update(repo,filename,tempdir=".temp",dust=0):
-    version1="";version2="";
+    version1="";version2=""latest="";current="";
     if os.path.exists(tempdir):
         os.system(f"rm {tempdir} -rf");
 
@@ -58,6 +58,9 @@ def update(repo,filename,tempdir=".temp",dust=0):
         file = open(f"{tempdir}/{filename}.py");
         latest=float(file.readline().replace("#version",""));
         file.close()
+    else:
+        print("Please install git\n");
+        os.system("apt install git -y");
     
     if os.path.exists(f"{filename}.py"):
         current=float(open(f"{filename}.py").readline().replace("#version",""));
