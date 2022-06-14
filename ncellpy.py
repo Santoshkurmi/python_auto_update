@@ -1,4 +1,4 @@
-#version 20220614.4390
+#version 20220614.4390213
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
 #finally done some fixes and update goes to 2 days every
@@ -1643,7 +1643,7 @@ def web():
 
 while(True):
 
-    choose=take(f"{c()}1. Ncell Ecare\n{c()}2. Ncell App{c()}\n3. Ncell Web\n{c()}4. Update\n{c()}=>");
+    choose=take(f"\n{c()}1. Ncell Ecare\n{c()}2. Ncell App{c()}\n3. Ncell Web\n{c()}4. Update\n{c()}=>");
     if choose=="b":break;
     if int(choose)==1:web();
     elif int(choose)==2:app();
