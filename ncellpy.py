@@ -1,4 +1,4 @@
-#version 20220614.5390213
+#version 20220614.6390213
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
 #finally done some fixes and update goes to 2 days every
@@ -1499,7 +1499,7 @@ def gettoken():
     # print(response.text)
 
 def printerweb():
-    
+    global phone2
     response=getsend()
     print(f"\n{c()}phone: {phone2}")
     balance= response["balanceInfo"]["currentBalance"]
@@ -1551,8 +1551,9 @@ def setdefault():
     # weblogin(1)
     temp = phone2 
     phone2 = default
+   
     postsend();
-    phone2 = temp
+    
 
 # weblogin() #login with password manually
 readwrite1(); #entry point here
