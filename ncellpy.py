@@ -1,4 +1,4 @@
-#version 20220614.4390213
+#version 20220614.5390213
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
 #finally done some fixes and update goes to 2 days every
@@ -1401,6 +1401,7 @@ def logouti():
       
 
 ######################################################ncell web
+phone2=""
 def getheader():
     headerweb={
 "Host": "webapi.ncell.axiata.com",
@@ -1557,6 +1558,7 @@ def setdefault():
 readwrite1(); #entry point here
 
 def webaxiata():
+    global phone2
     while True:
     
         aa=input(f"{c()}1. Login\n{c()}2. AutoLogin\n{c()}3. Set Default\n{c()}4. Print\n{c()}=>");
@@ -1571,6 +1573,7 @@ def webaxiata():
         elif int(aa)==3:setdefault();
         elif len(aa)==10:
             phone2=aa;
+            
             res=postsend()
             if not res ==12 and not res==10:printerweb()
             if res==10:weblogin()
