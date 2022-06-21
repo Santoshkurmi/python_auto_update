@@ -1662,7 +1662,7 @@ def app():
     start();
     profile();
     runner="";
-    while runner!="b":
+    while True:
         choose=takeInput(bcolors.WARNING+"\n\n---------------------------\n\n"+bcolors.HEADER+"Enter the choice\n"+bcolors.OKGREEN+"1.Send Sms\n"+bcolors.OKCYAN+"2.Subscribe\n"+bcolors.HEADER+"3.Unsubscribe\n"+bcolors.WARNING+"4.Send Gift\n"+bcolors.FAIL+"5.Login\n"+bcolors.OKGREEN+"6.Details\n"+bcolors.OKGREEN+"7.Usage Details\n"+"=> ");
 
         if choose=="b":return;
@@ -1679,7 +1679,6 @@ def app():
         elif choose=="m":mul(15,15);
         
 
-        runner=takeInput(bcolors.FAIL+"Enter to show menu: ");
 
 
 
