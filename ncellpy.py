@@ -1,4 +1,4 @@
-#version 20220614.9999390213
+#version 20220621.9999390213
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
 #finally done some fixes and update goes to 2 days every
@@ -981,7 +981,7 @@ def profile():
 def login():
     global current,phone,refresh,expire
     account=accounts(1);
-    phone1=takeInput(bcolors.OKBLUE+"Enter number or choose from above: ");
+    phone1=takeInput(bcolors.OKBLUE+"Enter number: ");
     if phone1=="b":return
     elif phone1=="e":exit()
     try:
