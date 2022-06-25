@@ -963,7 +963,7 @@ def profile():
 
     try:
             name=response[2]["querySubscriberProfileResponse"]["subscriberDetail"]["firstName"];
-            print(bcolors.OKBLUE+"Hello "+ response[2]["querySubscriberProfileResponse"]["subscriberDetail"]["firstName"]);
+            print(bcolors.OKBLUE+"Hello "+ response[2]["querySubscriberProfileResponse"]["subscriberDetail"]["firstName"]+" || "+str(phone));
             
             subid=response[2]["querySubscriberProfileResponse"]["subscriberDetail"]["subscriberId"];
             write(phonep=phone,currentp=current,refreshp=refresh,expirep=expire,sub=subid);
