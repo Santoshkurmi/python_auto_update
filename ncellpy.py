@@ -1,4 +1,4 @@
-#version 20220621.9999390213
+#version 20220625.9999390213
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
 #finally done some fixes and update goes to 2 days every
@@ -561,13 +561,15 @@ def checkData(operation=0):
     idd=""
     if code:
         print("\n****************************")
-        i=1;
-        if operation:
-            i=2;
-            print("\n1. Main Balance")
+        i=2;
+        result1=result;
+        send("query_balance");
+        if code:
+            balance=result["LOCAL_BAL"]
+        print("\n1. Main Balance: "+str(balance))
         idd=[["",""],["Local Currency","Rs."]];
-        for e in result:
-            for f in result[e]:
+        for e in result1:
+            for f in result1[e]:
                 print(f"\n{i}.")
                 print(f"{c()}Type: {f['ACCT_RES_NAME']}")
                 print(f"Amount: {f['REAL_BAL']}/{f['GROSS_BAL']} {f['UNIT_NAME']}")
@@ -630,7 +632,6 @@ def transfer():
     global id,otp,phone,unit,amount;
 
     idd=checkData(1);
-    print(idd)
     text=take("Choose the type of transfer: ");
     if text=="b":return;
     if int(text)>len(idd):print("Please enter the correct option")
@@ -1075,7 +1076,7 @@ def sendsms():
 
 def subuns(action=""):
     code=[5005024,5002848,5007729,5002846];
-    offer=takeInput(bcolors.WARNING+"1. 200 mb free data\n2. 1 gb free data\n3. 2gb at Rs.50 28 days\n4. 200 Min at Rs.45 7 days\n=> ");
+    offer=takeInput(bcolors.WARNING+"1. 400 mb free data\n2. 1 gb free data\n3. 2gb at Rs.50 28 days\n4. 200 Min at Rs.45 7 days\n=> ");
     if offer=="b":return
     elif offer=="e":exit()
     if offer!="":
@@ -1139,7 +1140,7 @@ def queryGift():
         Code=c["id"];
         Price=c["totalPrice"]
         Name=c["name"];
-        
+        print(Code)
         print(bcolors.WARNING+str(i)+". "+Name+"\nDesc: "+Desc+"\nPrice: Rs "+Price+"\n__________________________\n")
         codeArray.append(Code);
         
