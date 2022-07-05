@@ -1,4 +1,4 @@
-#version 20220625.9999390213
+#version 20220705.9999390213
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
 #finally done some fixes and update goes to 2 days every
@@ -22,8 +22,18 @@ import os
 import random
 import datetime
 import time
+
+rand_num=[]
 def c():
-    return f"\u001b[{random.randint(30,37)};1m";
+    global rand_num
+    while(True):
+        tmp= random.randint(30,37)
+        if not tmp in rand_num:
+            rand_num.append(tmp)
+            if len(rand_num)>7:
+                rand_num=[]
+            return f"\u001b[{tmp};1m";
+
 
 #global variavle for activating the services
 
