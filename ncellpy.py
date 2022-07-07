@@ -1693,7 +1693,7 @@ def app():
         os.system("../usr/bin/termux-notification  -t 'Processing the script' -c '\n\nPlease wait a second' --id 1234")
         out=balance()
         out = "'"+out +"'"
-        phon= "'Phone: 😳😳"+str(phone2)+"😳😳'"
+        phon= "'Phone: 😳😳"+str(phone)+"😳😳'"
         os.system("../usr/bin/termux-notification --button1 Refresh --button2 Details --button1-action 'termux-notification-remove 1234; ncell1' --button3-action 'termux-notification-remove 1234' --button3 Close --button2-action 'ls'  -t "+phon+" --image /sdcard/termux.png --id 1234  -c "+ out)
         return
     profile();
