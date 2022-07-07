@@ -1202,23 +1202,32 @@ def balance():
     details=['smsBalanceList',"dataBalanceList"];
     counter=2;
     comb ="\n1. Balance: "+ str(balance)+"\n\n"
+    comb2=""
     print(f"1. Balance: {balance}\n")
     for key in details:
         for json in data[key]:
-                comb+=str(counter)+ ". "+ json['ncellName']+"\nUsage: "+ str(json['balance']) + json['uom'] + "\nExpiry: "+json['expDate']+"\n\n"
+                if counter<4:
+                    comb +=str(counter)+ ". "+ json['ncellName']+"\nUsage: "+ str(json['balance']) + json['uom'] + "\nExpiry: "+json['expDate']+"\n\n"
+                else:
+                    
+                    comb2+=str(counter)+ ". "+ json['ncellName']+"\nUsage: "+ str(json['balance']) + json['uom'] + "\nExpiry: "+json['expDate']+"\n\n"
                 print(f"{counter}. {json['ncellName']}")
                 print(f"Usage: {json['balance']}{json['uom']}")
                 print(f"Expiry: {json['expDate']}\n\n")
                 counter +=1;
 
     for json in data["voiceBalanceList"]:
-                comb+=str(counter)+ ". "+ json['ncellName']+"\nUsage: "+ str(json['freeTalkTime']) + "Min" + "\nExpiry: "+json['expDate']+"\n\n"
+                if counter<4:
+                    comb+=str(counter)+ ". "+ json['ncellName']+"\nUsage: "+ str(json['freeTalkTime']) + "Min" + "\nExpiry: "+json['expDate']+"\n\n"
+                else:
+
+                    comb2+=str(counter)+ ". "+ json['ncellName']+"\nUsage: "+ str(json['freeTalkTime']) + "Min" + "\nExpiry: "+json['expDate']+"\n\n"
                 print(f"{counter}. {json['ncellName']}")
                 print(f"Usage: {json['freeTalkTime']} Min")
                 print(f"Expiry: {json['expDate']}\n\n") 
                 counter +=1;
 
-    return comb
+    return comb,comb2
 #verifying otp
 
 def verOtp():
@@ -1691,10 +1700,16 @@ def app():
     start();
     if func_wow==123:
         os.system("../usr/bin/termux-notification  -t 'Processing the script' -c '\n\nPlease wait a second' --id 1234")
-        out=balance()
-        out = "'"+out +"'"
+        out1,out2=balance()
         phon= "'Phone: 😳😳"+str(phone)+"😳😳'"
-        os.system("../usr/bin/termux-notification --button1 Refresh --button2 Details --button1-action 'termux-notification-remove 1234; ncell1' --button3-action 'termux-notification-remove 1234' --button3 Close --button2-action 'ls'  -t "+phon+" --image /sdcard/termux.png --id 1234  -c "+ out)
+        out1 = "'"+out1 +"'"
+
+        if len(out2)>8:
+            out2 = "'"+out2 +"'"
+
+            os.system("../usr/bin/termux-notification --button1 Refresh --button2 Details --button1-action 'termux-notification-remove 12345; ncell1' --button3-action 'termux-notification-remove 12345' --button3 Close --button2-action 'ls'  --image /sdcard/termux.png --id 12345  -c "+ out2)
+        os.system("../usr/bin/termux-notification --button1 Refresh --button2 Details --button1-action 'termux-notification-remove 1234; ncell1' --button3-action 'termux-notification-remove 1234' --button3 Close --button2-action 'ls'  -t "+phon+" --image /sdcard/termux.png --id 1234  -c "+ out1)
+        os.system("am broadcast -a com.jozein.xedgepro.PERFORM -e data 6402")
         return
     profile();
     runner="";
