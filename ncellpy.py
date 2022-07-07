@@ -1,4 +1,4 @@
-#version 20220705.9999390213
+#version 20220707.8
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
 #finally done some fixes and update goes to 2 days every
@@ -19,6 +19,7 @@ import re
 import hashlib
 import requests 
 import os 
+import sys
 import random
 import datetime
 import time
@@ -888,7 +889,11 @@ def post(url,keyValue):
     body=json.dumps(body);
     try:
         response=requests.post(url1,data=body,headers=Headers);
-    except Exception as e:print("Network request send failed..exiting");exit();
+    except Exception as e:
+        print("Network request send failed..exiting");
+        if func_wow==123:
+            os.system("../usr/bin/termux-notification  -t 'Network request send failed😓' -c '\n\n😵😭😭' --id 1234")
+        exit()
     code=response.status_code;
     
     jsonstr=response.json()
@@ -910,6 +915,10 @@ def post(url,keyValue):
         return wow;
       
     if desc=="Full authentication is required to access this resource":
+        if func_wow==123:
+            os.system("../usr/bin/termux-notification  -t 'Login expired😓' -c '\n\nPlease login again yourself\n😊' --id 1234")
+            exit()  
+
         url1=url
         key=keyValue
         login();
@@ -1192,19 +1201,24 @@ def balance():
     balance=data["creditBalanceDetail"]["balance"]
     details=['smsBalanceList',"dataBalanceList"];
     counter=2;
+    comb ="\n1. Balance: "+ str(balance)+"\n\n"
     print(f"1. Balance: {balance}\n")
     for key in details:
         for json in data[key]:
+                comb+=str(counter)+ ". "+ json['ncellName']+"\nUsage: "+ str(json['balance']) + json['uom'] + "\nExpiry: "+json['expDate']+"\n\n"
                 print(f"{counter}. {json['ncellName']}")
                 print(f"Usage: {json['balance']}{json['uom']}")
                 print(f"Expiry: {json['expDate']}\n\n")
                 counter +=1;
 
     for json in data["voiceBalanceList"]:
+                comb+=str(counter)+ ". "+ json['ncellName']+"\nUsage: "+ str(json['freeTalkTime']) + "Min" + "\nExpiry: "+json['expDate']+"\n\n"
                 print(f"{counter}. {json['ncellName']}")
                 print(f"Usage: {json['freeTalkTime']} Min")
                 print(f"Expiry: {json['expDate']}\n\n") 
                 counter +=1;
+
+    return comb
 #verifying otp
 
 def verOtp():
@@ -1415,7 +1429,11 @@ def refreshToken():
         
         
         
-    except:login();
+    except:
+        if func_wow==123:
+            os.system("../usr/bin/termux-notification  -t 'Login expired😓' -c '\n\nPlease login again yourself\n😊' --id 1234")
+            exit()
+        login();
 
         
 
@@ -1671,6 +1689,13 @@ def webaxiata():
 
 def app():
     start();
+    if func_wow==123:
+        os.system("../usr/bin/termux-notification  -t 'Processing the script' -c '\n\nPlease wait a second' --id 1234")
+        out=balance()
+        out = "'"+out +"'"
+        phon= "'Phone: 😳😳"+str(phone2)+"😳😳'"
+        os.system("../usr/bin/termux-notification --button1 Refresh --button2 Details --button1-action 'termux-notification-remove 1234; ncell1' --button3-action 'termux-notification-remove 1234' --button3 Close --button2-action 'ls'  -t "+phon+" --image /sdcard/termux.png --id 1234  -c "+ out)
+        return
     profile();
     runner="";
     while True:
@@ -1725,6 +1750,18 @@ def web():
 
 #Happy ending here everythings
 
+def func():
+    global func_wow
+    length = len(sys.argv)
+    if length>1:
+        func_wow = 123
+        app()
+        sys.exit()
+
+    else:
+        func_wow=0
+
+func()
 while(True):
 
     choose=take(f"\n{c()}1. Ncell Ecare\n{c()}2. Ncell App{c()}\n3. Ncell Web\n{c()}4. Update\n{c()}=>");
