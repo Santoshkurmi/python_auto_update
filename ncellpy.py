@@ -1070,7 +1070,7 @@ def login():
 
                     if response[0]==200:
                         code,otp=dialog_text("-m","Enter the otp","Enter otp here")
-                        if not code==-1:code,otp=dialog_text("-m","Enter the otp","Enter otp here")
+                        if not code==-1:code,otp=dialog_text("-m",phone1,"Enter otp here")
                         if otp=="b":return
                         elif otp=="e":exit()
                         if len(otp)>4:
