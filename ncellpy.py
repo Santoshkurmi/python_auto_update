@@ -1741,6 +1741,7 @@ def webaxiata():
 #starting the whole process
 
 def app():
+    global func_wow
     start();
     
     if func_wow==123:
