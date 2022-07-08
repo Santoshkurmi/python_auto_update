@@ -1052,7 +1052,7 @@ def login():
                 #profile()
                 func_wow=123
                 app()
-            else:
+            elif out["code"]==0:
                 code,phone1=dialog_text("-m","Enter the phone number","Enter number here")
                 phone1 =str(phone1)
                 if code==-1:
@@ -1093,7 +1093,9 @@ def login():
                                     profile();
                                 except:print("Something went wrong here ....")
                         if not code==-1:exit()
-                        
+
+            else:
+                subuns()           
 #################################
 
 
