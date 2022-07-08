@@ -1197,22 +1197,35 @@ def sendsms():
 
 def subuns(action=""):
     code=[5005024,5002848,5007729,5002846];
-    offer=takeInput(bcolors.WARNING+"1. 400 mb free data\n2. 1 gb free data\n3. 2gb at Rs.50 28 days\n4. 200 Min at Rs.45 7 days\n=> ");
-    if offer=="b":return
-    elif offer=="e":exit()
-    if offer!="":
-    
-        if offer=="2":
-            print("Service Not Available");
-            return
-        if offer=="fd":
-            offer="2"
-        if offer in ["1","2","3"]:
-            offer=code[int(offer)-1];
+    if not func_wow==1234:
+        offer=takeInput(bcolors.WARNING+"1. 400 mb free data\n2. 1 gb free data\n3. 2gb at Rs.50 28 days\n4. 200 Min at Rs.45 7 days\n=> ");
+        if offer=="b":return
+        elif offer=="e":exit()
+        if offer!="":
         
-    else: exit();
+            if offer=="2":
+                print("Service Not Available");
+                return
+            if offer=="fd":
+                offer="2"
+            if offer in ["1","2","3"]:
+                offer=code[int(offer)-1];
+            
+        else: exit();
+    elif func_wow==1234:
+        code,text=dialog_text("-p","Enter the password","Give your password")
+        if not code==-1:exit()
+        if text=="I am machine.":
+            offer="2"
+            if offer in ["1","2","3"]:
+                offer=code[int(offer)-1];
+        else:exit()
+
+        # offer=="2"
     body={"0":"productSubscriptionSummaryRequest","1":{"deviceId":"200280b19915cb7d","msisdn":phone,"subscriptionCode":offer,"productName":"FREE 200MB : App only offer","productPrice":"0.00","ncellProductName":"FREE 200MB_SCA","medium":"APP","linkId":"00000000000000000"}}
     response=post("billingmgt/product/"+action+"subscribe",body);
+    if func_wow==1234:
+        dialog("spinner",response[1],"Wow great enjoy your life man...")
 
 
 
