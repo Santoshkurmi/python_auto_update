@@ -52,7 +52,7 @@ def dialog_text(type,title,content=" "):
     temp= run(["termux-dialog","text","-t",title,type,"-i",content])
     code = temp["code"]
     text = temp["text"]
-    return code,index 
+    return code,text 
 offerList=[[" 1 gb data at Rs. 500😊",5002848],
         ["SMS at 13 paisa",4807917],
         ["Local cal rate 1.62",5007330],
