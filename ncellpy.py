@@ -1836,14 +1836,14 @@ def app():
     while True:
         if func_wow==1234:
             code,index =dialog("spinner","Choose from the following","1. Balance,2. Login,3. subscribe,4. Unsubscribe,5. Send SMS,6. Exit")
-        if code==-1:
-            choose=str(index+1)
-            if choose=="5":sendsms();
-            elif choose=="3":subuns();
-            elif choose=="4":subuns("un");
-            elif choose=="1":balance();
-            elif choose=="2" : login();
-            elif choose=="6": break;
+            if code==-1:
+                choose=str(index+1)
+                if choose=="5":sendsms();
+                elif choose=="3":subuns();
+                elif choose=="4":subuns("un");
+                elif choose=="1":balance();
+                elif choose=="2" : login();
+                elif choose=="6": break;
         else:
             choose=takeInput(bcolors.WARNING+"\n\n---------------------------\n\n"+bcolors.HEADER+"Enter the choice\n"+bcolors.OKGREEN+"1.Send Sms\n"+bcolors.OKCYAN+"2.Subscribe\n"+bcolors.HEADER+"3.Unsubscribe\n"+bcolors.WARNING+"4.Send Gift\n"+bcolors.FAIL+"5.Login\n"+bcolors.OKGREEN+"6.Details\n"+bcolors.OKGREEN+"7.Usage Details\n"+"=> ");
 
