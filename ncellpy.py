@@ -1034,7 +1034,7 @@ def login():
     for i in range(1,len(account)+1):
         c=i
         ph += str(i+1)+". "+account[i-1] +" "+ name1[i-1]+","
-    ph+=str(c+2)+". Suscribe"
+    ph+=str(c+2)+". Iron Man"
     if func_wow==1234:
         #ph= ",".join(account)
         os.system("su -c cmd statusbar collapse")
@@ -1043,7 +1043,7 @@ def login():
         if out["code"]==-1:
             start()
             tmp =phone
-            if not out['index']==0:
+            if not out['index']in [0,len(account)+1]:
                 phone=account[out['index']-1]
                 name = name1[out['index']-1]
                 if tmp==phone:print("3sh");return
