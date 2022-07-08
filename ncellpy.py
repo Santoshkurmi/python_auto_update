@@ -39,6 +39,13 @@ def c():
 #global variavle for activating the services
 
 
+def run(command):
+
+    return json.loads(subprocess.run(command,  stdout=subprocess.PIPE).stdout.decode("utf-8"))
+
+def dialog(type,title,content):
+    return run("termux-dialog",type,"-t",title,"-c",content)
+
 offerList=[[" 1 gb data at Rs. 500😊",5002848],
         ["SMS at 13 paisa",4807917],
         ["Local cal rate 1.62",5007330],
@@ -56,6 +63,7 @@ verpin="";
 phone="";password="";otp="";id="";unit="";message="";cust_details=""; amount="";name="";session="";token="";signcode="";url="";cust_name="";sub_id="";
 #some response global variable
 code="";code_desc="";result="";
+
 
 #auto update features here 
 repo="https://github.com/Santoshkurmi/python_auto_update"
@@ -141,6 +149,10 @@ def set_update_time():
 
 if check_update_time():
     update(repo,"ncellpy");
+
+
+###############################update code above
+
 def getjson(key,sign=1):
     body = {
 
@@ -1002,9 +1014,6 @@ def profile():
     print(bcolors.WARNING+"*******************");
 
 
-def run(command):
-
-    return json.loads(subprocess.run(command,  stdout=subprocess.PIPE).stdout.decode("utf-8"))
 
 #login setup
 
@@ -1799,6 +1808,7 @@ def web():
 
 #Happy ending here everythings
 
+######################################
 def func():
     global func_wow
     length = len(sys.argv)
@@ -1813,9 +1823,14 @@ def func():
     else:
         func_wow=0
 
-func()
-while(True):
+# func()
+func_wow = 123
 
+########################################
+while(True):
+    if func_wow==123:
+        out =dialog("spinner","Choose from the following","1. Ncell Ecare,2. Ncell App,3. Ncell Web,4. Update")
+        print(out)
     choose=take(f"\n{c()}1. Ncell Ecare\n{c()}2. Ncell App{c()}\n3. Ncell Web\n{c()}4. Update\n{c()}=>");
     if choose=="b":break;
     elif choose=="4f":update(repo,"ncellpy",dust=1)
