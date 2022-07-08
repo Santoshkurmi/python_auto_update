@@ -1028,6 +1028,7 @@ def login():
 
     global current,phone,refresh,expire,func_wow,name
     account,name1=accounts(1);
+    
     ph="1.Enter the number,"
     for i in range(1,len(account)+1):
         ph += str(i+1)+". "+account[i-1] +" "+ name1[i-1]+","
@@ -1036,6 +1037,7 @@ def login():
         #ph= ",".join(account)
         os.system("su -c cmd statusbar collapse")
         out= run(["termux-dialog","spinner","-t","Choose the number","-v",ph])
+        
         if out["code"]==-1:
             start()
             tmp =phone
@@ -1049,13 +1051,52 @@ def login():
                 func_wow=123
                 app()
             else:
-                code,text=dialog_text("-p","Enter the phone number","Enter number here")
+                code,phone1=dialog_text("-m","Enter the phone number","Enter number here")
                 if code==-1:
-                    print(text)
+                    print(phone1)
+
+                    ###################################
+                    if len(phone1)>=0 and len(phone1)<10:print("Wrong phone1 number..");return
+                    phone=phone1;
+                    body={"0":"generateOTPRequest",
+                        "1":{
+                        "msisdn":phone1,
+                        "deviceId": "200280b19915cb7d",
+                        "action": "LOGIN"
+                        }
+                             }
+                    response=post("user/otp/generate",body);
+
+                    if response[0]==200:
+                        code,otp=dialog_text("-m","Enter the otp","Enter otp here")
+                        if not code==-1:code,otp=dialog_text("-m","Enter the otp","Enter otp here")
+                        if otp=="b":return
+                        elif otp=="e":exit()
+                        if len(otp)>4:
+                            body={
+                            "0":"validateOTPRequest","1": {
+                            "msisdn":phone1,
+                            "deviceId": "200280b19915cb7d",
+                            "otpDetail":{"action":"LOGIN","otp":otp}
+                            }
+                            }
+                            response=post("user/otp/validate",body);
+                            
+                            if response[0]==200:
+                                try:
+                                    current=response[2]["validateOTPResponse"]["accessToken"]
+                                    refresh=response[2]["validateOTPResponse"]["refreshToken"]
+                                    expire=response[2]["validateOTPResponse"]["expiresIn"]
+                                    profile();
+                                except:print("Something went wrong here ....")
+                        
+#################################
 
 
+    return
 
-        return
+       
+    
     phone1=takeInput(bcolors.OKBLUE+"Enter number: ");
     if phone1=="b":return
     elif phone1=="e":exit()
