@@ -13,7 +13,7 @@ elif time <20:
 elif time<25:
     print("\033[93mHello🥺 Good evening🌌")
 
-
+func_wow=""
 import json 
 import re
 import hashlib
@@ -1838,7 +1838,6 @@ def func():
 
 ########################################
 while(True):
-    global func_wow
     if len(sys.argv)>1:func_wow=123
     if func_wow==123:
         code,index =dialog("spinner","Choose from the following","1. Ncell Ecare,2. Ncell App,3. Ncell Web,4. Update,5. Exit")
