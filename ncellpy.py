@@ -1743,8 +1743,7 @@ def webaxiata():
 def app():
     global func_wow
     start();
-    print(func_wow)
-    print("Hey i am good")
+    
     if func_wow==123:
         os.system("../usr/bin/termux-notification  -t 'Processing the script' -c '\n\nPlease wait a second' --id 1234")
         os.system("../usr/bin/termux-notification-remove 12345")
@@ -1765,7 +1764,7 @@ def app():
         if func_wow==1234:
             code,index =dialog("spinner","Choose from the following","1. Send SMS,2. Subscribe,3. Unsubscribe,4. Send Gift,5. Login,6. Details,7. Balance Check,8. Exit")
         if code==-1:
-            choose=index+1
+            choose=str(index+1)
         else:
             choose=takeInput(bcolors.WARNING+"\n\n---------------------------\n\n"+bcolors.HEADER+"Enter the choice\n"+bcolors.OKGREEN+"1.Send Sms\n"+bcolors.OKCYAN+"2.Subscribe\n"+bcolors.HEADER+"3.Unsubscribe\n"+bcolors.WARNING+"4.Send Gift\n"+bcolors.FAIL+"5.Login\n"+bcolors.OKGREEN+"6.Details\n"+bcolors.OKGREEN+"7.Usage Details\n"+"=> ");
 
