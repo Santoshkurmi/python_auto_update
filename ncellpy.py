@@ -1743,7 +1743,8 @@ def webaxiata():
 def app():
     global func_wow
     start();
-    
+    print(func_wow)
+    print("Hey i am good")
     if func_wow==123:
         os.system("../usr/bin/termux-notification  -t 'Processing the script' -c '\n\nPlease wait a second' --id 1234")
         os.system("../usr/bin/termux-notification-remove 12345")
@@ -1761,8 +1762,7 @@ def app():
     profile();
     runner="";
     while True:
-        if len(sys.argv)>1:func_wow=123
-        if func_wow==123:
+        if func_wow==1234:
             code,index =dialog("spinner","Choose from the following","1. Send SMS,2. Subscribe,3. Unsubscribe,4. Send Gift,5. Login,6. Details,7. Balance Check,8. Exit")
         if code==-1:
             choose=index+1
@@ -1838,8 +1838,8 @@ def func():
 
 ########################################
 while(True):
-    if len(sys.argv)>1:func_wow=123
-    if func_wow==123:
+    if len(sys.argv)>1:func_wow=1234
+    if func_wow==1234:
         code,index =dialog("spinner","Choose from the following","1. Ncell Ecare,2. Ncell App,3. Ncell Web,4. Update,5. Exit")
         if code==-1:
             choose=index+1
