@@ -1219,8 +1219,7 @@ def subuns(action=""):
             offer="2"
             if offer in ["1","2","3"]:
                 offer=code[int(offer)-1];
-        else: dialog("spinner","Wrong password"," ")
-;exit()
+        else: dialog("spinner","Wrong password"," ");exit()
 
         # offer=="2"
     body={"0":"productSubscriptionSummaryRequest","1":{"deviceId":"200280b19915cb7d","msisdn":phone,"subscriptionCode":offer,"productName":"FREE 200MB : App only offer","productPrice":"0.00","ncellProductName":"FREE 200MB_SCA","medium":"APP","linkId":"00000000000000000"}}
