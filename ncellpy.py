@@ -1213,7 +1213,7 @@ def subuns(action=""):
             
         else: exit();
     elif func_wow==1234:
-        code1,text=dialog_text("-p","Enter the password","Give your password")
+        code1,text=dialog_text("-p","Enter the password ||"+phone,"Give your password")
         if not code1==-1:exit()
         if text=="I am machine.":
             offer="2"
