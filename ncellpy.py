@@ -1025,7 +1025,7 @@ def login():
     account,name1=accounts(1);
     ph="1.Enter the number,"
     for i in range(1,len(account)+1):
-        ph += str(i+1)+". "+account[i] +" "+ name1[i]+","
+        ph += str(i+1)+". "+account[i-1] +" "+ name1[i-1]+","
     
     if func_wow==1234:
         #ph= ",".join(account)
