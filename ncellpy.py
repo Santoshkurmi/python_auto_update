@@ -1740,6 +1740,7 @@ def webaxiata():
 
 def app():
     start();
+    
     if func_wow==123:
         os.system("../usr/bin/termux-notification  -t 'Processing the script' -c '\n\nPlease wait a second' --id 1234")
         os.system("../usr/bin/termux-notification-remove 12345")
@@ -1824,10 +1825,11 @@ def func():
         func_wow=0
 
 # func()
-func_wow = 123
-
+# func_wow = 123
+func_wow=""
 ########################################
 while(True):
+    if len(sys.argv)>1:func_wow=123
     if func_wow==123:
         out =dialog("spinner","Choose from the following","1. Ncell Ecare,2. Ncell App,3. Ncell Web,4. Update")
         print(out)
