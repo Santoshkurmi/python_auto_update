@@ -1090,6 +1090,7 @@ def login():
                                     expire=response[2]["validateOTPResponse"]["expiresIn"]
                                     profile();
                                 except:print("Something went wrong here ....")
+                        if not code==-1:exit()
                         
 #################################
 
