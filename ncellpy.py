@@ -44,7 +44,10 @@ def run(command):
     return json.loads(subprocess.run(command,  stdout=subprocess.PIPE).stdout.decode("utf-8"))
 
 def dialog(type,title,content):
-    return run(["termux-dialog",type,"-t",title,"-v",content])
+    temp= run(["termux-dialog",type,"-t",title,"-v",content])
+    code = temp["code"]
+    index = temp["index"]
+    return code,index 
 
 offerList=[[" 1 gb data at Rs. 500😊",5002848],
         ["SMS at 13 paisa",4807917],
@@ -1831,9 +1834,11 @@ func_wow=""
 while(True):
     if len(sys.argv)>1:func_wow=123
     if func_wow==123:
-        out =dialog("spinner","Choose from the following","1. Ncell Ecare,2. Ncell App,3. Ncell Web,4. Update")
-        print(out)
-    choose=take(f"\n{c()}1. Ncell Ecare\n{c()}2. Ncell App{c()}\n3. Ncell Web\n{c()}4. Update\n{c()}=>");
+        code,index =dialog("spinner","Choose from the following","1. Ncell Ecare,2. Ncell App,3. Ncell Web,4. Update")
+        if code==-1:
+            choose=index
+    else:
+        choose=take(f"\n{c()}1. Ncell Ecare\n{c()}2. Ncell App{c()}\n3. Ncell Web\n{c()}4. Update\n{c()}=>");
     if choose=="b":break;
     elif choose=="4f":update(repo,"ncellpy",dust=1)
     elif int(choose)==1:web();
