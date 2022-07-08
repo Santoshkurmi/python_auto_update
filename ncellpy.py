@@ -1057,7 +1057,7 @@ def login():
                     print(phone1)
 
                     ###################################
-                    if not len(phone1)==10:dialog("spinner","The phone number is not correct","Please try again");return
+                    if not len(phone1)==10:dialog("spinner","The phone number is not correct","Please try again");exit()
                     phone=phone1;
                     body={"0":"generateOTPRequest",
                         "1":{
@@ -1082,7 +1082,7 @@ def login():
                             }
                             }
                             response=post("user/otp/validate",body);
-                            
+                            print(response[1])
                             if response[0]==200:
                                 try:
                                     current=response[2]["validateOTPResponse"]["accessToken"]
