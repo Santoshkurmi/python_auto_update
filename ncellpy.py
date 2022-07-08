@@ -1052,6 +1052,7 @@ def login():
                 app()
             else:
                 code,phone1=dialog_text("-m","Enter the phone number","Enter number here")
+                phone1 =str(phone1)
                 if code==-1:
                     print(phone1)
 
