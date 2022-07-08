@@ -1057,7 +1057,7 @@ def login():
                     print(phone1)
 
                     ###################################
-                    if len(phone1)>=0 and len(phone1)<10:dialog("spinner","The phone number is not correct","Please try again");return
+                    if not len(phone1)==10:dialog("spinner","The phone number is not correct","Please try again");return
                     phone=phone1;
                     body={"0":"generateOTPRequest",
                         "1":{
