@@ -40,7 +40,6 @@ def c():
 
 
 def run(command):
-    print(command)
     return json.loads(subprocess.run(command,  stdout=subprocess.PIPE).stdout.decode("utf-8"))
 
 def dialog(type,title,content):
@@ -1839,6 +1838,7 @@ while(True):
             choose=index
     else:
         choose=take(f"\n{c()}1. Ncell Ecare\n{c()}2. Ncell App{c()}\n3. Ncell Web\n{c()}4. Update\n{c()}=>");
+    print(choose)
     if choose=="b":break;
     elif choose=="4f":update(repo,"ncellpy",dust=1)
     elif int(choose)==1:web();
