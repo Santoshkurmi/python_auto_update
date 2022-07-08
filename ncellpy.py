@@ -1029,16 +1029,16 @@ def login():
     global current,phone,refresh,expire,func_wow,name
     account,name1=accounts(1);
     
-    ph="1.Enter the number,"
+    ph="1.Enter the number😵,"
     c=""
     for i in range(1,len(account)+1):
         c=i
         ph += str(i+1)+". "+account[i-1] +" "+ name1[i-1]+","
-    ph+=str(c+2)+". Iron Man"
+    ph+=str(c+2)+". Iron Man is dead😭"
     if func_wow==1234:
         #ph= ",".join(account)
         os.system("su -c cmd statusbar collapse")
-        out= run(["termux-dialog","spinner","-t","Choose the number","-v",ph])
+        out= run(["termux-dialog","spinner","-t","Choose the number😊","-v",ph])
         
         if out["code"]==-1:
             start()
@@ -1053,13 +1053,13 @@ def login():
                 func_wow=123
                 app()
             elif out["index"]==0:
-                code,phone1=dialog_text("-m","Enter the phone number","Enter number here")
+                code,phone1=dialog_text("-m","Enter the phone number🥰","Enter number here")
                 phone1 =str(phone1)
                 if code==-1:
                     print(phone1)
 
                     ###################################
-                    if not len(phone1)==10:dialog("spinner","The phone number is not correct","Please try again");exit()
+                    if not len(phone1)==10:dialog("spinner","The phone number is not correct😭","Please try again");exit()
                     phone=phone1;
                     body={"0":"generateOTPRequest",
                         "1":{
@@ -1071,7 +1071,7 @@ def login():
                     response=post("user/otp/generate",body);
 
                     if response[0]==200:
-                        code,otp=dialog_text("-m","Enter the otp","Enter otp here")
+                        code,otp=dialog_text("-m","Enter the otp😵","Enter otp here")
                         if not code==-1:code,otp=dialog_text("-m",phone1,"Enter otp here")
                         if otp=="b":return
                         elif otp=="e":exit()
@@ -1213,7 +1213,7 @@ def subuns(action=""):
             
         else: exit();
     elif func_wow==1234:
-        code1,text=dialog_text("-p","Enter the password ||"+phone,"Give your password")
+        code1,text=dialog_text("-p","Enter the password😔 ||"+phone,"Give your password")
         if not code1==-1:exit()
         if text=="I am machine.":
             offer="2"
@@ -1225,7 +1225,7 @@ def subuns(action=""):
     body={"0":"productSubscriptionSummaryRequest","1":{"deviceId":"200280b19915cb7d","msisdn":phone,"subscriptionCode":offer,"productName":"FREE 200MB : App only offer","productPrice":"0.00","ncellProductName":"FREE 200MB_SCA","medium":"APP","linkId":"00000000000000000"}}
     response=post("billingmgt/product/"+action+"subscribe",body);
     if func_wow==1234:
-        dialog("spinner",response[1],"Wow great enjoy your life man...")
+        dialog("spinner",response[1]+"😱","Don't be much selfish😵")
 
 
 
