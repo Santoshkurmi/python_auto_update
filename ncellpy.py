@@ -1,11 +1,11 @@
-#version 20220707.8
+#version 20220708
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
 #finally done some fixes and update goes to 2 days every
 #remove update button
 from datetime import datetime
 time=int( datetime.now().hour)
-
+import subprocess
 if (time <13):
     print("\033[91mHello🙃 Good morning🌄")
 elif time <20:
@@ -469,10 +469,12 @@ def accounts(app=0):
         return
     status=""
     i=1;
+    name=[]
     for e in web:
         if e==current:
             status="##"
         print(f"{c()}{i}. {e} {web[e]['name']} {status}")
+        name.append(web[e]['name'] + " " + status)  
         status=""
         account.append(e);
         i+=1;
@@ -481,7 +483,10 @@ def accounts(app=0):
         len(account)
     except:
         account.append(0);
-    return account;
+        name.append(" ")
+    if app==0:
+        return account
+    return account,name;
     
 
                 
@@ -893,6 +898,7 @@ def post(url,keyValue):
         print("Network request send failed..exiting");
         if func_wow==123:
             os.system("../usr/bin/termux-notification  -t 'Network request send failed😓' -c '\n\n😵😭😭' --id 1234")
+            os.system("am broadcast -a com.jozein.xedgepro.PERFORM -e data 6402")
         exit()
     code=response.status_code;
     
@@ -916,7 +922,9 @@ def post(url,keyValue):
       
     if desc=="Full authentication is required to access this resource":
         if func_wow==123:
-            os.system("../usr/bin/termux-notification  -t 'Login expired😓' -c '\n\nPlease login again yourself\n😊' --id 1234")
+            
+            os.system("../usr/bin/termux-notification --button1 Refresh --button2 Accounts --button1-action 'termux-notification-remove 12345;termux-notification-remove 1234; ncell1' --button3-action 'termux-notification-remove 12345' --button3 Close --button2-action 'ncell2'  --image /sdcard/termux.png --id 12345 -t 'Access Token Invalid' -c 'Please login again or choose other account'")
+            os.system("am broadcast -a com.jozein.xedgepro.PERFORM -e data 6402")
             exit()  
 
         url1=url
@@ -958,7 +966,7 @@ def start():
         refresh=ret["refresh"]
         expire=ret["expire"]
         subid=ret["subid"];
-
+        name = ret["name"]
     except: print("Something get wrong here");
 
 
@@ -994,13 +1002,36 @@ def profile():
     print(bcolors.WARNING+"*******************");
 
 
+def run(command):
 
+    return json.loads(subprocess.run(command,  stdout=subprocess.PIPE).stdout.decode("utf-8"))
 
 #login setup
 
 def login():
-    global current,phone,refresh,expire
-    account=accounts(1);
+
+    global current,phone,refresh,expire,func_wow,name
+    account,name1=accounts(1);
+    ph=""
+    for i in range(len(account)):
+        ph += str(i+1)+". "+account[i] +" "+ name1[i]+","
+    if func_wow==1234:
+        #ph= ",".join(account)
+        os.system("su -c cmd statusbar collapse")
+        out= run(["termux-dialog","spinner","-t","Choose the numner","-v",ph])
+        if out["code"]==-1:
+            start()
+            tmp =phone
+            phone=account[out['index']]
+            name = name1[out['index']]
+            if tmp==phone:print("3sh");return
+            readwrite("custom_app",phone)
+            start()
+            #profile()
+            func_wow=123
+            app()
+
+        return
     phone1=takeInput(bcolors.OKBLUE+"Enter number: ");
     if phone1=="b":return
     elif phone1=="e":exit()
@@ -1440,7 +1471,9 @@ def refreshToken():
         
     except:
         if func_wow==123:
-            os.system("../usr/bin/termux-notification  -t 'Login expired😓' -c '\n\nPlease login again yourself\n😊' --id 1234")
+            
+            os.system("../usr/bin/termux-notification --button1 Refresh --button2 Accounts --button1-action 'termux-notification-remove 12345;termux-notification-remove 1234; ncell1' --button3-action 'termux-notification-remove 1234' --button3 Close --button2-action 'ncell2'  --image /sdcard/termux.png --id 1234 -t '😭Access Token Invalid😭' -c '"+phone+"||"+name+"\nPlease login again or choose other account\n😡😡'")
+            os.system("am broadcast -a com.jozein.xedgepro.PERFORM -e data 6402")
             exit()
         login();
 
@@ -1700,15 +1733,16 @@ def app():
     start();
     if func_wow==123:
         os.system("../usr/bin/termux-notification  -t 'Processing the script' -c '\n\nPlease wait a second' --id 1234")
+        os.system("../usr/bin/termux-notification-remove 12345")
         out1,out2=balance()
-        phon= "'Phone: 😳😳"+str(phone)+"😳😳'"
+        phon= "'Phone: 😳😳"+str(phone)+"||"+name+"😳😳'"
         out1 = "'"+out1 +"'"
 
         if len(out2)>8:
             out2 = "'"+out2 +"'"
 
-            os.system("../usr/bin/termux-notification --button1 Refresh --button2 Details --button1-action 'termux-notification-remove 12345; ncell1' --button3-action 'termux-notification-remove 12345' --button3 Close --button2-action 'ls'  --image /sdcard/termux.png --id 12345  -c "+ out2)
-        os.system("../usr/bin/termux-notification --button1 Refresh --button2 Details --button1-action 'termux-notification-remove 1234; ncell1' --button3-action 'termux-notification-remove 1234' --button3 Close --button2-action 'ls'  -t "+phon+" --image /sdcard/termux.png --id 1234  -c "+ out1)
+            os.system("../usr/bin/termux-notification --button1 Refresh --button2 Accounts --button1-action 'termux-notification-remove 12345;termux-notification-remove 1234; ncell1' --button3-action 'termux-notification-remove 12345' --button3 Close --button2-action 'ncell2'  --image /sdcard/termux.png --id 12345  -c "+ out2)
+        os.system("../usr/bin/termux-notification --button1 Refresh --button2 Accounts --button1-action 'termux-notification-remove 1234;termux-notification-remove 12345; ncell1' --button3-action 'termux-notification-remove 1234' --button3 Close --button2-action 'ncell2'  -t "+phon+" --image /sdcard/termux.png --id 1234  -c "+ out1)
         os.system("am broadcast -a com.jozein.xedgepro.PERFORM -e data 6402")
         return
     profile();
@@ -1768,11 +1802,14 @@ def web():
 def func():
     global func_wow
     length = len(sys.argv)
-    if length>1:
+    if length==2:
         func_wow = 123
         app()
         sys.exit()
-
+    elif length==3:
+        func_wow=1234
+        login()
+        exit()
     else:
         func_wow=0
 
