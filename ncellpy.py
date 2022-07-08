@@ -48,6 +48,11 @@ def dialog(type,title,content):
     index = temp["index"]
     return code,index 
 
+def dialog_text(type,title,content=" "):
+    temp= run(["termux-dialog","text","-t",title,type,"-i",content])
+    code = temp["code"]
+    text = temp["text"]
+    return code,index 
 offerList=[[" 1 gb data at Rs. 500😊",5002848],
         ["SMS at 13 paisa",4807917],
         ["Local cal rate 1.62",5007330],
@@ -1044,7 +1049,10 @@ def login():
                 func_wow=123
                 app()
             else:
-                pass
+                code,text=dialog_text("-p","Enter the phone number","Enter number here")
+                if code==-1:
+                    print(text)
+
 
 
         return
