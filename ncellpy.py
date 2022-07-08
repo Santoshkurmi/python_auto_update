@@ -1082,7 +1082,7 @@ def login():
                             }
                             }
                             response=post("user/otp/validate",body);
-                            dialog_text("-m",response[1],"Upps try again later")
+                            dialog("spinner",response[1],"Upps try again later")
                             if response[0]==200:
                                 try:
                                     current=response[2]["validateOTPResponse"]["accessToken"]
