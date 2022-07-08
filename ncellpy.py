@@ -40,11 +40,11 @@ def c():
 
 
 def run(command):
-
+    print(command)
     return json.loads(subprocess.run(command,  stdout=subprocess.PIPE).stdout.decode("utf-8"))
 
 def dialog(type,title,content):
-    return run(["termux-dialog",type,"-t",title,"-c",content])
+    return run(["termux-dialog",type,"-t",title,"-v",content])
 
 offerList=[[" 1 gb data at Rs. 500😊",5002848],
         ["SMS at 13 paisa",4807917],
