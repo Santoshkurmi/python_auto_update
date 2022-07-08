@@ -1023,24 +1023,29 @@ def login():
 
     global current,phone,refresh,expire,func_wow,name
     account,name1=accounts(1);
-    ph=""
-    for i in range(len(account)):
+    ph="1.Enter the number,"
+    for i in range(1,len(account)+1):
         ph += str(i+1)+". "+account[i] +" "+ name1[i]+","
+    
     if func_wow==1234:
         #ph= ",".join(account)
         os.system("su -c cmd statusbar collapse")
-        out= run(["termux-dialog","spinner","-t","Choose the numner","-v",ph])
+        out= run(["termux-dialog","spinner","-t","Choose the number","-v",ph])
         if out["code"]==-1:
             start()
             tmp =phone
-            phone=account[out['index']]
-            name = name1[out['index']]
-            if tmp==phone:print("3sh");return
-            readwrite("custom_app",phone)
-            start()
-            #profile()
-            func_wow=123
-            app()
+            if not out['index']==0:
+                phone=account[out['index']-1]
+                name = name1[out['index']-1]
+                if tmp==phone:print("3sh");return
+                readwrite("custom_app",phone)
+                start()
+                #profile()
+                func_wow=123
+                app()
+            else:
+                pass
+
 
         return
     phone1=takeInput(bcolors.OKBLUE+"Enter number: ");
@@ -1762,7 +1767,7 @@ def app():
     runner="";
     while True:
         if func_wow==1234:
-            code,index =dialog("spinner","Choose from the following","1. Balance,2. Login,3. subscribe,,4. Unsubscribe,5. Send SMS,6. Exit")
+            code,index =dialog("spinner","Choose from the following","1. Balance,2. Login,3. subscribe,4. Unsubscribe,5. Send SMS,6. Exit")
         if code==-1:
             choose=str(index+1)
             if choose=="5":sendsms();
