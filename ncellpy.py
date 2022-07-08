@@ -1835,7 +1835,7 @@ while(True):
     if func_wow==123:
         code,index =dialog("spinner","Choose from the following","1. Ncell Ecare,2. Ncell App,3. Ncell Web,4. Update")
         if code==-1:
-            choose=index
+            choose=index+1
     else:
         choose=take(f"\n{c()}1. Ncell Ecare\n{c()}2. Ncell App{c()}\n3. Ncell Web\n{c()}4. Update\n{c()}=>");
     print(choose)
