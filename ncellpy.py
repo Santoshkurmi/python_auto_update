@@ -1594,7 +1594,7 @@ def refreshToken():
             os.system("../usr/bin/termux-notification --button1 Refresh --button2 Accounts --button1-action 'termux-notification-remove 12345;termux-notification-remove 1234; ncell1' --button3-action 'termux-notification-remove 1234' --button3 Close --button2-action 'ncell2'  --image /sdcard/termux.png --id 1234 -t '😭Access Token Invalid😭' -c '"+phone+"||"+name+"\nPlease login again or choose other account\n😡😡'")
             os.system("am broadcast -a com.jozein.xedgepro.PERFORM -e data 6402")
             exit()
-        # login();
+        login();
 
         
 
