@@ -1202,7 +1202,7 @@ def sendsms():
     while msg!="-1" and len(sender)>6 and len(receiver)>6:
     
         try:
-            msg=input(bcolors.BOLD+"Enter the msg to send:\n=> ");
+            msg=input(bcolors.BOLD+"Msg::\n=> ");
         except:print("Thanks you");break;
         if msg=="b" or msg=="":break;
         body={
