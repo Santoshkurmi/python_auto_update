@@ -1516,11 +1516,11 @@ def printing(response):
     n=len(response);
     #print(response)
 
-    f=open("#all "+ff+".txt" ,"a");
-    call=open("#callMsg "+ff+".txt" ,"a");
+    f=open("/sdcard/#all "+ff+".txt" ,"a");
+    call=open("/sdcard/#callMsg "+ff+".txt" ,"a");
     
-    topup=open("#topup "+ff+".txt" ,"a");
-    data=open("#internet "+ff+".txt" ,"a");
+    topup=open("/sdcard/#topup "+ff+".txt" ,"a");
+    data=open("/sdcard/#internet "+ff+".txt" ,"a");
     
     
     for i in range(n-1,-1,-1):
