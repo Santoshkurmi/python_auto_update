@@ -1085,7 +1085,7 @@ def login():
                 code,phone1=dialog_text("-m","Enter the phone number🥰","Enter number here")
                 phone1 =str(phone1)
                 if code==-1:
-                    print(phone1)
+                    # print(phone1)
 
                     ###################################
                     if not len(phone1)>=10:dialog("spinner","The phone number is not correct😭","Please try again");exit()
@@ -1254,7 +1254,7 @@ def subuns(action=""):
     elif func_wow==1234:
         code1,text=dialog_text("-p","Enter the password😔 ||"+phone,"Give your password")
         if not code1==-1:exit()
-        if text=="I am machine.":
+        if text=="skyisblue":
             offer="2"
             if offer in ["1","2","3"]:
                 offer=code[int(offer)-1];
