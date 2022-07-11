@@ -531,7 +531,7 @@ def logintest():
     if not code:
             session=""
             token=""
-            query =input(f"{c()}\nAre you sure want to login "+"9824486108 @ "+"(y|n):").lower()
+            query =input(f"{c()}\nWant to login ___"+phone+"___(y|n):").lower()
             if query=="y":
                 send("password_login");
             
