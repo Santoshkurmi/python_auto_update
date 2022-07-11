@@ -1885,17 +1885,17 @@ def app():
                 elif choose=="2" : login();
                 elif choose=="6": break;
         else:
-            choose=takeInput(bcolors.WARNING+"\n\n---------------------------\n\n"+bcolors.HEADER+"Enter the choice\n"+bcolors.OKGREEN+"1.Send Sms\n"+bcolors.OKCYAN+"2.Subscribe\n"+bcolors.HEADER+"3.Unsubscribe\n"+bcolors.WARNING+"4.Send Gift\n"+bcolors.FAIL+"5.Login\n"+bcolors.OKGREEN+"6.Details\n"+bcolors.OKGREEN+"7.Usage Details\n"+"=> ");
+            choose=takeInput(bcolors.WARNING+"\n\n---------------------------\n\n"+bcolors.HEADER+"Enter the choice\n"+bcolors.OKGREEN+"1.Check Data\n"+bcolors.OKCYAN+"2.Login\n"+bcolors.HEADER+"3.Subscribe\n"+bcolors.WARNING+"4.Unsubscribe\n"+bcolors.FAIL+"5.Send SMS\n"+bcolors.OKGREEN+"6.Call Details\n"+"=> ");
 
         if choose=="b" or choose==8:return;
         if choose=="e":exit()
-        if choose=="1":sendsms();
-        elif choose=="2":subuns();
-        elif choose=="3":subuns("un");
-        elif choose=="4":giftSend();
-        elif choose=="5" : login();
+        if choose=="5":sendsms();
+        elif choose=="3":subuns();
+        elif choose=="4":subuns("un");
+        elif choose=="7":giftSend();
+        elif choose=="2" : login();
         elif choose=="6": info();
-        elif choose=="7": balance();
+        elif choose=="1": balance();
         elif choose=="v": verOtp();
         elif choose=="t": dateTime();
         elif choose=="m":mul(15,15);
