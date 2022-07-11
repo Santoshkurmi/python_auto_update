@@ -25,6 +25,7 @@ import datetime
 import time
 
 rand_num=[]
+
 def c():
     global rand_num
     while(True):
@@ -69,8 +70,17 @@ ff = str(datetime.datetime.now())
 verpin="";
 phone="";password="";otp="";id="";unit="";message="";cust_details=""; amount="";name="";session="";token="";signcode="";url="";cust_name="";sub_id="";
 #some response global variable
-code="";code_desc="";result="";
+code="";code_desc="";result="";func_wow=""
 
+
+def func():
+    global func_wow
+    length = len(sys.argv)
+    if length==2:func_wow = 123
+    elif length==3:func_wow=1234 
+    else:func_wow=0
+
+func()
 
 #auto update features here 
 repo="https://github.com/Santoshkurmi/python_auto_update"
@@ -154,7 +164,8 @@ def set_update_time():
         file.write(str(int(time.time())))
 
 
-if check_update_time():
+
+if func_wow==0 and check_update_time():
     update(repo,"ncellpy");
 
 
@@ -520,7 +531,9 @@ def logintest():
     if not code:
             session=""
             token=""
-            send("password_login");
+            query =input(f"{c()}\nAre you sure want to login "+"9824486108 @ "+"(y|n):").lower()
+            if query=="y":
+                send("password_login");
             
             if code:
                 readwrite("write");
@@ -946,11 +959,11 @@ def post(url,keyValue):
             os.system("am broadcast -a com.jozein.xedgepro.PERFORM -e data 6402")
             exit()  
 
-        url1=url
-        key=keyValue
-        login();
-        wow=post(url1,key);
-        return wow;
+        # url1=url
+        # key=keyValue
+        # login();
+        # wow=post(url1,key);
+        # return wow;
         
     
     
@@ -1004,9 +1017,9 @@ def profile():
                 "languageCode": "1",
                 }
          }
-    response=post(url,value)
+         
+    response=post(url,value)    
     
-
     try:
             name=response[2]["querySubscriberProfileResponse"]["subscriberDetail"]["firstName"];
             print(bcolors.OKBLUE+"Hello "+ response[2]["querySubscriberProfileResponse"]["subscriberDetail"]["firstName"]+" || "+str(phone));
@@ -1027,7 +1040,12 @@ def profile():
 def login():
 
     global current,phone,refresh,expire,func_wow,name
-    account,name1=accounts(1);
+    try:
+        account,name1=accounts(1);
+    except :
+        account=[""]
+        name1=[""]
+        pass
     
     ph="1.Enter the number😵,"
     c=""
@@ -1812,11 +1830,11 @@ def webaxiata():
 
 #end of ncell web
 #starting the whole process
-
 def app():
     global func_wow
-    start();
     
+    start();
+
     if func_wow==123:
         os.system("../usr/bin/termux-notification  -t 'Processing the script' -c '\n\nPlease wait a second' --id 1234")
         os.system("../usr/bin/termux-notification-remove 12345")
@@ -1831,7 +1849,10 @@ def app():
         os.system("../usr/bin/termux-notification --button1 Refresh --button2 Accounts --button1-action 'termux-notification-remove 1234;termux-notification-remove 12345; ncell1' --button3-action 'termux-notification-remove 1234' --button3 Close --button2-action 'ncell2'  -t "+phon+" --image /sdcard/termux.png --id 1234  -c "+ out1)
         os.system("am broadcast -a com.jozein.xedgepro.PERFORM -e data 6402")
         return
+    
     profile();
+    
+    
     runner="";
     while True:
         if func_wow==1234:
@@ -1888,41 +1909,30 @@ def web():
         
         if choice <= len(fun_list):
             fun_list[choice-1][1]();
-            ch=input(f"\n{c()}Press enter  to show menu: ");
-            if ch=="b":return;
-            if ch=="e":exit();
+            # ch=input(f"\n{c()}Press enter  to show menu: ");
+            # if ch=="b":return;
+            # if ch=="e":exit();
         else:
             print("\n\nEnter the correct choice\n\n");
 
 #Happy ending here everythings
 
 ######################################
-def func():
-    global func_wow
-    length = len(sys.argv)
-    if length==2:
-        func_wow = 123
-        app()
-        sys.exit()
-    elif length==3:
-        func_wow=1234
-        login()
-        exit()
-    else:
-        func_wow=0
 
-func()
 # func_wow = 123
 
 ########################################
+if func_wow==123:app();exit()
+elif func_wow==1234:login();exit()
+
 while(True):
-    if len(sys.argv)>1:func_wow=1234
-    if func_wow==1234:
-        code,index =dialog("spinner","Choose from the following","1. Ncell Ecare,2. Ncell App,3. Ncell Web,4. Update,5. Exit")
-        if code==-1:
-            choose=index+1
-    else:
-        choose=take(f"\n{c()}1. Ncell Ecare\n{c()}2. Ncell App{c()}\n3. Ncell Web\n{c()}4. Update\n{c()}=>");
+    # if len(sys.argv)>1:func_wow=1234
+    # if func_wow==1234:
+    #     code,index =dialog("spinner","Choose from the following","1. Ncell Ecare,2. Ncell App,3. Ncell Web,4. Update,5. Exit")
+    #     if code==-1:
+    #         choose=index+1
+    # else:
+    choose=take(f"\n{c()}1. Ncell Ecare\n{c()}2. Ncell App{c()}\n3. Ncell Web\n{c()}4. Update\n{c()}=>");
 
     if choose=="b" or choose==5:break;
     elif choose=="4f":update(repo,"ncellpy",dust=1)
