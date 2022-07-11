@@ -1138,7 +1138,7 @@ def login():
     if phone1[-1:]=="-":
         phone1 = phone1.replace("-","")
         readwrite("delete",account[int(phone1)-1],1)
-        print(f"{c()}Account is removed successfully")
+        # print(f"{c()}Account is removed successfully")
         login();
         return
     try:
