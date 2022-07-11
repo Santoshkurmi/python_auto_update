@@ -1,4 +1,4 @@
-#version 20220708.6
+#version 20220711.6
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
 #finally done some fixes and update goes to 2 days every
