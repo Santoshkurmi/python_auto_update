@@ -1205,6 +1205,7 @@ def sendsms():
             msg=input(bcolors.BOLD+"\n=> ");
         except:print("Thanks you");break;
         if msg=="b" or msg=="":break;
+        if msg=="e":exit()
         body={
              "0":"sendSMSFreeRequest","1": {
              "source":sender,
