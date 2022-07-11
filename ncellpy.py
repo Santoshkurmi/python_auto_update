@@ -1135,6 +1135,12 @@ def login():
     phone1=takeInput(bcolors.OKBLUE+"Enter number: ");
     if phone1=="b":return
     elif phone1=="e":exit()
+    if phone1[-1:]=="-":
+        phone1 = phone1.replace("-","")
+        readwrite("delete",account[int(phone1)-1],1)
+        print(f"{c()}Account is removed successfully")
+        login();
+        return
     try:
         length=len(account)
     except:length=-1
