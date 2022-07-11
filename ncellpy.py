@@ -1192,18 +1192,19 @@ def login():
 #sending msg 
 def sendsms():
     global phone
-    sender=takeInput(bcolors.FAIL+"Enter the sender number(m): ");
+    # sender=takeInput(bcolors.FAIL+"Enter the sender number(m): ");
     receiver=takeInput(bcolors.ENDC+"Enter the receiver number(m): ");
+    sender=phone
 
-    if sender=="m":sender=phone
-    if receiver=="m":receiver=phone
+    # if sender=="m":sender=phone
+    # if receiver=="m":receiver=phone
     msg="1";
     while msg!="-1" and len(sender)>6 and len(receiver)>6:
     
         try:
-            msg=input(bcolors.BOLD+"Enter the msg to send(-1):\n=> ");
+            msg=input(bcolors.BOLD+"Enter the msg to send:\n=> ");
         except:print("Thanks you");break;
-        if msg=="-1" or msg=="":break;
+        if msg=="b" or msg=="":break;
         body={
              "0":"sendSMSFreeRequest","1": {
              "source":sender,
