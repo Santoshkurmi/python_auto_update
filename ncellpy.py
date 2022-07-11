@@ -1089,7 +1089,7 @@ def login():
 
                     ###################################
                     if not len(phone1)==10:dialog("spinner","The phone number is not correct😭","Please try again");exit()
-                    phone=phone1;
+                    phone= re.sub("[\W_]","",phone1)[-10:]
                     body={"0":"generateOTPRequest",
                         "1":{
                         "msisdn":phone1,
@@ -1144,7 +1144,7 @@ def login():
     try:
         length=len(account)
     except:length=-1
-    if int(phone1)<=1234:
+    if len(phone1)<=5:
         phone=account[int(phone1)-1]
         readwrite("custom_app",phone);
         start()
@@ -1153,7 +1153,8 @@ def login():
         return
     else:
             if len(phone1)>=0 and len(phone1)<10:print("Wrong phone1 number..");return
-            phone=phone1;
+            phone1= re.sub("[\W_]","",phone1)[-10:]
+            
     body={"0":"generateOTPRequest",
         "1":{
             "msisdn":phone1,
@@ -1195,6 +1196,7 @@ def sendsms():
     # sender=takeInput(bcolors.FAIL+"Enter the sender number(m): ");
     receiver=takeInput(bcolors.ENDC+"Enter the receiver number(m): ");
     sender=phone
+    receiver = re.sub("[\W_]","",receiver)[-10:]
 
     # if sender=="m":sender=phone
     # if receiver=="m":receiver=phone
@@ -1676,8 +1678,9 @@ def weblogin(mode=0):
     url="https://webapi.ncell.axiata.com/v1/account/login/request"
     if mode==0:
         phone2=input("Enter the phone: ");
-        if not  len(phone2)==10:
+        if not  len(phone2)>=10:
             exit();
+        phone2= re.sub("[\W_]","",phone2)[-10:]
         password1 = input("Enter the password: " );
     if mode==1:
         password1 = password2;
@@ -1789,8 +1792,8 @@ def printnumbers():
     in_number= input("Enter the number: ");
     if in_number=="b":return;
     elif in_number=="e":exit();
-    elif len(in_number)==10:
-        phone2 = in_number
+    elif len(in_number)>=10:
+        phone2 =re.sub("[\W_]","",in_number)[-10:]
         
     else:
         phone2 = web_numbers[int(in_number)-1];
