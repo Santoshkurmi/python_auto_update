@@ -1849,7 +1849,7 @@ def webaxiata():
 #starting the whole process
 pro =0
 def app():
-    global func_wow
+    global func_wow,pro
     
     start();
 
