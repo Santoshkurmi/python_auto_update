@@ -1089,7 +1089,7 @@ def login():
 
                     ###################################
                     if not len(phone1)>=10:dialog("spinner","The phone number is not correct😭","Please try again");exit()
-                    phone= re.sub("[\W_]","",phone1)[-10:]
+                    phone1= re.sub("[\W_]","",phone1)[-10:]
                     body={"0":"generateOTPRequest",
                         "1":{
                         "msisdn":phone1,
