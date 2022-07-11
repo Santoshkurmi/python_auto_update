@@ -446,9 +446,14 @@ def readwrite(operation,key="",app=0):
                 cust_details=json.load(file);
                 return cust_details
 
-    if operation=="delete":
+    if operation=="delete" and not app:
         readwrite("read");
         del cust_details["login_web"][key];
+        with open("cust_details.json","w") as file:
+                file.write(json.dumps(cust_details,indent=4));
+    if operation=="delete" and  app:
+        readwrite("read");
+        del cust_details["login_app"][key];
         with open("cust_details.json","w") as file:
                 file.write(json.dumps(cust_details,indent=4));
     if operation=="update":
@@ -553,6 +558,12 @@ def loginaccount():
     phone=take("Enter the number: ")
     if phone=="b":return;
     tempPhone=phone;
+    if phone[-1:]=="-":
+        phone = phone.replace("-","")
+        readwrite("delete",account[int(phone)-1],0)
+        print(f"{c()}Account is removed successfully")
+        loginaccount();
+        return
     if len(phone)==1 or len(phone)==2:
         readwrite("custom_update",account[int(phone)-1]);
         logintest();
