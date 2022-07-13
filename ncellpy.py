@@ -112,7 +112,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
                     os.system(f"mkdir .hehe");
                 if not os.system(f"cp {filename}.py .hehe/.{filename}_{time1}"):
                     if not os.system(f"cp {tempdir}/{filename}.py ."):
-                        # print("\n_____________________\n");
+                        print(f"\n{c()}_________________________")
                         set_update_time()
                         # print(f"\n{c()}Please restart the program")
                         # Popen("python3 ncellpy.py",shell=True)
@@ -136,7 +136,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
                     os.system(f"mkdir .hehe");
                 if not os.system(f"cp {filename}.py .hehe/.{filename}_{time1}"):
                     if not os.system(f"cp {tempdir}/{filename}.py ."):
-                        # print("\n_____________________\n");
+                        print(f"\n{c()}_________________________")
                         set_update_time()
                         # Popen("python3 ncellpy.py",shell=True)
                         os.system("python3 ncellpy.py")
