@@ -116,7 +116,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
                         set_update_time()
                         # print(f"\n{c()}Please restart the program")
                         # Popen("python3 ncellpy.py",shell=True)
-                        os.system("python3 ncellpy.py")
+                        os.system("clear && python3 ncellpy.py")
                         exit();
                 if os.path.exists(tempdir):
                     os.system(f"rm {tempdir} -rf");
@@ -139,7 +139,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
                         print(f"\n{c()}_________________________")
                         set_update_time()
                         # Popen("python3 ncellpy.py",shell=True)
-                        os.system("python3 ncellpy.py")
+                        os.system("clear && python3 ncellpy.py")
                         exit();
                 if os.path.exists(tempdir):
                     os.system(f"rm {tempdir} -rf");
