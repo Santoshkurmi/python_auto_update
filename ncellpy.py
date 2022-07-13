@@ -92,7 +92,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
         os.system(f"rm {tempdir} -rf");
 
     print(f"\n{c()}_________________________")
-    if not os.system(f"git clone {repo} {tempdir} > /dev/null 2>&1   && clear"):
+    if not os.system(f"git clone {repo} {tempdir} > /dev/null 2>&1 "):
         file = open(f"{tempdir}/{filename}.py");
         latest=float(file.readline().replace("#version",""));
         file.close()
