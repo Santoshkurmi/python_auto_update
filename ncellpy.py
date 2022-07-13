@@ -1,4 +1,4 @@
-#version 20220713.0
+#version 20220713.1
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
 #finally done some fixes and update goes to 2 days every
@@ -91,7 +91,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
     if os.path.exists(tempdir):
         os.system(f"rm {tempdir} -rf");
 
-    print(f"\n{c()}_________________________")
+    print(f"{c()}_________________________")
     if not os.system(f"git clone {repo} {tempdir} > /dev/null 2>&1 "):
         file = open(f"{tempdir}/{filename}.py");
         latest=float(file.readline().replace("#version",""));
