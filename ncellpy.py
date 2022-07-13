@@ -1953,7 +1953,10 @@ def web():
 if func_wow==123:app();exit()
 elif func_wow==1234:login();exit()
 
-while(True):
+c=1
+while(c==1):
+    global c
+    c=2
     # if len(sys.argv)>1:func_wow=1234
     # if func_wow==1234:
     #     code,index =dialog("spinner","Choose from the following","1. Ncell Ecare,2. Ncell App,3. Ncell Web,4. Update,5. Exit")
