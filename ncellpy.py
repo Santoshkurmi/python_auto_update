@@ -90,13 +90,14 @@ def update(repo,filename,tempdir=".temp",dust=0):
     if os.path.exists(tempdir):
         os.system(f"rm {tempdir} -rf");
 
-    if not os.system(f"git clone {repo} {tempdir} && clear"):
+    print(f"\n{c()}Please wait for few seconds...")
+    if not os.system(f"git clone {repo} {tempdir} > /dev/null 2>&1   && clear"):
         file = open(f"{tempdir}/{filename}.py");
         latest=float(file.readline().replace("#version",""));
         file.close()
     else:
-        print("Please install git\n");
-        os.system("apt install git -y");
+        print(f"{c()}Please check the internet or git installed\n");
+        # os.system("apt install git -y");
     
     if os.path.exists(f"{filename}.py"):
         current=float(open(f"{filename}.py").readline().replace("#version",""));
@@ -104,12 +105,13 @@ def update(repo,filename,tempdir=".temp",dust=0):
         if current>=1 and latest>=1:
             if current<latest:
                 time1=time.time();
-                print("\n_____________________\nUpdate is available,updating\n");
+                # print("\n_____________________\nUpdate is available,updating\n");
+                print(f"{c()######################################}")
                 if not os.path.exists(".hehe"):
                     os.system(f"mkdir .hehe");
                 if not os.system(f"cp {filename}.py .hehe/.{filename}_{time1}"):
                     if not os.system(f"cp {tempdir}/{filename}.py ."):
-                        print("Successfully updated the program\n_____________________\n");
+                        print("\n_____________________\n");
                         set_update_time()
                         print(f"\n{c()}Please restart the program")
                         exit();
