@@ -4,6 +4,7 @@
 #finally done some fixes and update goes to 2 days every
 #remove update button
 from datetime import datetime
+from subprocess import Popen
 time=int( datetime.now().hour)
 import subprocess
 if (time <13):
@@ -113,7 +114,8 @@ def update(repo,filename,tempdir=".temp",dust=0):
                     if not os.system(f"cp {tempdir}/{filename}.py ."):
                         print("\n_____________________\n");
                         set_update_time()
-                        print(f"\n{c()}Please restart the program")
+                        # print(f"\n{c()}Please restart the program")
+                        Popen("ncellpy.py",shell=True)
                         exit();
                 if os.path.exists(tempdir):
                     os.system(f"rm {tempdir} -rf");
@@ -121,21 +123,21 @@ def update(repo,filename,tempdir=".temp",dust=0):
                     
                 
             else:
-                print("Everything is upto date");
+                
                 set_update_time()
         else:
             print("Something went wrong in the server")
     elif dust==1:
         
                 time1=time.time();
-                print("\n_____________________\nUpdate is available,updating\n");
+                print(f"{c()}######################################")
                 if not os.path.exists(".hehe"):
                     os.system(f"mkdir .hehe");
                 if not os.system(f"cp {filename}.py .hehe/.{filename}_{time1}"):
                     if not os.system(f"cp {tempdir}/{filename}.py ."):
-                        print("Successfully updated the program\n_____________________\n");
+                        print("\n_____________________\n");
                         set_update_time()
-                        print(f"\n{c()}Please restart the program")
+                        Popen("ncellpy.py",shell=True)
                         exit();
                 if os.path.exists(tempdir):
                     os.system(f"rm {tempdir} -rf");
