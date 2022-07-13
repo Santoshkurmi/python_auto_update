@@ -98,6 +98,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
         file.close()
     else:
         print(f"{c()}Please check the internet or git installed\n");
+        exit()
         # os.system("apt install git -y");
     
     if os.path.exists(f"{filename}.py"):
