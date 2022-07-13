@@ -106,7 +106,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
         if current>=1 and latest>=1:
             if current<latest:
                 time1=time.time();
-                # print("\n_____________________\nUpdate is available,updating\n");
+                print("\n_____________________\nUpdate is available,updating\n");
                 # print(f"{c()}######################################")
                 if not os.path.exists(".hehe"):
                     os.system(f"mkdir .hehe");
