@@ -115,7 +115,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
                         print("\n_____________________\n");
                         set_update_time()
                         # print(f"\n{c()}Please restart the program")
-                        Popen("python3 ncellpy.py",shell=True)
+                        # Popen("python3 ncellpy.py",shell=True)
                         exit();
                 if os.path.exists(tempdir):
                     os.system(f"rm {tempdir} -rf");
@@ -1953,9 +1953,7 @@ def web():
 if func_wow==123:app();exit()
 elif func_wow==1234:login();exit()
 
-d=1
-while(d==1):
-    d=2
+while(True):
     # if len(sys.argv)>1:func_wow=1234
     # if func_wow==1234:
     #     code,index =dialog("spinner","Choose from the following","1. Ncell Ecare,2. Ncell App,3. Ncell Web,4. Update,5. Exit")
