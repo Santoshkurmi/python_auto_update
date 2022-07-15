@@ -632,7 +632,7 @@ def checkData(operation=0):
         send("query_balance");
         if code:
             balance=result["LOCAL_BAL"]
-            print(result)
+            #print(result)
         print("\n1. Main Balance: "+str(balance))
         idd=[["",""],["Local Currency","Rs."]];
         for e in result1:
