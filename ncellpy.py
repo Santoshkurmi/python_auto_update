@@ -1,4 +1,4 @@
-#version 20220713.1
+#version 20220715
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
 #finally done some fixes and update goes to 2 days every
@@ -632,6 +632,7 @@ def checkData(operation=0):
         send("query_balance");
         if code:
             balance=result["LOCAL_BAL"]
+            print(result)
         print("\n1. Main Balance: "+str(balance))
         idd=[["",""],["Local Currency","Rs."]];
         for e in result1:
@@ -1097,6 +1098,7 @@ def login():
                     ###################################
                     if not len(phone1)>=10:dialog("spinner","The phone number is not correct😭","Please try again");exit()
                     phone1= re.sub("[\W_]","",phone1)[-10:]
+                    phone = phone1
                     body={"0":"generateOTPRequest",
                         "1":{
                         "msisdn":phone1,
@@ -1159,9 +1161,9 @@ def login():
 #do something here
         return
     else:
-            if len(phone1)>=0 and len(phone1)<10:print("Wrong phone1 number..");return
+            if not len(phone1)>=10:print("Wrong phone1 number..");return
             phone1= re.sub("[\W_]","",phone1)[-10:]
-            
+            phone = phone1
     body={"0":"generateOTPRequest",
         "1":{
             "msisdn":phone1,
