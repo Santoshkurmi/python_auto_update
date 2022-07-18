@@ -1966,10 +1966,14 @@ if not os.path.exists(".device.txt"):
 with open(".device.txt") as f:
     f = f.read()
     if f=="y":
-        if not os.path.exists("/sdcard/Termux"):os.mkdir("/sdcard/Movies")
+        if not os.path.exists("/sdcard/Movies"):os.mkdir("/sdcard/Movies")
         command="termux-open "
         directory="/sdcard/"
-    else:command="google-chrome-stable --enable-logging=stderr --v=1 > log.txt 2>&1 ";directory="Movies"
+    else:
+        command="google-chrome-stable --enable-logging=stderr --v=1 > log.txt 2>&1 ";
+        directory="Movies";
+        if not os.path.exists("Movies"):
+            os.mkdir("Movies")
 
 
 
@@ -2045,16 +2049,14 @@ def downloader(url):
     response = requests.get(url,headers=headers,stream=True)
     # print(response.headers)
     size_server_file = response.headers.get('content-length',0)
-    # print(f"size of server = {int(size_server_file)} Bytes")
-    # print(f"size of local = {int(size_local_file)} Bytes")
-    # return
-    if size_server_file==0:print(f"{c()}File is already downloaded");return 
+    
+    if size_server_file==0:print(f"{c()}May be file is downloaded or try again");;return 
     print(f"{c()}Filename: {filename}\n{c()}Location: {directory}\n")
     block_size = 8192
     progress_bar =tqdm(total=int(size_local_file)+int(size_server_file), unit="iB",unit_scale=True)
     progress_bar.update(size_local_file)
     file_write(url,"paused",pathlib.Path( directory + filename).stat().st_size)
-    with open(directory+filename,"ab") as file:
+    with open(f"{directory}/{filename}","ab") as file:
         try:
             for data in response.iter_content(block_size):
                 
@@ -2063,7 +2065,8 @@ def downloader(url):
 
         except:
             # print(e)
-            print(f"{c()}Something went wrong dowloading file")
+            print(f"{c()}\nSomething went wrong dowloading file")
+            input(f"{c()}\nPress enter to show option:")
             file.close()
             file_write(url,"paused",pathlib.Path( directory + filename).stat().st_size)
             return
@@ -2319,7 +2322,7 @@ def main():
                 print("\n_________________________________________\n")
 
                 
-            choose =take_inpu_mt(f"{c()}Enter the choice: ")
+            choose =take_input_m(f"{c()}Enter the choice: ")
             runner=""
             if choose=="b":runner="movie";continue
             if choose=="s":runner="search";continue
@@ -2347,7 +2350,7 @@ def main():
             
         if runner in ["","drive"]:
             for i in range(len(drive_links)): print(f"{c()}{i+1}. {drive_links[i][0]} ")
-            main_link = take_input_(f"\n\n{c()}Choose the drive link: ")
+            main_link = take_input_m(f"\n\n{c()}Choose the drive link: ")
             if main_link=="b":runner="quality";continue
             if main_link=="s":runner="search";continue
             runner=""
