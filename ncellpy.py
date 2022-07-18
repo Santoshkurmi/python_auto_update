@@ -2038,8 +2038,9 @@ def downloader(url):
     movie_json = file_write(type="read")
     try:
         if movie_json[filename]['status'] =="completed" and  os.path.exists(directory+filename):
-            print(f"{c()}File is already downlaoded\n")
-            return 
+            if pathlib.Path( f"{directory}/{filename}").stat().st_size>1*1024*1024:
+                print(f"{c()}File is already downlaoded\n")
+                return 
     except Exception as e:pass
 
     if not  os.path.exists(directory+filename):open(directory+filename,"w").close()
