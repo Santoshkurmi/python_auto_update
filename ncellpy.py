@@ -2367,7 +2367,7 @@ def main():
             if  open_browser==-1:
                 runner="drive";
                 print(f"\n{c()}All the link are not working...\n");
-                test = input(f"{c()}Do you want to continue in browser:(y|n): " );
+                test = input(f"{c()}Do you want to continue in browser (y|n): " );
                 if test in ["y","Y"]:
                     last = main_links.replace("=","\=")
                     last = last.replace("&","\&")
@@ -2375,7 +2375,7 @@ def main():
                     os.system(command+last)
                 continue
 
-            temp = input(f"\n{c()}Download the file in terminal(y|n):")    
+            temp = input(f"\n{c()}Download the file in terminal (y|n):")    
             if temp=="n":
                 # last = last_step(real_l[int(open_browser)])
                 os.system(command+open_browser)
