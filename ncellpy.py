@@ -2033,7 +2033,7 @@ def print_movies():
 def downloader(url):
     filename =url[ url.rfind('/')+1: ]
 
-    
+    print("Hey")
     # size_local_file = pathlib.Path( directory + filename).stat().st_size
     movie_json = file_write(type="read")
     try:
