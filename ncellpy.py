@@ -1968,7 +1968,7 @@ with open(".device.txt") as f:
     if f=="y":
         if not os.path.exists("/sdcard/Movies"):os.mkdir("/sdcard/Movies")
         command="termux-open "
-        directory="/sdcard/"
+        directory="/sdcard/Movies"
     else:
         command="google-chrome-stable --enable-logging=stderr --v=1 > log.txt 2>&1 ";
         directory="Movies";
