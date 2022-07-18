@@ -2045,7 +2045,7 @@ def downloader(url):
     if not  os.path.exists(directory+filename):open(directory+filename,"w").close()
     size_local_file = pathlib.Path( directory + filename).stat().st_size
     headers={"Hey":"No",'Range':f'bytes={size_local_file}-'}
-        
+    print(headers)    
     response = requests.get(url,headers=headers,stream=True)
     # print(response.headers)
     size_server_file = response.headers.get('content-length',0)
