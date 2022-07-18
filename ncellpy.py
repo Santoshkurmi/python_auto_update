@@ -2303,7 +2303,7 @@ def main():
 
         
         if runner in ["","movie"]:
-            for i in range(len(movies_list)): print(f"{c()}{i+1}. {movies_list[i][1]}\n")
+            for i in range(len(movies_list)): print(f"\n{c()}{i+1}. {movies_list[i][1]}")
             movie = take_input_m(f"\n\n{c()}Choose the movie: ")
             if movie=="b":runner="search"; continue
             if movie=="s":runner="search";continue
