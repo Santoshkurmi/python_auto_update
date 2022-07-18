@@ -2050,7 +2050,7 @@ def downloader(url):
     # print(response.headers)
     size_server_file = response.headers.get('content-length',0)
     
-    if size_server_file==0:print(f"{c()}May be file is downloaded or try again");;return 
+    if size_server_file==0:print(f"{c()}May be file is downloaded or try again");return 
     print(f"{c()}Filename: {filename}\n{c()}Location: {directory}\n")
     block_size = 8192
     progress_bar =tqdm(total=int(size_local_file)+int(size_server_file), unit="iB",unit_scale=True)
