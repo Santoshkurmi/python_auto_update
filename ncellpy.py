@@ -2043,12 +2043,12 @@ def downloader(url):
                 return 
     except Exception as e:print(e)
 
-    if not  os.path.exists(directory+filename):open(directory+filename,"w").close()
+    if not  os.path.exists(f"{directory}/{filename}"):open(f"{directory}/{filename}","w").close()
     size_local_file = pathlib.Path( f"{directory}/{filename}").stat().st_size
     headers={"Hey":"No",'Range':f'bytes={size_local_file}-'}
     # print(headers)    
     response = requests.get(url,headers=headers,stream=True)
-    print(response.headers)
+    # print(response.headers)
     size_server_file = response.headers.get('content-length',0)
     
     if size_server_file==0:print(f"{c()}May be file is downloaded or try again");return 
