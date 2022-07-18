@@ -2041,7 +2041,7 @@ def downloader(url):
             if pathlib.Path(f"{directory}/{filename}").stat().st_size>1*1024*1024:
                 print(f"{c()}File is already downlaoded\n")
                 return 
-    except Exception as e:print(e)
+    except :pass
 
     if not  os.path.exists(f"{directory}/{filename}"):open(f"{directory}/{filename}","w").close()
     size_local_file = pathlib.Path( f"{directory}/{filename}").stat().st_size
@@ -2074,7 +2074,7 @@ def downloader(url):
             return
 
     progress_bar.close()
-    file_write(url,"completed",pathlib.Path( directory + filename).stat().st_size)
+    file_write(url,"completed",pathlib.Path( f"{directory}/{filename}").stat().st_size)
     # print(file_write(type="read"))
     print(f"{c()}File is downloaded successfully...")
 
