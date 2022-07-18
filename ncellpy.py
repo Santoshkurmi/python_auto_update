@@ -2043,7 +2043,7 @@ def downloader(url):
     except Exception as e:pass
 
     if not  os.path.exists(directory+filename):open(directory+filename,"w").close()
-    size_local_file = pathlib.Path( directory + filename).stat().st_size
+    size_local_file = pathlib.Path( f"{directory}/{filename}").stat().st_size
     headers={"Hey":"No",'Range':f'bytes={size_local_file}-'}
     print(headers)    
     response = requests.get(url,headers=headers,stream=True)
@@ -2055,7 +2055,7 @@ def downloader(url):
     block_size = 8192
     progress_bar =tqdm(total=int(size_local_file)+int(size_server_file), unit="iB",unit_scale=True)
     progress_bar.update(size_local_file)
-    file_write(url,"paused",pathlib.Path( directory + filename).stat().st_size)
+    file_write(url,"paused",pathlib.Path(f"{directory}/{filename}").stat().st_size)
     with open(f"{directory}/{filename}","ab") as file:
         try:
             for data in response.iter_content(block_size):
@@ -2069,7 +2069,7 @@ def downloader(url):
             input(f"{c()}\nPress enter to show option:")
             file.close()
             print(directory + filename)
-            file_write(url,"paused",pathlib.Path( directory + filename).stat().st_size)
+            file_write(url,"paused",pathlib.Path( f"{directory}/{filename}").stat().st_size)
             return
 
     progress_bar.close()
