@@ -2068,6 +2068,7 @@ def downloader(url):
             print(f"{c()}\nSomething went wrong dowloading file")
             input(f"{c()}\nPress enter to show option:")
             file.close()
+            print(directory + filename)
             file_write(url,"paused",pathlib.Path( directory + filename).stat().st_size)
             return
 
