@@ -2033,7 +2033,7 @@ def print_movies():
 def downloader(url):
     filename =url[ url.rfind('/')+1: ]
 
-    print("Hey")
+    # print("Hey")
     # size_local_file = pathlib.Path( directory + filename).stat().st_size
     movie_json = file_write(type="read")
     try:
@@ -2041,7 +2041,7 @@ def downloader(url):
             if pathlib.Path(f"{directory}/{filename}").stat().st_size>1*1024*1024:
                 print(f"{c()}File is already downlaoded\n")
                 return 
-    except Exception as e:pass
+    except Exception as e:print(e)
 
     if not  os.path.exists(directory+filename):open(directory+filename,"w").close()
     size_local_file = pathlib.Path( f"{directory}/{filename}").stat().st_size
