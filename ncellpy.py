@@ -1949,6 +1949,9 @@ def web():
             print("\n\nEnter the correct choice\n\n");
 
 #Happy ending here everythings
+
+
+
 ###########################
 # moviesverse here
 from bs4 import BeautifulSoup as bs 
@@ -1957,7 +1960,6 @@ import pathlib
 from tqdm import tqdm 
 
 main_host= "https://moviezverse.com"
-
 if not os.path.exists(".device.txt"):
     temp = input("Are you android(y|n): ")
     with open(".device.txt","w") as f:
@@ -1977,7 +1979,7 @@ with open(".device.txt") as f:
 
 
 
-def file_write(url="",status="",size="",type="write"):
+def file_write(url="",status="",size="",main_links="",total="1",type="write"):
     filename="movies.json"
     original_list=""
 
@@ -2000,6 +2002,8 @@ def file_write(url="",status="",size="",type="write"):
 
     if int(size)/(1024*1024*1024)>=1:size = f"{round(int(size)/(1024*1024*1024),2)} GB"
     else: size =f"{round(int(size)/(1024*1024),2)} MB"
+    if int(total)/(1024*1024*1024)>=1:total = f"{round(int(total)/(1024*1024*1024),2)} GB"
+    else: total =f"{round(int(total)/(1024*1024),2)} MB"
 
     
         
@@ -2007,30 +2011,34 @@ def file_write(url="",status="",size="",type="write"):
     if type=="write":    
         with open(filename,"w") as f:
             # print(original_list)
-            original_list[file_local]={"url":url,"status":status,"size":size}
+            original_list[file_local]={"url":url,"status":status,"size":size,"main_link":main_links,"total":total}
             f.write(json.dumps(original_list,indent=4))
 
 
 # file_write("Avatar.mp4","paused","123456677")
-
+import urllib.parse
 def print_movies():
     movies= file_write(type="read")
     try:
         counter=1
         array=[]
         for name in movies:
-            print(f"\n{c()}{counter}. {name}\n{c()}Status: {movies[name]['status']}\n{c()}Size:{movies[name]['size']}\n")
+            
+            text = f"\n{c()}{counter}. {name}\n{c()}Status: {movies[name]['status']}\n{c()}Size:{movies[name]['size']}\n{c()}Total:{movies[name]['total']}\n"
+            print(urllib.parse.unquote(text))
             counter+=1
-            array.append(movies[name]['url'])
+            array.append([movies[name]['url'],movies[name]['main_link']])
     except:pass 
-    download_movie= take_input_m("Choose the movie to downlaod: ")
+    download_movie= take_input_m("Choose the movie to downlaod (b): ")
     if download_movie=="b":return
+    if download_movie=="e":exit()
     if int(download_movie)<=len(array):
-        downloader(array[int(download_movie)-1])
+        
+        downloader(array[int(download_movie)-1][0],array[int(download_movie)-1][1])
 
 
 
-def downloader(url):
+def downloader(url,main_links):
     filename =url[ url.rfind('/')+1: ]
 
     # print("Hey")
@@ -2049,14 +2057,14 @@ def downloader(url):
     # print(headers)    
     response = requests.get(url,headers=headers,stream=True)
     # print(response.headers)
-    size_server_file = response.headers.get('content-length',0)
+    size_server_file = int(response.headers.get('content-length',0) )
     
     if size_server_file==0:print(f"{c()}May be file is downloaded or try again");return 
     print(f"{c()}Filename: {filename}\n{c()}Location: {directory}\n")
     block_size = 8192
     progress_bar =tqdm(total=int(size_local_file)+int(size_server_file), unit="iB",unit_scale=True)
     progress_bar.update(size_local_file)
-    file_write(url,"paused",pathlib.Path(f"{directory}/{filename}").stat().st_size)
+    file_write(url,"paused",pathlib.Path(f"{directory}/{filename}").stat().st_size,main_links,size_server_file+size_local_file)
     with open(f"{directory}/{filename}","ab") as file:
         try:
             for data in response.iter_content(block_size):
@@ -2066,15 +2074,15 @@ def downloader(url):
 
         except:
             # print(e)
-            print(f"{c()}\nSomething went wrong dowloading file")
-            input(f"{c()}\n\n\nPress enter to show option:\n\n")
+            print(f"{c()}\n______________________Something went wrong dowloading file\n________________________")
+            # input(f"{c()}\n\n\nPress enter to show option:\n\n")
             file.close()
             # print(directory + filename)
-            file_write(url,"paused",pathlib.Path( f"{directory}/{filename}").stat().st_size)
+            file_write(url,"paused",pathlib.Path( f"{directory}/{filename}").stat().st_size,main_links,size_server_file+size_local_file)
             return
 
     progress_bar.close()
-    file_write(url,"completed",pathlib.Path( f"{directory}/{filename}").stat().st_size)
+    file_write(url,"completed",pathlib.Path( f"{directory}/{filename}").stat().st_size,main_links,size_server_file+size_local_file)
     # print(file_write(type="read"))
     print(f"{c()}File is downloaded successfully...")
 
@@ -2112,15 +2120,19 @@ def is_link_working(url):
 
 
 def read_drive_links(url):
-    
+    # print(url)
     response= requests.get(url).text
     links = []
     soup = bs(response,'html.parser')
 
     max_btn=soup.find_all('a',class_='maxbutton') #string=""
     try:
-        for link in max_btn:    links.append([ [link['title']],link["href"] ] )
-    except:pass
+        for link in max_btn:
+            if not "policiesforyou" in url: 
+               links.append([ [link['title']],link["href"] ] )
+            else:
+                links.append([ [link.text],link["href"] ] )
+    except Exception as e:print(e)
     # return links 
 
 
@@ -2190,15 +2202,31 @@ def get_movie_quality(movie):
         soup =bs(response,'html.parser').find("span",string =re.compile('[Ss]creen[Ss]hots:')).parent
     counter = 0
     array_link=[]
+    
     tags=[]
+    # print( soup.parent.contents )
+    # print(len(soup.parent.contents))
     for tag in  soup.next_siblings:
         if tag=="\n":continue
         if tag.name=="div":tags.append(tag)
-    if len(tags)==0:tags=soup.next_siblings
+
+    # if len(tags)==0:
+    #     try:
+    #         if soup.parent.a['class']=="maxbutton":
+    #             tags=soup.next_siblings
+    #         else:
+    #             tags=soup.parent.parent
+    #     except:tags=soup.parent.parent
+    # print(tags)
+    if len(tags)==0 and len(soup.parent.contents)>10 :tags=soup.next_siblings;
+    elif len(tags)==0 and len(soup.parent.contents)<10 :tags=soup.parent.parent;
     elif len(tags)==1:tags=tags[0]
     elif len(tags)==2:tags=tags[1]
     elif len(tags)==3:tags=tags[2]
-
+    # text =(soup.parent.contents)
+    # print(text)
+    # if "maxbutton" in text:
+    #     print("Wow its exists")
     for tag in tags:
         # print(f"\n\n\n*********************************\n{tag}")
         try:
@@ -2229,6 +2257,7 @@ def get_movie_quality(movie):
 
 
 def real_link(url):
+    # print(url)
     print(f"{c()}\nAlmost completing everything ..\n")
     pattern ="(https://[\.a-z]+)"
     host = re.search(pattern,url).group(1)
@@ -2250,6 +2279,7 @@ def real_link(url):
     for direct in soup.children:
         if direct=="\n":continue
         real_l.append(direct['href'])
+    # print(real_l)
     return real_l
   
 def last_step(url):
@@ -2275,10 +2305,13 @@ def take_input_m(msg):
     return text 
 
 
-def auto_checker(array):
+def auto_checker(url):
+    # print(array)
+    array = real_link(url)
     for i in range(len(array)):
-        print(f"\n\n{c()}Trying link {i+1}...")
+        print(f"{c()}________Trying link {i+1}__________")
         last = last_step(array[i])
+        # print(last)
         if is_link_working(last):
             # print(last)
             return last
@@ -2288,21 +2321,35 @@ def auto_checker(array):
 
 
 def main():
-    global runner
+    hosts =["https://moviezverse.com","https://dexmovies.xyz"]
+    global runner,main_host
     runner=""
+    current_host=1
     while(True):
         # print(f"{c()}______________________________________")
 
 
         if runner in ["","search"]:
-            movie = take_input_m(f"{c()}\nEnter the movie to search: ")
+            if current_host==1:
+                movie = take_input_m(f"{c()}\nEnter Hollywood movie to search  (i|b|p|e): ")
+                
+            else:
+                movie = take_input_m(f"{c()}\nEnter Indian movie to search (h|b|p|e): ")
+                
+            if movie=="i":current_host=2;main_host=hosts[1];continue
+            if movie=="h":current_host=1;main_host=hosts[0];continue
             if movie=="b":return
+            
             movies_list = get_movies_list(movie)
             runner=""
         
 
         
         if runner in ["","movie"]:
+            if len(movies_list)==0:
+                print(f"\n_______________________\n{c()}Please search correctly,there is no movie of this name\n_______________________\n")
+                runner="search"; 
+                continue
             for i in range(len(movies_list)): print(f"\n{c()}{i+1}. {movies_list[i][1]}\n______________________________________")
             movie = take_input_m(f"\n\n{c()}Choose the movie: ")
             if movie=="b":runner="search"; continue
@@ -2359,32 +2406,51 @@ def main():
             main_links = bypass_ads( drive_links[int(main_link)-1][1] )
             
         if runner in ["","link"]:
-            real_l= real_link(main_links)
+            # real_l= real_link(main_links)
             # print(real_l)
             # for i in range(len(real_l)):
             #     print(f"{c()}{i+1} Downlaod link {i+1}")
             
-            open_browser =auto_checker(real_l)
+            open_browser =auto_checker(main_links)
                 
             if  open_browser==-1:
                 runner="drive";
                 print(f"\n{c()}All the link are not working...\n");
-                test = input(f"{c()}Do you want to continue in browser (y|n): " );
-                if test in ["y","Y"]:
+                test=take_input_m(f"{c()}Enter no. times to retry (i|b|c): ")
+                # test = take_input_m(f"{c()}Do you want to continue in browser (y|n): " );
+
+                if test in ["c","C","chrome"]:
                     last = main_links.replace("=","\=")
                     last = last.replace("&","\&")
                     
                     os.system(command+last)
-                continue
+                elif test=="b":continue
+                elif test in ["i","I"]:repeat = 30
+                else: repeat = int(test)
+                while not repeat==0:
+                    repeat-=1
+                    
+                    open_browser =auto_checker(main_links)
+                    
+                    if not open_browser ==-1:break
+                if open_browser==-1:
+                    test=take_input_m(f"{c()}Do you want to open in browser (c|b): ")
+                # test = take_input_m(f"{c()}Do you want to continue in browser (y|n): " );
+                    if test in ["c","C","chrome"]:
+                        last = main_links.replace("=","\=")
+                        last = last.replace("&","\&")
+                        
+                        os.system(command+last)
+                    continue
 
-            temp = input(f"\n{c()}Download the file in terminal (y|n):")    
-            if temp=="n":
+            temp = input(f"\n{c()}Download the file in terminal or chrome (t|c|b):")    
+            if temp=="c":
                 # last = last_step(real_l[int(open_browser)])
                 os.system(command+open_browser)
             elif temp=="b":
                 runner="drive";continue
             else:
-                downloader(open_browser)    
+                downloader(open_browser,main_links)    
             
             runner="drive"
             
