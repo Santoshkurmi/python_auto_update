@@ -2331,7 +2331,7 @@ def main():
 
         if runner in ["","search"]:
             if current_host==1:
-                movie = take_input_m(f"{c()}\nEnter Hollywood movie to search  (i|b|p|e): ")
+                movie = take_input_m(f"{c()}\nSearch Hollywood movies (i|b|p|e): ")
                 
             else:
                 movie = take_input_m(f"{c()}\nEnter Indian movie to search (h|b|p|e): ")
@@ -2445,8 +2445,13 @@ def main():
 
             temp = input(f"\n{c()}Download the file in terminal or chrome (t|c|b):")    
             if temp=="c":
-                # last = last_step(real_l[int(open_browser)])
-                os.system(command+open_browser)
+                # last = last_step(real_l[int(open_browser)]8)
+                last = open_browser.replace("=","\=")
+                last = last.replace("&","\&")
+                last = last.replace(")","\)")
+                last = last.replace("(","\(")
+                #print(last)
+                os.system(command+last)
             elif temp=="b":
                 runner="drive";continue
             else:
