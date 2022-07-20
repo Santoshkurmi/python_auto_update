@@ -2039,7 +2039,7 @@ def print_movies():
 
 
 def downloader(url,main_links):
-    filename =url[ url.rfind('/')+1: ]
+    filename =urllib.parse.unquote(url[ url.rfind('/')+1: ])
 
     # print("Hey")
     # size_local_file = pathlib.Path( directory + filename).stat().st_size
@@ -2149,7 +2149,7 @@ def bypass_ads(token):
     
     search = re.search(pattern,token)
     host = search.group(2)
-    
+    # print(token)
     token = token.replace("https://href.li/?https://sifitales.com/?id=","")
     response=send_request("post",host,"","_wp_http="+token)
     
