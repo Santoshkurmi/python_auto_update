@@ -1,4 +1,4 @@
-#version 20220719
+#version 20220720
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
 #finally done some fixes and update goes to 2 days every
@@ -2144,7 +2144,7 @@ def read_drive_links(url):
 
 
 def bypass_ads(token):
-    print(f"{c()}\nPlease wait for few seconds..\n")
+    print(f"{c()}\nPlease wait for few seconds..")
     pattern ="(https://[\.a-z]+/\?)(https://[.a-z]+)"
     
     search = re.search(pattern,token)
@@ -2256,23 +2256,45 @@ def get_movie_quality(movie):
     return array_link
 
 
-def real_link(url):
+def real_link(url,type=1):
     # print(url)
-    print(f"{c()}\nAlmost completing everything ..\n")
+    print(f"{c()}Almost completing everything ..\n")
     pattern ="(https://[\.a-z]+)"
     host = re.search(pattern,url).group(1)
     headers={"Host":host.replace("https://","")}
-    if host=="https://raninfoapi.xyz":
-        new_url = requests.get(url)
-        # print(new_url.text)
-        url = bs(new_url.text,'html.parser').find('a',class_="btn-success")['href']
-        url = requests.get(url,allow_redirects=False).headers['Location']
-        # print(url)
-        host = re.search(pattern,url).group(1)
-        headers={"Host":host.replace("https://","")}
- 
-    link = requests.get(url,headers=headers,allow_redirects=False).headers['location'].replace("/file","/devfile")
-    link = host +link 
+    if type==1:
+        if host=="https://raninfoapi.xyz":
+            new_url = requests.get(url)
+            # print(new_url.text)
+            url = bs(new_url.text,'html.parser').find('a',class_="btn-success")['href']
+            url = requests.get(url,allow_redirects=False).headers['Location']
+            # print(url)
+            host = re.search(pattern,url).group(1)
+            headers={"Host":host.replace("https://","")}
+        
+        link = requests.get(url,headers=headers,allow_redirects=False).headers['location'].replace("/file","/devfile")
+        link = host +link 
+    else:
+        try:
+            link = requests.get(url,headers=headers,allow_redirects=False).headers['location']
+            url = host +link 
+            response = requests.get(url)
+
+            cookies = response.cookies
+            pattern  = '("key",.+")([a-z0-9]+)(")'
+            key = re.search(pattern,response.text).group(2)
+
+            data = {"action":"direct","type":"2","key":key}
+            # print(data,url)
+            response = requests.post(url,data=data,cookies=cookies)
+            url = json.loads(response.text )['url']
+            new_url = requests.get(url)
+            url = bs(new_url.text,'html.parser').find('a',class_="btn-success")['href']
+            return [url]
+        except:
+            return []
+
+
     response = requests.get(link,headers=headers).text
     soup = bs(response,'html.parser').find("div",class_="mb-4")
     real_l =[]
@@ -2305,9 +2327,9 @@ def take_input_m(msg):
     return text 
 
 
-def auto_checker(url):
+def auto_checker(url,type=1):
     # print(array)
-    array = real_link(url)
+    array = real_link(url,type)
     for i in range(len(array)):
         print(f"{c()}________Trying link {i+1}__________")
         last = last_step(array[i])
@@ -2332,10 +2354,10 @@ def main():
         if runner in ["","search"]:
             if current_host==1:
                 movie = take_input_m(f"{c()}\nSearch Hollywood movies (i|b|p|e): ")
-                
+                main_host=hosts[0]
             else:
                 movie = take_input_m(f"{c()}\nEnter Indian movie to search (h|b|p|e): ")
-                
+                main_host=hosts[1]
             if movie=="i":current_host=2;main_host=hosts[1];continue
             if movie=="h":current_host=1;main_host=hosts[0];continue
             if movie=="b":return
@@ -2411,15 +2433,17 @@ def main():
             # for i in range(len(real_l)):
             #     print(f"{c()}{i+1} Downlaod link {i+1}")
             
-            open_browser =auto_checker(main_links)
-                
+            open_browser =auto_checker(main_links,1)
+            if open_browser==-1:print(f"\n{c()}Trying new ways\n");open_browser= auto_checker(main_links,2)    
             if  open_browser==-1:
+                repeat=0
                 runner="drive";
                 print(f"\n{c()}All the link are not working...\n");
-                test=take_input_m(f"{c()}Enter no. times to retry (i|b|c): ")
+                test=take_input_m(f"{c()}Enter no. times to retry (i|b|c|f): ")
                 # test = take_input_m(f"{c()}Do you want to continue in browser (y|n): " );
-
-                if test in ["c","C","chrome"]:
+                if test=="f":
+                    open_browser =auto_checker(main_links,2)
+                elif test in ["c","C","chrome"]:
                     last = main_links.replace("=","\=")
                     last = last.replace("&","\&")
                     
@@ -2444,6 +2468,7 @@ def main():
                     continue
 
             temp = input(f"\n{c()}Download the file in terminal or chrome (t|c|b):")    
+            if temp=="e":exit()
             if temp=="c":
                 # last = last_step(real_l[int(open_browser)]8)
                 last = open_browser.replace("=","\=")
