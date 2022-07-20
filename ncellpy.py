@@ -1958,7 +1958,7 @@ from bs4 import BeautifulSoup as bs
 import re
 import pathlib 
 from tqdm import tqdm 
-
+import shutil
 main_host= "https://moviezverse.com"
 if not os.path.exists(".device.txt"):
     temp = input("Are you android(y|n): ")
@@ -2037,6 +2037,93 @@ def print_movies():
         downloader(array[int(download_movie)-1][0],array[int(download_movie)-1][1])
 
 
+import threading
+
+url ="http://162.12.215.254/Data/Movies/Dual%20Audio/2020/Beauty%20and%20the%20Beast%202014%20Dual%20Audio%20Hindi%20720p%20BluRay/Beauty%20and%20the%20Beast%202014%20Dual%20Audio%20Hindi%20720p%20BluRay.mkv"
+
+
+# total_parts =120 
+def set_progress_bar(total_size):
+    global progress_bar
+    progress_bar =tqdm(total=total_size, unit="iB",unit_scale=True)
+
+def delete_chunk():
+    real_directory=directory+"/.temp_chunk"
+    if os.path.exists(real_directory):shutil.rmtree(real_directory)
+def download_thread(url,total_parts,total_size,part,range_location):
+        
+    global counter
+    # print(f"Starting the thread {part+1}")
+    try:
+        if not os.path.exists(directory):os.mkdir(directory)
+        real_directory=directory+"/.temp_chunk"
+        # print(real_directory) #
+        if not os.path.exists(real_directory):os.mkdir(real_directory)
+    except:pass
+    real_filename =urllib.parse.unquote(url[ url.rfind('/')+1: ])
+    filename =f"{real_directory}/{real_filename}-0{part+1}.bin"
+    # print(filename) #
+    if os.path.exists(filename):
+        size_local_file = pathlib.Path(filename).stat().st_size
+        # print(range_location[0])
+        headers={'Range':f'bytes={int(range_location[0])+size_local_file-1}-{range_location[1]}'}
+        progress_bar.update(size_local_file)
+    else:
+        headers={'Range':f'bytes={range_location[0]}-{range_location[1]}'}
+    # print(headers)
+
+    res = requests.get(url,headers=headers,stream=True)
+    # size_server_file = int(res.headers['content-length'])
+
+    
+    with open(filename,"ab") as file:
+        for data in res.iter_content(8192):
+            progress_bar.update(len(data))
+            file.write(data)
+    #after successfull completion
+    counter+=1
+    # print(f"Finished the thread{part+1}")
+    command=""
+    if counter==total_parts:
+        
+        real_filename = '"'+real_filename +'"'
+        print(f"{c()}All the file chunk are downloaded successfully")
+        for i in range(total_parts):
+            command += f"{real_directory}/{real_filename}-0{i+1}.bin "
+            # print(filename)
+        # print(command)
+        os.system("cat "+command +" >"+directory+"/"+real_filename)
+        os.system("rm "+command )
+    
+
+def create_thread(url=""):
+    global counter
+    counter  = 0
+    # total_size = get_total_size(url)
+    parts = input(f"{c()}Enter the number of chunk (l|n|h):")
+    total_size = int(requests.get(url,stream=True).headers['content-length'])
+    set_progress_bar(total_size)
+    if parts=="n":parts=5
+    elif parts=="l":parts=3
+    elif parts=="h":parts=10
+    elif parts=="b":return 
+    elif parts=="e":exit()
+    else:parts=int(parts)
+    
+
+    each_size = int(total_size/parts)
+    for i in range(parts):
+        start=i*each_size+i
+        if not i==parts-1: end=i*each_size+each_size+i
+        else:end=""
+        # print(f"{start}-{end}")
+        threading.Thread(target=download_thread,args=(url,parts,total_size,i,[start,end],)).start()
+
+
+# # create_thread(url)
+# delete_chunk()
+
+
 
 def downloader(url,main_links):
     filename =urllib.parse.unquote(url[ url.rfind('/')+1: ])
@@ -2084,7 +2171,7 @@ def downloader(url,main_links):
     progress_bar.close()
     file_write(url,"completed",pathlib.Path( f"{directory}/{filename}").stat().st_size,main_links,size_server_file+size_local_file)
     # print(file_write(type="read"))
-    print(f"{c()}File is downloaded successfully...")
+    print(f"{c()}\nFile is downloaded successfully...")
 
 ###################################3
 
@@ -2210,23 +2297,13 @@ def get_movie_quality(movie):
         if tag=="\n":continue
         if tag.name=="div":tags.append(tag)
 
-    # if len(tags)==0:
-    #     try:
-    #         if soup.parent.a['class']=="maxbutton":
-    #             tags=soup.next_siblings
-    #         else:
-    #             tags=soup.parent.parent
-    #     except:tags=soup.parent.parent
-    # print(tags)
+   
     if len(tags)==0 and len(soup.parent.contents)>10 :tags=soup.next_siblings;
     elif len(tags)==0 and len(soup.parent.contents)<10 :tags=soup.parent.parent;
     elif len(tags)==1:tags=tags[0]
     elif len(tags)==2:tags=tags[1]
     elif len(tags)==3:tags=tags[2]
-    # text =(soup.parent.contents)
-    # print(text)
-    # if "maxbutton" in text:
-    #     print("Wow its exists")
+ 
     for tag in tags:
         # print(f"\n\n\n*********************************\n{tag}")
         try:
@@ -2320,7 +2397,18 @@ def take_input_m(msg):
         while(text==""):
             text =input(msg)
             if text=="p":print_movies();text=""
-        
+            elif text=="a":
+                temp = input(f"{c()}Enter the url(b): ")
+                if temp=="b":text="";continue;
+                elif temp=="e":exit()
+                elif len(temp)>10:
+                    
+                    create_thread(temp);
+                    text=""
+                    input("")
+                    
+                else:text=""
+            elif text=="delete":delete_chunk();text=""
     except:pass
     if text=="e":exit()
     
@@ -2344,6 +2432,7 @@ def auto_checker(url,type=1):
 
 def main():
     hosts =["https://moviezverse.com","https://dexmovies.xyz"]
+    thread=""
     global runner,main_host
     runner=""
     current_host=1
@@ -2421,9 +2510,11 @@ def main():
             
         if runner in ["","drive"]:
             for i in range(len(drive_links)): print(f"{c()}{i+1}. {drive_links[i][0]} ")
-            main_link = take_input_m(f"\n\n{c()}Choose the drive link: ")
+            main_link = take_input_m(f"\n\n{c()}Choose the drive link (b): ")
             if main_link=="b":runner="quality";continue
-            if main_link=="s":runner="search";continue
+            elif main_link=="s":runner="search";continue
+            # elif main_link[-1:]=="t":thread=1;main_link=main_link.replace("t","")
+            # else:thread=0
             runner=""
             main_links = bypass_ads( drive_links[int(main_link)-1][1] )
             
@@ -2466,8 +2557,8 @@ def main():
                         
                         os.system(command+last)
                     continue
-
-            temp = input(f"\n{c()}Download the file in terminal or chrome (t|c|b):")    
+            # print(open_browser)
+            temp = input(f"\n{c()}Download the file in terminal or chrome (a|t|c|b):")    
             if temp=="e":exit()
             if temp=="c":
                 # last = last_step(real_l[int(open_browser)]8)
@@ -2479,6 +2570,11 @@ def main():
                 os.system(command+last)
             elif temp=="b":
                 runner="drive";continue
+            elif temp=="a":
+                
+                create_thread(open_browser)
+                
+                input("")
             else:
                 downloader(open_browser,main_links)    
             
