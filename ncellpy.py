@@ -2445,7 +2445,7 @@ def main():
                 movie = take_input_m(f"{c()}\nSearch Hollywood movies (i|b|p|e): ")
                 main_host=hosts[0]
             else:
-                movie = take_input_m(f"{c()}\nEnter Indian movie to search (h|b|p|e): ")
+                movie = take_input_m(f"{c()}\nSearch Indian movies (h|b|p|e): ")
                 main_host=hosts[1]
             if movie=="i":current_host=2;main_host=hosts[1];continue
             if movie=="h":current_host=1;main_host=hosts[0];continue
