@@ -1376,9 +1376,9 @@ def balance():
                 else:
                     
                     comb2+=str(counter)+ ". "+ json['ncellName']+"\nUsage: "+ str(json['balance']) + json['uom'] + "\nExpiry: "+json['expDate']+"\n\n"
-                print(f"{counter}. {json['ncellName']}")
-                print(f"Usage: {json['balance']}{json['uom']}")
-                print(f"Expiry: {json['expDate']}\n\n")
+                print(f"{c()}{counter}.{c()} {json['ncellName']}")
+                print(f"{c()}Usage: {c()}{json['balance']}{json['uom']}")
+                print(f"{c()}Expiry:{c()} {json['expDate']}\n\n")
                 counter +=1;
 
     for json in data["voiceBalanceList"]:
@@ -1387,9 +1387,9 @@ def balance():
                 else:
 
                     comb2+=str(counter)+ ". "+ json['ncellName']+"\nUsage: "+ str(json['freeTalkTime']) + "Min" + "\nExpiry: "+json['expDate']+"\n\n"
-                print(f"{counter}. {json['ncellName']}")
-                print(f"Usage: {json['freeTalkTime']} Min")
-                print(f"Expiry: {json['expDate']}\n\n") 
+                print(f"{c()}{counter}. {c()}{json['ncellName']}")
+                print(f"{c()}Usage:{c()} {json['freeTalkTime']} Min")
+                print(f"{c()}Expiry:{c()} {json['expDate']}\n\n") 
                 counter +=1;
     input();os.system("clear")
     return comb,comb2
