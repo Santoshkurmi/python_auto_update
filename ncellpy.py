@@ -2114,17 +2114,17 @@ def create_thread(url=""):
     global counter
     counter  = 0
     # total_size = get_total_size(url)
-    parts = input(f"{c()}Enter the number of chunk (l|n|h):")
-    total_size = int(requests.get(url,stream=True).headers['content-length'])
-    set_progress_bar(total_size)
-    if parts=="n":parts=5
+    parts = input(f"{c()}Enter {c()}the {c()}no. {c()}of{c()} split {c()}(l|n|h):{c()}")
+   
+    if parts=="n":parts=6
     elif parts=="l":parts=3
-    elif parts=="h":parts=10
+    elif parts=="h":parts=9
     elif parts=="b":return 
     elif parts=="e":exit()
     else:parts=int(parts)
+    total_size = int(requests.get(url,stream=True).headers['content-length'])
+    set_progress_bar(total_size)
     
-
     each_size = int(total_size/parts)
     for i in range(parts):
         start=i*each_size+i
