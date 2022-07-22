@@ -86,7 +86,6 @@ def update(repo,filename2,tempdir=".temp",dust=0):
     version1="";version2="";latest="";current="";
     address= sys.argv[0]
     filename=address[address.rfind("/")+1:]
-    print(filename)
     try:
         return_text=requests.get(repo).text
         latest = float( return_text[:return_text.find("\n")].replace("#version","")  )
@@ -94,8 +93,8 @@ def update(repo,filename2,tempdir=".temp",dust=0):
         print(f"{c()}Network request send failed,try again")
         exit()
     
-    if os.path.exists(f"{filename}"):
-        current=float(open(f"{filename}").readline().replace("#version",""));
+    if os.path.exists(f"{filename}.py"):
+        current=float(open(f"{filename}.py").readline().replace("#version",""));
     if dust==0:
         if current>=1 and latest>=1:
             if current<latest:
@@ -104,14 +103,14 @@ def update(repo,filename2,tempdir=".temp",dust=0):
                 # print(f"{c()}######################################")
                 if not os.path.exists(".hehe"):
                     os.system(f"mkdir .hehe");
-                if not os.system(f"cp {filename} .hehe/.{filename}_{time1}"):
-                    with open(f"{filename}","w") as f:
+                if not os.system(f"cp {filename}.py .hehe/.{filename}_{time1}"):
+                    with open(f"{filename}.py","w") as f:
                         f.write(return_text)
                         set_update_time()
                         # print(f"\n{c()}Please restart the program")
                         # Popen("python3 ncellpy.py",shell=True)
                         # if back_thread==0:
-                        os.system(f"clear && python3 {filename}")
+                        os.system("clear && python3 ncellpy.py")
                         exit();
                         # else:exit()
                         
@@ -129,13 +128,13 @@ def update(repo,filename2,tempdir=".temp",dust=0):
                 # print(f"{c()}######################################")
                 if not os.path.exists(".hehe"):
                     os.system(f"mkdir .hehe");
-                if not os.system(f"cp {filename} .hehe/.{filename}_{time1}"):
-                    with open(f"{filename}","w") as f:
+                if not os.system(f"cp {filename}.py .hehe/.{filename}_{time1}"):
+                    with open(f"{filename}.py","w") as f:
                         f.write(return_text)
                         set_update_time()
                         # Popen("python3 ncellpy.py",shell=True)
                         # if back_thread==0:
-                        os.system(f"clear && python3 {filename}")
+                        os.system("clear && python3 ncellpy.py")
                         exit();
                         # else:exit()
 
