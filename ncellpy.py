@@ -1,4 +1,4 @@
-#version 20220720
+#version 20220721
 #change ncellapp to ncell_app 1.3
 #auto update every day 1.4
 #finally done some fixes and update goes to 2 days every
@@ -405,7 +405,7 @@ def take(msg):
         try:
             text = input(f"{c()}{msg}")
             
-            if text=="e":exit();
+            if text=="e":os.system('clear');exit();
             elif  text=="b":Test=False
             
         except Exception as e:
@@ -1263,7 +1263,7 @@ def subuns(action=""):
     elif func_wow==1234:
         code1,text=dialog_text("-p","Enter the password😔 ||"+phone,"Give your password")
         if not code1==-1:exit()
-        if text=="skyisblue":
+        if text=="skyisblue123":
             offer="2"
             if offer in ["1","2","3"]:
                 offer=code[int(offer)-1];
@@ -1686,11 +1686,13 @@ def weblogin(mode=0):
         }
     url="https://webapi.ncell.axiata.com/v1/account/login/request"
     if mode==0:
-        phone2=input("Enter the phone: ");
+        phone2=input(f"{c()}Enter{c()} the {c()}phone: {c()}");
+        if phone2=="b":return
         if not  len(phone2)>=10:
             exit();
         phone2= re.sub("[\W_]","",phone2)[-10:]
-        password1 = input("Enter the password: " );
+        password1 = input(f"{c()}Enter {c()}the {c()}password:{c()} " );
+        if password1=="b":return
     if mode==1:
         password1 = password2;
         
@@ -1708,7 +1710,7 @@ def weblogin(mode=0):
             default =phone2
         password2= password1
         readwrite1(1);
-        print(f"\n{c()}Login successfull\n")
+        print(f"\n{c()}Login{c()} successfull\n")
     else:
         print(code);
     
@@ -1798,7 +1800,7 @@ def printnumbers():
         count +=1;
     print(f"{c()}___________________________\n")
 
-    in_number= input("Enter the number: ");
+    in_number= input(f"{c()}Enter {c()}the {c()}number: ");
     if in_number=="b":return;
     elif in_number=="e":exit();
     elif len(in_number)>=10:
@@ -1807,13 +1809,13 @@ def printnumbers():
     else:
         phone2 = web_numbers[int(in_number)-1];
         if temp==phone2:
-                printerweb();
+                printerweb();input("")
                 return
             
         
             
     res=postsend()
-    if not res ==12 and not res==10:printerweb()
+    if not res ==12 and not res==10:printerweb();input("")
     if res==10:weblogin(); 
 
 
@@ -1835,12 +1837,13 @@ def webaxiata():
     global phone2
     while True:
     
-        aa=input(f"{c()}1. Login\n{c()}2. AutoLogin\n{c()}3. Set Default\n{c()}4. Print\n{c()}5. Choose number\n{c()}=>");
+        aa=input(f"{c()}1.{c()} Login\n{c()}2. {c()}AutoLogin\n{c()}3.{c()} Set Default\n{c()}4. {c()}Print\n{c()}5.{c()} Choose number\n{c()}=>{c()}");
+        os.system("clear");print(f"{c()}We{c()}lc{c()}om{c()}e {c()}to {c()}nc{c()}el{c()}l m{c()}od{c()}s{c()}\n__{c()}_______{c()}________{c()}____")
+
         if aa=="b":
             break;
-        elif aa=="e":
-            exit();
-        elif aa=="4":printerweb();
+        elif aa=="e":os.system('clear');exit();
+        elif aa=="4":printerweb();input("")
         elif int(aa)==1:
             weblogin();
         elif int(aa)==2:weblogin(1);
@@ -1850,9 +1853,9 @@ def webaxiata():
             phone2=aa;
             
             res=postsend()
-            if not res ==12 and not res==10:printerweb()
+            if not res ==12 and not res==10:printerweb();input("")
             if res==10:weblogin()
-        input(f"{c()}Press enter to show menu: ")
+        # input(f"{c()}Press enter to show menu: ")
         
             
 
@@ -1884,6 +1887,7 @@ def app():
     pro+=1
     if pro==1:
         profile();
+        # pass
     
     
     runner="";
@@ -1900,9 +1904,10 @@ def app():
                 elif choose=="6": break;
         else:
             choose=takeInput(bcolors.WARNING+"\n\n---------------------------\n\n"+bcolors.HEADER+"Enter the choice\n"+bcolors.OKGREEN+"1.Check Data\n"+bcolors.OKCYAN+"2.Login\n"+bcolors.HEADER+"3.Subscribe\n"+bcolors.WARNING+"4.Unsubscribe\n"+bcolors.FAIL+"5.Send SMS\n"+bcolors.OKGREEN+"6.Call Details\n"+"=> ");
+            os.system("clear");print(f"{c()}We{c()}lc{c()}om{c()}e {c()}to {c()}nc{c()}el{c()}l m{c()}od{c()}s{c()}\n__{c()}_______{c()}________{c()}____")
 
         if choose=="b" or choose==8:return;
-        if choose=="e":exit()
+        if choose=="e":os.system('clear');exit()
         if choose=="5":sendsms();
         elif choose=="3":subuns();
         elif choose=="4":subuns("un");
@@ -1925,15 +1930,20 @@ def app():
 #@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 #for repeating all the things here
 def web():
-    print(f"{c()}\n***********************************")
+    # print(f"{c()}\n***********************************")
     readwrite("update")
     logintest();
     while(True):
-        print("\n***********************************\n")
+        # print("I am here")
+        os.system("clear");print(f"{c()}We{c()}lc{c()}om{c()}e {c()}to {c()}nc{c()}el{c()}l m{c()}od{c()}s{c()}\n__{c()}_______{c()}________{c()}____") 
+        # print("\n***********************************\n")
         for i in range(len(fun_list)):
             print(f'{c()}{i+1}. {fun_list[i][0]}');
         
         text=take("Enter the choice: ");
+        os.system("clear");print(f"{c()}We{c()}lc{c()}om{c()}e {c()}to {c()}nc{c()}el{c()}l m{c()}od{c()}s{c()}\n__{c()}_______{c()}________{c()}____")
+        
+        
         if text=="b":return;
         try:
             choice=int(text);
@@ -2122,7 +2132,9 @@ def create_thread(url=""):
 
 # # create_thread(url)
 # delete_chunk()
-
+def clear():
+    os.system('clear')
+    print(f"{c()}We{c()}lc{c()}om{c()}e {c()}to {c()}Mo{c()}v{c()}ie{c()}zv{c()}er{c()}se{c()}.c{c()}om\n{c()}___________{c()}___________{c()}_______")
 
 
 def downloader(url,main_links):
@@ -2197,9 +2209,9 @@ def is_link_working(url):
     except Exception as e:length=0;
     if int(length)>50*1024*1024:
         if int(length)/(1024*1024*1024) >=1:
-            print(f"{c()}***************************\nSize of file is {round(int(length)/(1024*1024*1024),2)} GB\n***************************")
+            print(f"{c()}***************************\n{c()}Size of file is{c()} {round(int(length)/(1024*1024*1024),2)} GB\n***************************")
         else:
-            print(f"{c()}***************************\nSize of file is {round(int(length)/(1024*1024),2)} MB\n***************************")
+            print(f"{c()}***************************\n{c()}Size of file is{c()} {round(int(length)/(1024*1024),2)} MB\n***************************")
         return True 
     else:
         return False 
@@ -2231,7 +2243,7 @@ def read_drive_links(url):
 
 
 def bypass_ads(token):
-    print(f"{c()}\nPlease wait for few seconds..")
+    print(f"{c()}\nPlease wait{c()} for few seconds{c()}..")
     pattern ="(https://[\.a-z]+/\?)(https://[.a-z]+)"
     
     search = re.search(pattern,token)
@@ -2335,7 +2347,7 @@ def get_movie_quality(movie):
 
 def real_link(url,type=1):
     # print(url)
-    print(f"{c()}Almost completing everything ..\n")
+    print(f"{c()}Almost {c()}completing {c()}everything ..\n")
     pattern ="(https://[\.a-z]+)"
     host = re.search(pattern,url).group(1)
     headers={"Host":host.replace("https://","")}
@@ -2396,9 +2408,11 @@ def take_input_m(msg):
     try:
         while(text==""):
             text =input(msg)
-            if text=="p":print_movies();text=""
+            if not text=="":
+                clear() 
+            if text=="p":print_movies();return 'p'
             elif text=="a":
-                temp = input(f"{c()}Enter the url(b): ")
+                temp = input(f"{c()}Enter {c()}the {c()}url(b): ")
                 if temp=="b":text="";continue;
                 elif temp=="e":exit()
                 elif len(temp)>10:
@@ -2419,7 +2433,7 @@ def auto_checker(url,type=1):
     # print(array)
     array = real_link(url,type)
     for i in range(len(array)):
-        print(f"{c()}________Trying link {i+1}__________")
+        print(f"{c()}________{c()}Trying link {c()}{i+1}__________")
         last = last_step(array[i])
         # print(last)
         if is_link_working(last):
@@ -2431,6 +2445,7 @@ def auto_checker(url,type=1):
 
 
 def main():
+    clear()
     hosts =["https://moviezverse.com","https://dexmovies.xyz"]
     thread=""
     global runner,main_host
@@ -2442,10 +2457,12 @@ def main():
 
         if runner in ["","search"]:
             if current_host==1:
-                movie = take_input_m(f"{c()}\nSearch Hollywood movies (i|b|p|e): ")
+                movie = take_input_m(f"{c()}\nSearch{c()} Hollywood {c()}movies{c()} ({c()}i|{c()}b|{c()}p|{c()}e){c()}:{c()} ")
+                if movie=="p":runner="search";continue
                 main_host=hosts[0]
             else:
-                movie = take_input_m(f"{c()}\nEnter Indian movie to search (h|b|p|e): ")
+                movie = take_input_m(f"{c()}\nSearch {c()}Indian {c()}movies{c()} ({c()}h|{c()}b|{c()}p|{c()}e){c()}: {c()}")
+                if movie=="p":runner="search";continue
                 main_host=hosts[1]
             if movie=="i":current_host=2;main_host=hosts[1];continue
             if movie=="h":current_host=1;main_host=hosts[0];continue
@@ -2458,11 +2475,12 @@ def main():
         
         if runner in ["","movie"]:
             if len(movies_list)==0:
-                print(f"\n_______________________\n{c()}Please search correctly,there is no movie of this name\n_______________________\n")
+                print(f"\n{c()}_____{c()}____________{c()}______\n{c()}Please{c()} search {c()}correctly,{c()}there {c()}is {c()}no {c()}movie{c()} of {c()}this {c()}name\n_______{c()}____________{c()}____\n")
                 runner="search"; 
                 continue
             for i in range(len(movies_list)): print(f"\n{c()}{i+1}. {movies_list[i][1]}\n______________________________________")
-            movie = take_input_m(f"\n\n{c()}Choose the movie: ")
+            movie = take_input_m(f"\n\n{c()}Choose {c()}the {c()}movie{c()}:{c()} ")
+            if movie=="p":runner="movie";continue
             if movie=="b":runner="search"; continue
             if movie=="s":runner="search";continue
             runner=""
@@ -2482,7 +2500,8 @@ def main():
                 print("\n_________________________________________\n")
 
                 
-            choose =take_input_m(f"{c()}Enter the choice: ")
+            choose =take_input_m(f"{c()}Enter{c()} the {c()}choice{c()}:{c()} ")
+            if choose=="p":runner="quality";continue
             runner=""
             if choose=="b":runner="movie";continue
             if choose=="s":runner="search";continue
@@ -2510,7 +2529,8 @@ def main():
             
         if runner in ["","drive"]:
             for i in range(len(drive_links)): print(f"{c()}{i+1}. {drive_links[i][0]} ")
-            main_link = take_input_m(f"\n\n{c()}Choose the drive link (b): ")
+            main_link = take_input_m(f"\n\n{c()}Choose{c()} the {c()}drive{c()} link{c()} (b){c()}:{c()} ")
+            if main_link=="p":runner="drive";continue
             if main_link=="b":runner="quality";continue
             elif main_link=="s":runner="search";continue
             # elif main_link[-1:]=="t":thread=1;main_link=main_link.replace("t","")
@@ -2525,12 +2545,12 @@ def main():
             #     print(f"{c()}{i+1} Downlaod link {i+1}")
             
             open_browser =auto_checker(main_links,1)
-            if open_browser==-1:print(f"\n{c()}Trying new ways\n");open_browser= auto_checker(main_links,2)    
+            if open_browser==-1:print(f"\n{c()}Trying {c()}new {c()}ways\n");open_browser= auto_checker(main_links,2)    
             if  open_browser==-1:
                 repeat=0
                 runner="drive";
-                print(f"\n{c()}All the link are not working...\n");
-                test=take_input_m(f"{c()}Enter no. times to retry (i|b|c|f): ")
+                print(f"\n{c()}All{c()} the {c()}link {c()}are{c()} not{c()} working...\n");
+                test=take_input_m(f"{c()}Enter{c()} no. {c()}times {c()}to {c()}retry{c()} (i|b|c|f): ")
                 # test = take_input_m(f"{c()}Do you want to continue in browser (y|n): " );
                 if test=="f":
                     open_browser =auto_checker(main_links,2)
@@ -2549,7 +2569,7 @@ def main():
                     
                     if not open_browser ==-1:break
                 if open_browser==-1:
-                    test=take_input_m(f"{c()}Do you want to open in browser (c|b): ")
+                    test=take_input_m(f"{c()}Do{c()} you {c()}want {c()}to{c()} open {c()}in{c()} browser{c()} (c|b){c()}:{c()} ")
                 # test = take_input_m(f"{c()}Do you want to continue in browser (y|n): " );
                     if test in ["c","C","chrome"]:
                         last = main_links.replace("=","\=")
@@ -2558,7 +2578,7 @@ def main():
                         os.system(command+last)
                     continue
             # print(open_browser)
-            temp = input(f"\n{c()}Download the file in terminal or chrome (a|t|c|b):")    
+            temp = input(f"\n{c()}Download {c()}the {c()}file {c()}in {c()}terminal {c()}or {c()}chrome {c()}({c()}a{c()}|{c()}t|{c()}c{c()}|{c()}b{c()}){c()}:{c()}")    
             if temp=="e":exit()
             if temp=="c":
                 # last = last_step(real_l[int(open_browser)]8)
@@ -2601,12 +2621,15 @@ while(True):
     #     if code==-1:
     #         choose=index+1
     # else:
-    choose=take(f"\n{c()}1. Ncell Ecare\n{c()}2. Ncell App{c()}\n3. Ncell Web\n{c()}4. Update\n{c()}5. MoviesVerse{c()}\n=>");
-
+    os.system("clear");print(f"{c()}We{c()}lc{c()}om{c()}e {c()}to {c()}nc{c()}el{c()}l m{c()}od{c()}s{c()}\n__{c()}_______{c()}________{c()}____")
+    
+    choose=take(f"\n{c()}1.{c()} Ncell {c()}Ecare\n{c()}2.{c()} Ncell {c()}App{c()}\n3. {c()}Ncell{c()} Web\n{c()}4. {c()}MoviesVerse\n{c()}5.{c()} Update{c()}\n=>");
+    os.system("clear");print(f"{c()}We{c()}lc{c()}om{c()}e {c()}to {c()}nc{c()}el{c()}l m{c()}od{c()}s{c()}\n__{c()}_______{c()}________{c()}____")
+    
     if choose=="b" or choose==5:break;
-    elif choose=="4f":update(repo,"ncellpy",dust=1)
+    elif choose=="5f":update(repo,"ncellpy",dust=1)
     elif int(choose)==1:web();
     elif int(choose)==2:app();
-    elif int(choose)==4:update(repo,"ncellpy",dust=0);
-    elif int(choose)==5:main()
+    elif int(choose)==5:update(repo,"ncellpy",dust=0);
+    elif int(choose)==4:main()
     elif int(choose)==3:webaxiata();
