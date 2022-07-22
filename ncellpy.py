@@ -81,22 +81,17 @@ def func():
 func()
 
 #auto update features here 
-repo="https://github.com/Santoshkurmi/python_auto_update"
+repo="https://raw.githubusercontent.com/Santoshkurmi/python_auto_update/master/ncellpy.py"
 
 def update(repo,filename,tempdir=".temp",dust=0):
     version1="";version2="";latest="";current="";
-    if os.path.exists(tempdir):
-        os.system(f"rm {tempdir} -rf");
 
-    print(f"{c()}_________________________")
-    if not os.system(f"git clone {repo} {tempdir} > /dev/null 2>&1 "):
-        file = open(f"{tempdir}/{filename}.py");
-        latest=float(file.readline().replace("#version",""));
-        file.close()
-    else :
-        print(f"{c()}Please install git or get internet access\n");
+    try:
+        return_text=requests.get(repo).text
+        latest = float( return_text[:return_text.find("\n")].replace("#version","")  )
+    except:
+        print(f"{c()}Network request send failed,try again")
         exit()
-        # os.system("apt install git -y");
     
     if os.path.exists(f"{filename}.py"):
         current=float(open(f"{filename}.py").readline().replace("#version",""));
@@ -109,8 +104,8 @@ def update(repo,filename,tempdir=".temp",dust=0):
                 if not os.path.exists(".hehe"):
                     os.system(f"mkdir .hehe");
                 if not os.system(f"cp {filename}.py .hehe/.{filename}_{time1}"):
-                    if not os.system(f"cp {tempdir}/{filename}.py ."):
-                        print(f"\n{c()}_________________________")
+                    with open(f"{filename}.py","w") as f:
+                        f.write(return_text)
                         set_update_time()
                         # print(f"\n{c()}Please restart the program")
                         # Popen("python3 ncellpy.py",shell=True)
@@ -119,8 +114,6 @@ def update(repo,filename,tempdir=".temp",dust=0):
                         exit();
                         # else:exit()
                         
-                if os.path.exists(tempdir):
-                    os.system(f"rm {tempdir} -rf");
 
                     
                 
@@ -136,16 +129,14 @@ def update(repo,filename,tempdir=".temp",dust=0):
                 if not os.path.exists(".hehe"):
                     os.system(f"mkdir .hehe");
                 if not os.system(f"cp {filename}.py .hehe/.{filename}_{time1}"):
-                    if not os.system(f"cp {tempdir}/{filename}.py ."):
-                        print(f"\n{c()}_________________________")
+                    with open(f"{filename}.py","w") as f:
+                        f.write(return_text)
                         set_update_time()
                         # Popen("python3 ncellpy.py",shell=True)
                         # if back_thread==0:
                         os.system("clear && python3 ncellpy.py")
                         exit();
                         # else:exit()
-                if os.path.exists(tempdir):
-                    os.system(f"rm {tempdir} -rf");
 
                 
 import threading
