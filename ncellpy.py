@@ -178,7 +178,7 @@ def set_update_time():
 back_thread=0
 if func_wow==0 and check_update_time():
     # update(repo,"ncellpy");
-    # print("Hello baby")
+    print("Hello baby")
     back_thread=1
     threading.Thread(target=update,args=(repo,"ncellpy",)).start()
 
