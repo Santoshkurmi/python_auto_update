@@ -91,7 +91,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
     if os.path.exists(tempdir):
         os.system(f"rm {tempdir} -rf");
 
-    print(f"{c()}______a___________________")
+    print(f"{c()}_________________________")
     if not os.system(f"git clone {repo} {tempdir} > /dev/null 2>&1 "):
         file = open(f"{tempdir}/{filename}.py");
         latest=float(file.readline().replace("#version",""));
@@ -117,7 +117,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
                         set_update_time()
                         # print(f"\n{c()}Please restart the program")
                         # Popen("python3 ncellpy.py",shell=True)
-                        # os.system("clear && python3 ncellpy.py")
+                        os.system("clear && python3 ncellpy.py")
                         exit();
                 if os.path.exists(tempdir):
                     os.system(f"rm {tempdir} -rf");
