@@ -824,6 +824,7 @@ def checkPin():
         print(f"{c()}9. SUBS_ID: {result['SUBS']['SUBS_BASE_DETAIL']['SUBS_ID']}")
         for i in range(len(more)):
             print(f"{c()}{i+9}. {more[i]['RES_TYPE_NAME']}: {more[i]['RES_NBR']}")
+        input()
    
 
 def blockSim():
