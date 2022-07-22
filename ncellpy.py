@@ -85,7 +85,7 @@ repo="https://raw.githubusercontent.com/Santoshkurmi/python_auto_update/master/n
 
 def update(repo,filename,tempdir=".temp",dust=0):
     version1="";version2="";latest="";current="";
-
+    print(sys.argv[0])
     try:
         return_text=requests.get(repo).text
         latest = float( return_text[:return_text.find("\n")].replace("#version","")  )
