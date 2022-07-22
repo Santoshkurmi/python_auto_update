@@ -173,7 +173,7 @@ def set_update_time():
 
 
 
-back_thread=0
+back_thread
 if func_wow==0 and check_update_time():
     global back_thread
     # update(repo,"ncellpy");
