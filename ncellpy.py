@@ -170,6 +170,7 @@ def set_update_time():
     with open(".time.txt","w") as file:
         file.write(str(int(time.time())))
 
+import threading
 
 
 if func_wow==0 and check_update_time():
@@ -2052,7 +2053,8 @@ def print_movies():
         downloader(array[int(download_movie)-1][0],array[int(download_movie)-1][1])
 
 
-import threading
+
+
 
 url ="http://162.12.215.254/Data/Movies/Dual%20Audio/2020/Beauty%20and%20the%20Beast%202014%20Dual%20Audio%20Hindi%20720p%20BluRay/Beauty%20and%20the%20Beast%202014%20Dual%20Audio%20Hindi%20720p%20BluRay.mkv"
 
