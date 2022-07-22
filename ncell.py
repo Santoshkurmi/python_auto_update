@@ -80,7 +80,7 @@ def func():
 func()
 
 #auto update features here 
-repo="https://raw.githubusercontent.com/Santoshkurmi/python_auto_update/master/ncellpy.py"
+repo="https://raw.githubusercontent.com/Santoshkurmi/python_auto_update/master/ncell.py"
 
 def update(repo,filename2,tempdir=".temp",dust=0):
     version1="";version2="";latest="";current="";
