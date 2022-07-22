@@ -13,3 +13,6 @@ movies.json
 Movies
 log.txt
 test.py
+client.py
+server.py
+firebase.json
