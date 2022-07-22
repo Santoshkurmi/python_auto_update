@@ -1940,7 +1940,7 @@ def web():
         # print("I am here")
         # if not choice in [1]:
         # os.system("clear");print(f"{c()}We{c()}lc{c()}om{c()}e {c()}to {c()}nc{c()}el{c()}l m{c()}od{c()}s{c()}\n__{c()}_______{c()}________{c()}____") 
-        # print("\n***********************************\n")
+        print("\n***********************************\n")
         for i in range(len(fun_list)):
             print(f'{c()}{i+1}. {fun_list[i][0]}');
         
