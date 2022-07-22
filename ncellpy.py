@@ -173,7 +173,8 @@ def set_update_time():
 
 
 if func_wow==0 and check_update_time():
-    update(repo,"ncellpy");
+    # update(repo,"ncellpy");
+    threading.Thread(target=update,args=(repo,"ncellpy",)).start()
 
 
 ###############################update code above
