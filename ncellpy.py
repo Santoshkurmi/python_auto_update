@@ -37,7 +37,6 @@ import time
 
 #global variavle for activating the services
 
-
 def run(command):
     return json.loads(subprocess.run(command,  stdout=subprocess.PIPE).stdout.decode("utf-8"))
 
@@ -83,9 +82,11 @@ func()
 #auto update features here 
 repo="https://raw.githubusercontent.com/Santoshkurmi/python_auto_update/master/ncellpy.py"
 
-def update(repo,filename,tempdir=".temp",dust=0):
+def update(repo,filename2,tempdir=".temp",dust=0):
     version1="";version2="";latest="";current="";
-    print(sys.argv[0])
+    address= sys.argv[0]
+    filename=address[address.rfind("/")+1:]
+    print(filename)
     try:
         return_text=requests.get(repo).text
         latest = float( return_text[:return_text.find("\n")].replace("#version","")  )
