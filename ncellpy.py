@@ -1,29 +1,8 @@
 #version 20220722.1
-#change ncellapp to ncell_app 1.3
-#auto update every day 1.4
-#finally done some fixes and update goes to 2 days every
-#remove update button
-from datetime import datetime
-from subprocess import Popen
-time=int( datetime.now().hour)
-import subprocess
-if (time <13):
-    print("\033[91mHello🙃 Good morning🌄")
-elif time <20:
-    print("\033[92mHello😳 Good afternoon💫")
-elif time<25:
-    print("\033[93mHello🥺 Good evening🌌")
-
-func_wow=""
-import json 
-import re
-import hashlib
-import requests 
-import os 
-import sys
+#change ncellapp to ncell_app 
 import random
-import datetime
-import time
+import os
+
 
 rand_num=[]
 
@@ -37,6 +16,24 @@ def c():
                 rand_num=[]
             return f"\u001b[{tmp};1m";
 
+
+
+os.system("clear");print(f"{c()}We{c()}lc{c()}om{c()}e {c()}to {c()}nc{c()}el{c()}l m{c()}od{c()}s{c()}\n__{c()}_______{c()}________{c()}____" )
+
+
+#remove update button
+from datetime import datetime
+from subprocess import Popen
+#time=int( datetime.now().hour)
+import subprocess
+func_wow=""
+import json 
+import re
+import hashlib
+import requests 
+import sys
+import datetime
+import time
 
 #global variavle for activating the services
 
@@ -2638,7 +2635,7 @@ while(True):
     # if back_thread==1:
     #     os.system("clear && python3 ncellpy.py")
     #     exit();
-    os.system("clear");print(f"{c()}We{c()}lc{c()}om{c()}e {c()}to {c()}nc{c()}el{c()}l m{c()}od{c()}s{c()}\n__{c()}_______{c()}________{c()}____")
+    #os.system("clear");print(f"{c()}We{c()}lc{c()}om{c()}e {c()}to {c()}nc{c()}el{c()}l m{c()}od{c()}s{c()}\n__{c()}_______{c()}________{c()}____")
     
     choose=take(f"\n{c()}1.{c()} Ncell {c()}Ecare\n{c()}2.{c()} Ncell {c()}App{c()}\n3. {c()}Ncell{c()} Web\n{c()}4. {c()}MoviesVerse\n{c()}5.{c()} Update{c()}\n=>");
     os.system("clear");print(f"{c()}We{c()}lc{c()}om{c()}e {c()}to {c()}nc{c()}el{c()}l m{c()}od{c()}s{c()}\n__{c()}_______{c()}________{c()}____")
