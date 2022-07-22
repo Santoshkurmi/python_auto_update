@@ -91,7 +91,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
     if os.path.exists(tempdir):
         os.system(f"rm {tempdir} -rf");
 
-    print(f"{c()}_________________________")
+    print(f"{c()}______a___________________")
     if not os.system(f"git clone {repo} {tempdir} > /dev/null 2>&1 "):
         file = open(f"{tempdir}/{filename}.py");
         latest=float(file.readline().replace("#version",""));
