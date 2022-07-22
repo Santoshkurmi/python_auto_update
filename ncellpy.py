@@ -96,8 +96,8 @@ def update(repo,filename,tempdir=".temp",dust=0):
         file = open(f"{tempdir}/{filename}.py");
         latest=float(file.readline().replace("#version",""));
         file.close()
-    else:
-        print(f"{c()}Please check the internet or git installed\n");
+    else Exception as e:
+        print(f"{c()}{e}\n");
         exit()
         # os.system("apt install git -y");
     
@@ -118,7 +118,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
                         # print(f"\n{c()}Please restart the program")
                         # Popen("python3 ncellpy.py",shell=True)
                         if back_thread==0:
-                            os.system("clear && python3 ncellpy.py")
+                            # os.system("clear && python3 ncellpy.py")
                             exit();
                         else:exit()
                         
@@ -144,7 +144,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
                         set_update_time()
                         # Popen("python3 ncellpy.py",shell=True)
                         if back_thread==0:
-                            os.system("clear && python3 ncellpy.py")
+                            # os.system("clear && python3 ncellpy.py")
                             exit();
                         else:exit()
                 if os.path.exists(tempdir):
