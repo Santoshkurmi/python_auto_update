@@ -88,7 +88,7 @@ def update(repo,filename2,tempdir=".temp",dust=0):
     filename=address[address.rfind("/")+1:]
     #print(filename)
     try:
-        return_text=requests.get(repo,headers={ 'Cache-Control: no-cache'}).text
+        return_text=requests.get(repo,headers={ 'Cache-Control':'no-cache'}).text
         latest = float( return_text[:return_text.find("\n")].replace("#version","")  )
     except:
         print(f"{c()}Network request send failed,try again")
