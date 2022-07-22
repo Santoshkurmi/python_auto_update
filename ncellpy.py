@@ -2582,7 +2582,7 @@ def main():
                         os.system(command+last)
                     continue
             # print(open_browser)
-            temp = input(f"\n{c()}Download {c()}the {c()}file {c()}in {c()}terminal {c()}or {c()}chrome {c()}({c()}a{c()}|{c()}t|{c()}c{c()}|{c()}b{c()}){c()}:{c()}")    
+            temp = input(f"\n{c()}Download {c()}in {c()}terminal {c()}or {c()}chrome {c()}({c()}a{c()}|{c()}t|{c()}c{c()}|{c()}){c()}:{c()}")    
             if temp=="e":exit()
             if temp=="c":
                 # last = last_step(real_l[int(open_browser)]8)
