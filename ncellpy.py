@@ -644,7 +644,7 @@ def checkData(operation=0):
                 i+=1;
                 idd.append([f["ACCT_RES_ID"],f["UNIT_NAME"] ])
     print("****************************\n")
-    # if operation==0:input()
+    if operation==0:input()
     return idd;
 
 def signup():
