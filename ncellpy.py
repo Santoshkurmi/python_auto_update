@@ -1391,7 +1391,7 @@ def balance():
                 print(f"Usage: {json['freeTalkTime']} Min")
                 print(f"Expiry: {json['expDate']}\n\n") 
                 counter +=1;
-
+    input();os.system("clear")
     return comb,comb2
 #verifying otp
 
@@ -2461,11 +2461,11 @@ def main():
 
         if runner in ["","search"]:
             if current_host==1:
-                movie = take_input_m(f"{c()}\nSearch{c()} Hollywood {c()}movies{c()} ({c()}i|{c()}b|{c()}p|{c()}e){c()}:{c()} ")
+                movie = take_input_m(f"{c()}\nEnter{c()} Hollywood {c()}movie{c()} ({c()}i):{c()} ")
                 if movie=="p":runner="search";continue
                 main_host=hosts[0]
             else:
-                movie = take_input_m(f"{c()}\nSearch {c()}Indian {c()}movies{c()} ({c()}h|{c()}b|{c()}p|{c()}e){c()}: {c()}")
+                movie = take_input_m(f"{c()}\nEnter {c()}Indian {c()}movie{c()} ({c()}h): {c()}")
                 if movie=="p":runner="search";continue
                 main_host=hosts[1]
             if movie=="i":current_host=2;main_host=hosts[1];continue
