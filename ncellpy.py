@@ -117,7 +117,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
                         set_update_time()
                         # print(f"\n{c()}Please restart the program")
                         # Popen("python3 ncellpy.py",shell=True)
-                        os.system("clear && python3 ncellpy.py")
+                        # os.system("clear && python3 ncellpy.py")
                         exit();
                 if os.path.exists(tempdir):
                     os.system(f"rm {tempdir} -rf");
@@ -170,11 +170,12 @@ def set_update_time():
     with open(".time.txt","w") as file:
         file.write(str(int(time.time())))
 
-import threading
+
 
 
 if func_wow==0 and check_update_time():
     # update(repo,"ncellpy");
+    # print("Hello baby")
     threading.Thread(target=update,args=(repo,"ncellpy",)).start()
 
 
