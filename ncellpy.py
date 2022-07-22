@@ -96,8 +96,8 @@ def update(repo,filename,tempdir=".temp",dust=0):
         file = open(f"{tempdir}/{filename}.py");
         latest=float(file.readline().replace("#version",""));
         file.close()
-    else Exception as e:
-        print(f"{c()}{e}\n");
+    else :
+        print(f"{c()}Please install git or get internet access\n");
         exit()
         # os.system("apt install git -y");
     
