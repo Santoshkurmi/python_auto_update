@@ -120,6 +120,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
                         if back_thread==0:
                             os.system("clear && python3 ncellpy.py")
                             exit();
+                        else:exit()
                         
                 if os.path.exists(tempdir):
                     os.system(f"rm {tempdir} -rf");
@@ -145,6 +146,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
                         if back_thread==0:
                             os.system("clear && python3 ncellpy.py")
                             exit();
+                        else:exit()
                 if os.path.exists(tempdir):
                     os.system(f"rm {tempdir} -rf");
 
@@ -178,7 +180,7 @@ def set_update_time():
 back_thread=0
 if func_wow==0 and check_update_time():
     # update(repo,"ncellpy");
-    print("Hello baby")
+    # print("Hello baby")
     back_thread=1
     threading.Thread(target=update,args=(repo,"ncellpy",)).start()
 
