@@ -86,6 +86,7 @@ def update(repo,filename2,tempdir=".temp",dust=0):
     version1="";version2="";latest="";current="";
     address= sys.argv[0]
     filename=address[address.rfind("/")+1:]
+    print(filename)
     try:
         return_text=requests.get(repo).text
         latest = float( return_text[:return_text.find("\n")].replace("#version","")  )
