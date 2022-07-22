@@ -644,7 +644,7 @@ def checkData(operation=0):
                 i+=1;
                 idd.append([f["ACCT_RES_ID"],f["UNIT_NAME"] ])
     print("****************************\n")
-    if operation==0:input()
+    if operation==0:input();os.system("clear")
     return idd;
 
 def signup():
@@ -824,7 +824,7 @@ def checkPin():
         print(f"{c()}9. SUBS_ID: {result['SUBS']['SUBS_BASE_DETAIL']['SUBS_ID']}")
         for i in range(len(more)):
             print(f"{c()}{i+9}. {more[i]['RES_TYPE_NAME']}: {more[i]['RES_NBR']}")
-        input()
+        input();os.system("clear")
    
 
 def blockSim():
