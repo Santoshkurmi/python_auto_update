@@ -1,4 +1,4 @@
-#version 20220722.1
+#version 20220722.2
 #change ncellapp to ncell_app 
 import random
 import os
