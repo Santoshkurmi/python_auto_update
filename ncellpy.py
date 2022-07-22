@@ -146,7 +146,7 @@ def update(repo,filename,tempdir=".temp",dust=0):
                     os.system(f"rm {tempdir} -rf");
 
                 
-            
+import threading
             
 #end of auto feature here
 
