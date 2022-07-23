@@ -1,4 +1,4 @@
-#version 20220723.2
+#version 20220723.5
 #change ncellapp to ncell_app 
 import random
 import os
@@ -1838,24 +1838,24 @@ def webaxiata():
     
         aa=input(f"{c()}1.{c()} Login\n{c()}2. {c()}AutoLogin\n{c()}3.{c()} Set Default\n{c()}4. {c()}Print\n{c()}5.{c()} Choose number\n{c()}=>{c()}");
         os.system("clear");print(f"{c()}We{c()}lc{c()}om{c()}e {c()}to {c()}nc{c()}el{c()}l m{c()}od{c()}s{c()}\n__{c()}_______{c()}________{c()}____")
-
-        if aa=="b":
-            break;
-        elif aa=="e":os.system('clear');exit();
-        elif aa=="4":printerweb();input("")
-        elif int(aa)==1:
-            weblogin();
-        elif int(aa)==2:weblogin(1);
-        elif int(aa)==3:setdefault();
-        elif int(aa)==5:printnumbers();
-        elif len(aa)==10:
-            phone2=aa;
-            
-            res=postsend()
-            if not res ==12 and not res==10:printerweb();input("")
-            if res==10:weblogin()
-        # input(f"{c()}Press enter to show menu: ")
-        
+        try:
+            if aa=="b":
+                break;
+            elif aa=="e":os.system('clear');exit();
+            elif aa=="4":printerweb();input("")
+            elif int(aa)==1:
+                weblogin();
+            elif int(aa)==2:weblogin(1);
+            elif int(aa)==3:setdefault();
+            elif int(aa)==5:printnumbers();
+            elif len(aa)==10:
+                phone2=aa;
+                
+                res=postsend()
+                if not res ==12 and not res==10:printerweb();input("")
+                if res==10:weblogin()
+            # input(f"{c()}Press enter to show menu: ")
+        except Exception as e:pass    
             
 
 
@@ -1904,19 +1904,20 @@ def app():
         else:
             choose=takeInput(bcolors.WARNING+"\n\n---------------------------\n\n"+bcolors.HEADER+"Enter the choice\n"+bcolors.OKGREEN+"1.Check Data\n"+bcolors.OKCYAN+"2.Login\n"+bcolors.HEADER+"3.Subscribe\n"+bcolors.WARNING+"4.Unsubscribe\n"+bcolors.FAIL+"5.Send SMS\n"+bcolors.OKGREEN+"6.Call Details\n"+"=> ");
             os.system("clear");print(f"{c()}We{c()}lc{c()}om{c()}e {c()}to {c()}nc{c()}el{c()}l m{c()}od{c()}s{c()}\n__{c()}_______{c()}________{c()}____")
-
-        if choose=="b" or choose==8:return;
-        if choose=="e":os.system('clear');exit()
-        if choose=="5":sendsms();
-        elif choose=="3":subuns();
-        elif choose=="4":subuns("un");
-        elif choose=="7":giftSend();
-        elif choose=="2" : login();
-        elif choose=="6": info();
-        elif choose=="1": balance();
-        elif choose=="v": verOtp();
-        elif choose=="t": dateTime();
-        elif choose=="m":mul(15,15);
+        try:
+            if choose=="b" or choose==8:return;
+            if choose=="e":os.system('clear');exit()
+            if choose=="5":sendsms();
+            elif choose=="3":subuns();
+            elif choose=="4":subuns("un");
+            elif choose=="7":giftSend();
+            elif choose=="2" : login();
+            elif choose=="6": info();
+            elif choose=="1": balance();
+            elif choose=="v": verOtp();
+            elif choose=="t": dateTime();
+            elif choose=="m":mul(15,15);
+        except Exception as e:pass
         
 
 
@@ -1944,21 +1945,21 @@ def web():
         text=take("Enter the choice: ");
         os.system("clear");print(f"{c()}We{c()}lc{c()}om{c()}e {c()}to {c()}nc{c()}el{c()}l m{c()}od{c()}s{c()}\n__{c()}_______{c()}________{c()}____")
         
-        
-        if text=="b":return;
         try:
-            choice=int(text);
-        except:
-            continue;
-        
-        if choice <= len(fun_list):
-            fun_list[choice-1][1]();
-            # ch=input(f"\n{c()}Press enter  to show menu: ");
-            # if ch=="b":return;
-            # if ch=="e":exit();
-        else:
-            print("\n\nEnter the correct choice\n\n");
-
+            if text=="b":return;
+            try:
+                choice=int(text);
+            except:
+                continue;
+            
+            if choice <= len(fun_list):
+                fun_list[choice-1][1]();
+                # ch=input(f"\n{c()}Press enter  to show menu: ");
+                # if ch=="b":return;
+                # if ch=="e":exit();
+            else:
+                print("\n\nEnter the correct choice\n\n");
+        except Exception as e:pass
 #Happy ending here everythings
 
 
@@ -2028,30 +2029,10 @@ def file_write(url="",status="",size="",main_links="",total="1",type="write"):
 
 # file_write("Avatar.mp4","paused","123456677")
 import urllib.parse
-def print_movies():
-    movies= file_write(type="read")
-    try:
-        counter=1
-        array=[]
-        for name in movies:
-            
-            text = f"\n{c()}{counter}. {name}\n{c()}Status: {movies[name]['status']}\n{c()}Size:{movies[name]['size']}\n{c()}Total:{movies[name]['total']}\n"
-            print(urllib.parse.unquote(text))
-            counter+=1
-            array.append([movies[name]['url'],movies[name]['main_link']])
-    except:pass 
-    download_movie= take_input_m("Choose the movie to downlaod (b): ")
-    if download_movie=="b":return
-    if download_movie=="e":exit()
-    if int(download_movie)<=len(array):
-        
-        downloader(array[int(download_movie)-1][0],array[int(download_movie)-1][1])
 
 
 
-
-
-url ="http://162.12.215.254/Data/Movies/Dual%20Audio/2020/Beauty%20and%20the%20Beast%202014%20Dual%20Audio%20Hindi%20720p%20BluRay/Beauty%20and%20the%20Beast%202014%20Dual%20Audio%20Hindi%20720p%20BluRay.mkv"
+# url ="http://162.12.215.254/Data/Movies/Dual%20Audio/2020/Beauty%20and%20the%20Beast%202014%20Dual%20Audio%20Hindi%20720p%20BluRay/Beauty%20and%20the%20Beast%202014%20Dual%20Audio%20Hindi%20720p%20BluRay.mkv"
 
 
 # total_parts =120 
@@ -2140,76 +2121,83 @@ def clear():
 
 
 def downloader(url,main_links):
-    filename =urllib.parse.unquote(url[ url.rfind('/')+1: ])
-
-    # print("Hey")
-    # size_local_file = pathlib.Path( directory + filename).stat().st_size
-    movie_json = file_write(type="read")
     try:
-        if movie_json[filename]['status'] =="completed" and  os.path.exists(f"{directory}/{filename}"):
-            if pathlib.Path(f"{directory}/{filename}").stat().st_size>1*1024*1024:
-                print(f"{c()}File is already downlaoded\n")
-                return 
-    except :pass
+        filename =urllib.parse.unquote(url[ url.rfind('/')+1: ])
 
-    if not  os.path.exists(f"{directory}/{filename}"):open(f"{directory}/{filename}","w").close()
-    size_local_file = pathlib.Path( f"{directory}/{filename}").stat().st_size
-    headers={"Hey":"No",'Range':f'bytes={size_local_file}-'}
-    # print(headers)    
-    response = requests.get(url,headers=headers,stream=True)
-    # print(response.headers)
-    size_server_file = int(response.headers.get('content-length',0) )
-    
-    if size_server_file==0:print(f"{c()}May be file is downloaded or try again");return 
-    print(f"{c()}Filename: {filename}\n{c()}Location: {directory}\n")
-    block_size = 8192
-    progress_bar =tqdm(total=int(size_local_file)+int(size_server_file), unit="iB",unit_scale=True)
-    progress_bar.update(size_local_file)
-    file_write(url,"paused",pathlib.Path(f"{directory}/{filename}").stat().st_size,main_links,size_server_file+size_local_file)
-    with open(f"{directory}/{filename}","ab") as file:
+        # print("Hey")
+        # size_local_file = pathlib.Path( directory + filename).stat().st_size
+        movie_json = file_write(type="read")
         try:
-            for data in response.iter_content(block_size):
-                
-                progress_bar.update(len(data))
-                file.write(data)
+            if movie_json[filename]['status'] =="completed" and  os.path.exists(f"{directory}/{filename}"):
+                if pathlib.Path(f"{directory}/{filename}").stat().st_size>1*1024*1024:
+                    print(f"{c()}File is already downlaoded\n");input()
+                    return 
+        except Exception as e:pass
 
-        except:
-            # print(e)
-            print(f"{c()}\n______________________Something went wrong dowloading file\n________________________")
-            # input(f"{c()}\n\n\nPress enter to show option:\n\n")
-            file.close()
-            # print(directory + filename)
-            file_write(url,"paused",pathlib.Path( f"{directory}/{filename}").stat().st_size,main_links,size_server_file+size_local_file)
-            return
+        if not  os.path.exists(f"{directory}/{filename}"):open(f"{directory}/{filename}","w").close()
+        size_local_file = pathlib.Path( f"{directory}/{filename}").stat().st_size
+        headers={"Hey":"No",'Range':f'bytes={size_local_file}-'}
+        # print(headers)    
+        response = requests.get(url,headers=headers,stream=True)
+        # print(response.headers)
+        size_server_file = int(response.headers.get('content-length',0) )
+        
+        if size_server_file==0:print(f"{c()}May be file is downloaded or try again");input();return 
+        print(f"{c()}Filename: {filename}\n{c()}Location: {directory}\n")
+        block_size = 8192
+        progress_bar =tqdm(total=int(size_local_file)+int(size_server_file), unit="iB",unit_scale=True)
+        progress_bar.update(size_local_file)
+        file_write(url,"paused",pathlib.Path(f"{directory}/{filename}").stat().st_size,main_links,size_server_file+size_local_file)
+        with open(f"{directory}/{filename}","ab") as file:
+            try:
+                for data in response.iter_content(block_size):
+                    
+                    progress_bar.update(len(data))
+                    file.write(data)
 
-    progress_bar.close()
-    file_write(url,"completed",pathlib.Path( f"{directory}/{filename}").stat().st_size,main_links,size_server_file+size_local_file)
-    # print(file_write(type="read"))
-    print(f"{c()}\nFile is downloaded successfully...")
+            except:
+                # print(e)
+                print(f"{c()}Failed{c()} downloading{c()} the{c()} file...");input("")
+                # input(f"{c()}\n\n\nPress enter to show option:\n\n")
+                file.close()
+                # print(directory + filename)
+                file_write(url,"paused",pathlib.Path( f"{directory}/{filename}").stat().st_size,main_links,size_server_file+size_local_file)
+                return
+
+        progress_bar.close()
+        file_write(url,"completed",pathlib.Path( f"{directory}/{filename}").stat().st_size,main_links,size_server_file+size_local_file)
+        # print(file_write(type="read"))
+        clear()
+        print(f"{c()}\nFile {c()}is {c()}downloaded {c()}successfully{c()}...{c()}\n")
+        input("")
+    except Exception as e:print(f"{c()}Failed{c()} downloading{c()} the{c()} file...");input("")
 
 ###################################3
 
 
 # main_host="https://dexmovies.xyz"
 def send_request(type,host,path,body=""):
-    url = host+path
-    headers={"Host":host.replace("https://",""),"Content-Type": "application/x-www-form-urlencoded"}
-    if type=="get":
-        
-        return requests.get(url).text
-    else:
-        return requests.post(url,data=body,headers=headers).text
+    try:
+        url = host+path
+        headers={"Host":host.replace("https://",""),"Content-Type": "application/x-www-form-urlencoded"}
+        if type=="get":
+            
+            return requests.get(url).text
+        else:
+            return requests.post(url,data=body,headers=headers).text
 
-
+    except:return ""
 
 def is_link_working(url):
     # print(url) 
     response = requests.get(url,stream=True)
+    print(f"{c()}____{c()}____{c()}Completed {c()} step {c()}2{c()}_____{c()}_____\n")
     try:
         length = response.headers['Content-Length']
         
     except Exception as e:length=0;
-    if int(length)>50*1024*1024:
+    clear()
+    if int(length)>10*1024*1024:
         if int(length)/(1024*1024*1024) >=1:
             print(f"{c()}***************************\n{c()}Size of file is{c()} {round(int(length)/(1024*1024*1024),2)} GB\n***************************")
         else:
@@ -2222,186 +2210,234 @@ def is_link_working(url):
 
 def read_drive_links(url):
     # print(url)
-    response= requests.get(url).text
-    links = []
-    soup = bs(response,'html.parser')
-
-    max_btn=soup.find_all('a',class_='maxbutton') #string=""
     try:
-        for link in max_btn:
-            if not "policiesforyou" in url: 
-               links.append([ [link['title']],link["href"] ] )
-            else:
-                links.append([ [link.text],link["href"] ] )
-    except Exception as e:print(e)
-    # return links 
+        response= requests.get(url).text
+        links = []
+        soup = bs(response,'html.parser')
+
+        max_btn=soup.find_all('a',class_='maxbutton') #string=""
+        try:
+            for link in max_btn:
+                if not "policiesforyou" in url: 
+                    links.append([ [link['title']],link["href"] ] )
+                else:
+                    links.append([ [link.text],link["href"] ] )
+        except Exception as e:print(e)
+        # return links 
 
 
-    tags = soup.find_all('h3')
-    for tag in tags:
-        links.append([ [tag.text],tag.a["href"] ] )
-    return links
+        tags = soup.find_all('h3')
+        for tag in tags:
+            links.append([ [tag.text],tag.a["href"] ] )
+        return links
 
-
+    except:return []
 
 def bypass_ads(token):
-    print(f"{c()}\nPlease wait{c()} for few seconds{c()}..")
-    pattern ="(https://[\.a-z]+/\?)(https://[.a-z]+)"
-    
-    search = re.search(pattern,token)
-    host = search.group(2)
-    # print(token)
-    token = token.replace("https://href.li/?https://sifitales.com/?id=","")
-    response=send_request("post",host,"","_wp_http="+token)
-    
-    soup = bs(response,'html.parser')
-    
-    action = soup.find("form")["action"].replace("https://sifitales.com","")
-    inputs = soup.find_all("input")
-    http2,token = inputs[0]['value'],inputs[1]['value']
-    # print("2. Second stage is completed successfully")
-    # print(action,http2,token)
+    try:
+        print(f"{c()}********{c()}********{c()}Bypassing {c()}the {c()}ads{c()}*********{c()}********")
 
-    #sending the step two of ads bypass
-    
-    response=send_request("post",host,action,"_wp_http2="+http2+"&token="+token)
-    # print("3. Third stage is completed successfully")
-    
-    pattern = '(https://.+go=sk-.+")'
-    search =re.search(pattern,response)
-    if search:
-        link = search.group().replace('"',"")
-        link = link.replace("https://sifitales.com","")
-        # print({link.replace("/?go=",""):http2})
-        response =requests.get(host+link, cookies={link.replace("/?go=",""):http2} )
+        pattern ="(https://[\.a-z]+/\?)(https://[.a-z]+)"
         
-        return bs(response.text,"html.parser").find_all("meta")[1]["content"].replace("0;url=","")
+        search = re.search(pattern,token)
+        host = search.group(2)
+        # print(token)
+        token = token.replace("https://href.li/?https://sifitales.com/?id=","")
+        response=send_request("post",host,"","_wp_http="+token)
         
-        # print(response)
-    
+        soup = bs(response,'html.parser')
+        
+        action = soup.find("form")["action"].replace("https://sifitales.com","")
+        inputs = soup.find_all("input")
+        http2,token = inputs[0]['value'],inputs[1]['value']
+        # print("2. Second stage is completed successfully")
+        # print(action,http2,token)
+
+        #sending the step two of ads bypass
+        print(f"{c()}____{c()}____{c()}Completed {c()} step {c()}1{c()}_____{c()}_____")
+
+        response=send_request("post",host,action,"_wp_http2="+http2+"&token="+token)
+        # print("3. Third stage is completed successfully")
+        
+        pattern = '(https://.+go=sk-.+")'
+        search =re.search(pattern,response)
+        print(f"{c()}____{c()}____{c()}Completed {c()} step {c()}2{c()}_____{c()}_____")
+
+        if search:
+            link = search.group().replace('"',"")
+            link = link.replace("https://sifitales.com","")
+            # print({link.replace("/?go=",""):http2})
+            response =requests.get(host+link, cookies={link.replace("/?go=",""):http2} )
+            print(f"{c()}____{c()}____{c()}Completed {c()} step {c()}3{c()}_____{c()}_____\n")
+            
+            temp_url = bs(response.text,"html.parser").find_all("meta")[1]["content"].replace("0;url=","")
+            # print(temp_url,"bypass_ads")
+            return temp_url
+    except:""
+            # print(response)
+        
 
 def get_movies_list(movie=""):
-    
-    path="/?s="+movie
-    response = send_request("get",main_host,path)
-    
-    movies  = bs(response,'html.parser').find_all("a",class_="post-image")
-    
-    movies_list=[]
-    for mov in movies:
-        # print(mov['title'])   #printing the movies here
-        movies_list.append([mov["href"],mov["title"]])
-    return movies_list
+    try:
+        path="/?s="+movie
+        response = send_request("get",main_host,path)
+        
+        movies  = bs(response,'html.parser').find_all("a",class_="post-image")
+        
+        movies_list=[]
+        for mov in movies:
+            # print(mov['title'])   #printing the movies here
+            movies_list.append([mov["href"],mov["title"]])
+        return movies_list
+    except:return []
     # print(movies_list[0][0])
     # response = requests.get(movies_list[0][0]).text
 
 def get_movie_quality(movie):
-    response = requests.get(movie).text
-    
-    soup = bs(response,'html.parser').find("h2",string =re.compile('[Ss]creen[Ss]hots:'))
-    if soup==None:
-        soup =bs(response,'html.parser').find("span",string =re.compile('[Ss]creen[Ss]hots:')).parent
-    counter = 0
-    array_link=[]
-    
-    tags=[]
-    # print( soup.parent.contents )
-    # print(len(soup.parent.contents))
-    for tag in  soup.next_siblings:
-        if tag=="\n":continue
-        if tag.name=="div":tags.append(tag)
-
-   
-    if len(tags)==0 and len(soup.parent.contents)>10 :tags=soup.next_siblings;
-    elif len(tags)==0 and len(soup.parent.contents)<10 :tags=soup.parent.parent;
-    elif len(tags)==1:tags=tags[0]
-    elif len(tags)==2:tags=tags[1]
-    elif len(tags)==3:tags=tags[2]
- 
-    for tag in tags:
-        # print(f"\n\n\n*********************************\n{tag}")
-        try:
-            tag_name = tag.a['class'][1]
-            # print(tag.a['class'])
-            # print(tag_name)
-        except:tag_name=""
-        if tag=="\n":continue
-        if tag.a==None:
-            
-            # if counter==0 and header=="h3":counter=1;continue
-            if tag.text=="Search Movies":break
-            title=tag.text
-            counter+=1
+    try:
+        response = requests.get(movie).text
         
-        elif tag_name=="maxbutton" and tag.a:
-            temp_array=[]
-            
-            for a_tag in tag.children:
-                if a_tag=="\n":continue
-                try:
-                    temp_array.append([a_tag.text,a_tag['href']])
-                except:pass
-            if len(temp_array)>0:
-                array_link.append([title,temp_array])
+        soup = bs(response,'html.parser').find("h2",string =re.compile('[Ss]creen[Ss]hots:'))
+        if soup==None:
+            soup =bs(response,'html.parser').find("span",string =re.compile('[Ss]creen[Ss]hots:')).parent
+        counter = 0
+        array_link=[]
         
-    return array_link
+        tags=[]
+        # print( soup.parent.contents )
+        # print(len(soup.parent.contents))
+        for tag in  soup.next_siblings:
+            if tag=="\n":continue
+            if tag.name=="div":tags.append(tag)
 
+    
+        if len(tags)==0 and len(soup.parent.contents)>10 :tags=soup.next_siblings;
+        elif len(tags)==0 and len(soup.parent.contents)<10 :tags=soup.parent.parent;
+        elif len(tags)==1:tags=tags[0]
+        elif len(tags)==2:tags=tags[1]
+        elif len(tags)==3:tags=tags[2]
+    
+        for tag in tags:
+            # print(f"\n\n\n*********************************\n{tag}")
+            try:
+                tag_name = tag.a['class'][1]
+                # print(tag.a['class'])
+                # print(tag_name)
+            except:tag_name=""
+            if tag=="\n":continue
+            if tag.a==None:
+                
+                # if counter==0 and header=="h3":counter=1;continue
+                if tag.text=="Search Movies":break
+                title=tag.text
+                counter+=1
+            
+            elif tag_name=="maxbutton" and tag.a:
+                temp_array=[]
+                
+                for a_tag in tag.children:
+                    if a_tag=="\n":continue
+                    try:
+                        temp_array.append([a_tag.text,a_tag['href']])
+                    except:pass
+                if len(temp_array)>0:
+                    array_link.append([title,temp_array])
+            
+        return array_link
+    except:return []
 
 def real_link(url,type=1):
-    # print(url)
-    print(f"{c()}Almost {c()}completing {c()}everything ..\n")
-    pattern ="(https://[\.a-z]+)"
-    host = re.search(pattern,url).group(1)
-    headers={"Host":host.replace("https://","")}
-    if type==1:
+
+    try:    
+        print(f"{c()}********{c()}********{c()}Fetching {c()}the {c()}links{c()}*********{c()}********")
+
+        pattern ="(http[sS]://[\.a-z]+)"
+        host = re.search(pattern,url).group(1)
+        headers={"Host":host.replace("https://","")}
+        looper=1
         if host=="https://raninfoapi.xyz":
-            new_url = requests.get(url)
-            # print(new_url.text)
-            url = bs(new_url.text,'html.parser').find('a',class_="btn-success")['href']
-            url = requests.get(url,allow_redirects=False).headers['Location']
-            # print(url)
-            host = re.search(pattern,url).group(1)
-            headers={"Host":host.replace("https://","")}
-        
-        link = requests.get(url,headers=headers,allow_redirects=False).headers['location'].replace("/file","/devfile")
-        link = host +link 
-    else:
-        try:
-            link = requests.get(url,headers=headers,allow_redirects=False).headers['location']
-            url = host +link 
-            response = requests.get(url)
+                new_url = requests.get(url)
+                # print(new_url.text)
+                # print(url)
+                url = bs(new_url.text,'html.parser').find('a',class_="btn-success")['href']
+                print(f"{c()}____{c()}____{c()}Completed {c()} step {c()}{looper}{c()}_____{c()}_____")
+                # print(url)
+                looper+=1
+                url = requests.get(url,allow_redirects=False).headers['Location']
+                print(f"{c()}____{c()}____{c()}Completed {c()} step {c()}{looper}{c()}_____{c()}_____")
+                looper+=1
+                # print(url)
+                host = re.search(pattern,url).group(1)
+                headers={"Host":host.replace("https://","")}
+        if type==1:    
+            link = requests.get(url,headers=headers,allow_redirects=False).headers['location'].replace("/file","/devfile")
+            print(f"{c()}____{c()}____{c()}Completed {c()} step {c()}{looper}{c()}_____{c()}_____")
+            looper+=1
+            link = host +link 
+        else:
+            try:
+                link = requests.get(url,headers=headers,allow_redirects=False).headers['location']
+                host = re.search(pattern,url).group(1)
+                # print(url,"hey")
+                url = host+link 
+                print(f"{c()}____{c()}____{c()}Completed {c()} step {c()}{looper}{c()}_____{c()}_____")
+                # print(url,host,"url")
+                looper+=1
+                response = requests.get(url)
+                # print(response.text,"res")
+                # print(url,"second step in realLink")
+                cookies = response.cookies
+                pattern  = '("key",.+")([a-z0-9]+)(")'
+                key = re.search(pattern,response.text).group(2)
+                print(f"{c()}____{c()}____{c()}Completed {c()} step {c()}{looper}{c()}_____{c()}_____")
+                looper+=1
+                for i in range(3,0,-1):
+                    data = {"action":"direct","type":str(i),"key":key}
+                    # print(url,url,"thirdstep in realink")
+                    #print(data) 
+                    response = requests.post(url,data=data,cookies=cookies)
+                    # print("res text: ",response.text,"fourth half")
+                    try:
+                        url = json.loads(response.text )['url']
+                        #print(url,str(i))
+                        print(f"{c()}____{c()}____{c()}Completed {c()} step {c()}{looper}{c()}_____{c()}_____")
+                        looper+=1
+                        break;
+                    except:pass
+                # print(url,"fourth step")
+                new_url = requests.get(url)
+                #print(new_url.text)
+                print(f"{c()}____{c()}____{c()}Completed {c()} step {c()}{looper}{c()}_____{c()}_____")
+                looper+=1
+                url = bs(new_url.text,'html.parser').find('a',class_="btn-success")['href']
+                return [url]
+            except Exception as e:
+                
+                return []
 
-            cookies = response.cookies
-            pattern  = '("key",.+")([a-z0-9]+)(")'
-            key = re.search(pattern,response.text).group(2)
 
-            data = {"action":"direct","type":"2","key":key}
-            # print(data,url)
-            response = requests.post(url,data=data,cookies=cookies)
-            url = json.loads(response.text )['url']
-            new_url = requests.get(url)
-            url = bs(new_url.text,'html.parser').find('a',class_="btn-success")['href']
-            return [url]
-        except:
-            return []
+        response = requests.get(link,headers=headers).text
+        print(f"{c()}____{c()}____{c()}Completed {c()} step {c()}{looper}{c()}_____{c()}_____\n")
+        # print(link,"if =1")
+        looper+=1
+        soup = bs(response,'html.parser').find("div",class_="mb-4")
+        real_l =[]
+        for direct in soup.children:
+            if direct=="\n":continue
+            real_l.append(direct['href'])
+        # print(real_l)
+        return real_l
+    except:return []
 
-
-    response = requests.get(link,headers=headers).text
-    soup = bs(response,'html.parser').find("div",class_="mb-4")
-    real_l =[]
-    for direct in soup.children:
-        if direct=="\n":continue
-        real_l.append(direct['href'])
-    # print(real_l)
-    return real_l
-  
 def last_step(url):
-    response = requests.get(url).text 
-    soup = bs(response,'html.parser').find('form')
-    link = soup.a['onclick']
-    link = link.replace("Openblank('","")
-    link = link.replace("')","")
-    return link
+    try:
+        response = requests.get(url).text 
+        soup = bs(response,'html.parser').find('form')
+        link = soup.a['onclick']
+        link = link.replace("Openblank('","")
+        link = link.replace("')","")
+        return link
+    except:pass
 
 
 def take_input_m(msg):
@@ -2416,7 +2452,7 @@ def take_input_m(msg):
             elif text=="a":
                 temp = input(f"{c()}Enter {c()}the {c()}url(b): ")
                 if temp=="b":text="";continue;
-                elif temp=="e":exit()
+                elif temp=="e":os.system("clear");exit()
                 elif len(temp)>10:
                     
                     create_thread(temp);
@@ -2426,181 +2462,247 @@ def take_input_m(msg):
                 else:text=""
             elif text=="delete":delete_chunk();text=""
     except:pass
-    if text=="e":exit()
+    if text=="e":os.system("clear");exit()
     
     return text 
 
 
 def auto_checker(url,type=1):
     # print(array)
-    array = real_link(url,type)
-    for i in range(len(array)):
-        print(f"{c()}________{c()}Trying link {c()}{i+1}__________")
-        last = last_step(array[i])
-        # print(last)
-        if is_link_working(last):
+    try:
+        array = real_link(url,type)
+        for i in range(len(array)):
+            print(f"{c()}\n____{c()}____{c()}Trying {c()} link {c()}{i+1}_____{c()}_____")
+            last = last_step(array[i])
             # print(last)
-            return last
-    return -1
+            print(f"{c()}____{c()}____{c()}Completed {c()} step {c()}1{c()}_____{c()}_____")
+            if is_link_working(last):
+                # print(last)
+                
+                return last
+        return ""
+    except:return ""
 
+def print_movies():
+    movies= file_write(type="read")
+    try:
+        counter=1
+        array=[]
+        for name in movies:
+            
+            text = f"\n{c()}{counter}. {name}\n{c()}Status: {movies[name]['status']}\n{c()}Size:{movies[name]['size']}\n{c()}Total:{movies[name]['total']}\n"
+            print(urllib.parse.unquote(text))
+            counter+=1
+            array.append([movies[name]['url'],movies[name]['main_link']])
+    except Exception as e:print(e) 
+    try:
+        download_movie= input("Choose the movie to downlaod (b): ")
+        # print(array[int(download_movie)-1][0],array[int(download_movie)-1][1]);input()
+        if download_movie=="b":return
+        # elif download_movie=="e":exit()
+        elif int(download_movie)<=len(array):
+            if is_link_working(array[int(download_movie)-1][0]):
+                downloader(array[int(download_movie)-1][0],array[int(download_movie)-1][1])
+                # print("First")
+            else:
+                main_l = auto_checker(array[int(download_movie)-1][1],1)
+                if len(main_l)>5:
+                    # print("Second")
+                    downloader(main_l,array[int(download_movie)-1][1])
+                else:
+                    main_l=auto_checker(array[int(download_movie)-1][1],2)
+                    # print(main_l,"main");input("")
+                    if len(main_l)>5:
+                        # print("Third")
+                        downloader(main_l,array[int(download_movie)-1][1])
+    except Exception as e:print(e)
 
 
 
 def main():
-    clear()
+    
     hosts =["https://moviezverse.com","https://dexmovies.xyz"]
     thread=""
     global runner,main_host
     runner=""
     current_host=1
     while(True):
+        clear()
         # print(f"{c()}______________________________________")
+        try:
 
-
-        if runner in ["","search"]:
-            if current_host==1:
-                movie = take_input_m(f"{c()}\nEnter{c()} Hollywood {c()}movie{c()} ({c()}i):{c()} ")
-                if movie=="p":runner="search";continue
-                main_host=hosts[0]
-            else:
-                movie = take_input_m(f"{c()}\nEnter {c()}Indian {c()}movie{c()} ({c()}h): {c()}")
-                if movie=="p":runner="search";continue
-                main_host=hosts[1]
-            if movie=="i":current_host=2;main_host=hosts[1];continue
-            if movie=="h":current_host=1;main_host=hosts[0];continue
-            if movie=="b":return
-            
-            movies_list = get_movies_list(movie)
-            runner=""
+            if runner in ["","search"]:
+                if current_host==1:
+                    movie = take_input_m(f"{c()}\nEnter{c()} Hollywood {c()}movie{c()} ({c()}i):{c()} ")
+                    if movie=="p":runner="search";continue
+                    main_host=hosts[0]
+                else:
+                    movie = take_input_m(f"{c()}\nEnter {c()}Indian {c()}movie{c()} ({c()}h): {c()}")
+                    if movie=="p":runner="search";continue
+                    main_host=hosts[1]
+                if movie=="i":current_host=2;main_host=hosts[1];continue
+                if movie=="h":current_host=1;main_host=hosts[0];continue
+                if movie=="b":return
+                
+                movies_list = get_movies_list(movie)
+                runner=""
+        except Exception as e:runner="";continue
         
 
-        
-        if runner in ["","movie"]:
-            if len(movies_list)==0:
-                print(f"\n{c()}_____{c()}____________{c()}______\n{c()}Please{c()} search {c()}correctly,{c()}there {c()}is {c()}no {c()}movie{c()} of {c()}this {c()}name\n_______{c()}____________{c()}____\n")
-                runner="search"; 
-                continue
-            for i in range(len(movies_list)): print(f"\n{c()}{i+1}. {movies_list[i][1]}\n______________________________________")
-            movie = take_input_m(f"\n\n{c()}Choose {c()}the {c()}movie{c()}:{c()} ")
-            if movie=="p":runner="movie";continue
-            if movie=="b":runner="search"; continue
-            if movie=="s":runner="search";continue
-            runner=""
-            array_link = get_movie_quality( movies_list[int(movie)-1][0]  )
-            
+        try:
+            if runner in ["","movie"]:
+                if len(movies_list)==0:
+                    print(f"\n{c()}_____{c()}____________{c()}______\n{c()}Please{c()} search {c()}correctly,{c()}there {c()}is {c()}no {c()}movie{c()} of {c()}this {c()}name\n_______{c()}____________{c()}____\n")
+                    runner="search";
+                    input("") 
+                    continue
+                for i in range(len(movies_list)): print(f"\n{c()}{i+1}. {movies_list[i][1]}\n______________________________________")
+                movie = take_input_m(f"\n\n{c()}Choose {c()}the {c()}movie{c()}:{c()} ")
+                if movie=="p":runner="movie";continue
+                if movie=="b":runner="search"; continue
+                if movie=="s":runner="search";continue
+                runner=""
+                array_link = get_movie_quality( movies_list[int(movie)-1][0]  )
+        except Exception as e:runner="movie";continue    
 
+        try:
+            if runner in ["","quality"]:
+                counter=0
+                for title,link in array_link:
+                    print(f"{c()}{counter+1}. {title}")
+                    counter+=1
+                    alpha =97
+                    for each_title,each_link in link:
+                        print(f"{c()}{chr(alpha)}. {each_title}",end="\t")
+                        alpha+=1
+                    print("\n_________________________________________\n")
 
-        if runner in ["","quality"]:
-            counter=0
-            for title,link in array_link:
-                print(f"{c()}{counter+1}. {title}")
-                counter+=1
-                alpha =97
-                for each_title,each_link in link:
-                    print(f"{c()}{chr(alpha)}. {each_title}",end="\t")
-                    alpha+=1
-                print("\n_________________________________________\n")
-
-                
-            choose =take_input_m(f"{c()}Enter{c()} the {c()}choice{c()}:{c()} ")
-            if choose=="p":runner="quality";continue
-            runner=""
-            if choose=="b":runner="movie";continue
-            if choose=="s":runner="search";continue
-            subchoice=choose[-1:]
-            # print(subchoice)
-            if subchoice in ["a","b","c","d","e"]:
-                choose = int(choose.replace(str(subchoice),""))
-                if subchoice=="a":subchoice=1;
-                elif subchoice=="b":subchoice=2
-                elif subchoice=="c":subchoice=3
-                elif subchoice=="d":subchoice=4
-                elif subchoice=="e":subchoice=5
-                
-                
-                
-            else:
-                subchoice=1
-                choose =int(choose)
-            
-            # print( array_link[choose-1][1][subchoice-1][1] )
-
-            drive_links = read_drive_links(array_link[choose-1][1][subchoice-1][1] )
-        
-
-            
-        if runner in ["","drive"]:
-            for i in range(len(drive_links)): print(f"{c()}{i+1}. {drive_links[i][0]} ")
-            main_link = take_input_m(f"\n\n{c()}Choose{c()} the {c()}drive{c()} link{c()} (b){c()}:{c()} ")
-            if main_link=="p":runner="drive";continue
-            if main_link=="b":runner="quality";continue
-            elif main_link=="s":runner="search";continue
-            # elif main_link[-1:]=="t":thread=1;main_link=main_link.replace("t","")
-            # else:thread=0
-            runner=""
-            main_links = bypass_ads( drive_links[int(main_link)-1][1] )
-            
-        if runner in ["","link"]:
-            # real_l= real_link(main_links)
-            # print(real_l)
-            # for i in range(len(real_l)):
-            #     print(f"{c()}{i+1} Downlaod link {i+1}")
-            
-            open_browser =auto_checker(main_links,1)
-            if open_browser==-1:print(f"\n{c()}Trying {c()}new {c()}ways\n");open_browser= auto_checker(main_links,2)    
-            if  open_browser==-1:
-                repeat=0
-                runner="drive";
-                print(f"\n{c()}All{c()} the {c()}link {c()}are{c()} not{c()} working...\n");
-                test=take_input_m(f"{c()}Enter{c()} no. {c()}times {c()}to {c()}retry{c()} (i|b|c|f): ")
-                # test = take_input_m(f"{c()}Do you want to continue in browser (y|n): " );
-                if test=="f":
-                    open_browser =auto_checker(main_links,2)
-                elif test in ["c","C","chrome"]:
-                    last = main_links.replace("=","\=")
-                    last = last.replace("&","\&")
                     
-                    os.system(command+last)
-                elif test=="b":continue
-                elif test in ["i","I"]:repeat = 30
-                else: repeat = int(test)
-                while not repeat==0:
-                    repeat-=1
+                choose =take_input_m(f"{c()}Enter{c()} the {c()}choice{c()}:{c()} ")
+                if choose=="p":runner="quality";continue
+                runner=""
+                if choose=="b":runner="movie";continue
+                if choose=="s":runner="search";continue
+                subchoice=choose[-1:]
+                # print(subchoice)
+                if subchoice in ["a","b","c","d","e"]:
+                    choose = int(choose.replace(str(subchoice),""))
+                    if subchoice=="a":subchoice=1;
+                    elif subchoice=="b":subchoice=2
+                    elif subchoice=="c":subchoice=3
+                    elif subchoice=="d":subchoice=4
+                    elif subchoice=="e":subchoice=5
                     
-                    open_browser =auto_checker(main_links)
                     
-                    if not open_browser ==-1:break
-                if open_browser==-1:
-                    test=take_input_m(f"{c()}Do{c()} you {c()}want {c()}to{c()} open {c()}in{c()} browser{c()} (c|b){c()}:{c()} ")
-                # test = take_input_m(f"{c()}Do you want to continue in browser (y|n): " );
-                    if test in ["c","C","chrome"]:
+                    
+                else:
+                    subchoice=1
+                    choose =int(choose)
+                
+                # print( array_link[choose-1][1][subchoice-1][1] )
+
+                drive_links = read_drive_links(array_link[choose-1][1][subchoice-1][1] )
+            
+
+        except Exception as e:runner="quality";continue
+
+        try:            
+            if runner in ["","drive"]:
+                if len(drive_links)==0:runner="quality";continue
+                elif drive_links[0][0][0].find("pisode") ==-1:main_links=bypass_ads(drive_links[0][1]);runner="link";continue
+                for i in range(len(drive_links)): print(f"{c()}{i+1}. {drive_links[i][0]} ")
+                main_link = take_input_m(f"\n\n{c()}Choose{c()} the {c()}drive{c()} link{c()} (b){c()}:{c()} ")
+                if main_link=="p":runner="drive";continue
+                if main_link=="b":runner="quality";continue
+                elif main_link=="s":runner="search";continue
+                # elif main_link[-1:]=="t":thread=1;main_link=main_link.replace("t","")
+                # else:thread=0
+                runner=""
+                main_links = bypass_ads( drive_links[int(main_link)-1][1] )
+        except Exception as e:runner="drive";continue
+
+        try:    
+            if runner in ["","link"]:
+                # real_l= real_link(main_links)
+                # print(real_l)
+                # for i in range(len(real_l)):
+                #     print(f"{c()}{i+1} Downlaod link {i+1}")
+                
+                open_browser =auto_checker(main_links,1)
+                if len(open_browser)<1:print(f"\n{c()}________{c()}Trying {c()}new {c()}ways{c()}__________\n");open_browser= auto_checker(main_links,2)    
+                if  len(open_browser)<1:
+                    repeat=0
+                    if drive_links[0][0][0].find("pisode") ==-1:
+                        runner="quality"
+                    else:
+                        runner="drive"
+                    print(f"\n{c()}All{c()} the {c()}link {c()}are{c()} not{c()} working...\n");
+                    test=take_input_m(f"{c()}Enter{c()} no. {c()}times {c()}to {c()}retry{c()} (i|b|c|f): ")
+                    # test = take_input_m(f"{c()}Do you want to continue in browser (y|n): " );
+                    if test=="f":
+                        open_browser =auto_checker(main_links,2)
+                    elif test in ["c","C","chrome"]:
                         last = main_links.replace("=","\=")
                         last = last.replace("&","\&")
                         
                         os.system(command+last)
+                    elif test=="b":continue
+                    elif test in ["i","I"]:repeat = 30
+                    else: repeat = int(test)
+                    while not repeat==0:
+                        repeat-=1
+                        
+                        open_browser =auto_checker(main_links)
+                        
+                        if not len(open_browser)>1:break
+                    if len(open_browser)<1:
+                        test=take_input_m(f"{c()}Do{c()} you {c()}want {c()}to{c()} open {c()}in{c()} browser{c()} (c|b){c()}:{c()} ")
+                    # test = take_input_m(f"{c()}Do you want to continue in browser (y|n): " );
+                        if test in ["c","C","chrome"]:
+                            last = main_links.replace("=","\=")
+                            last = last.replace("&","\&")
+                            
+                            os.system(command+last)
+                        continue
+                # print(open_browser)
+                if len(open_browser)<1 :
+                    runner="drive"
+                    if drive_links[0][0][0].find("pisode") ==-1:
+                        runner="quality";
                     continue
-            # print(open_browser)
-            temp = input(f"\n{c()}Download {c()}in {c()}terminal {c()}or {c()}chrome {c()}({c()}a{c()}|{c()}t|{c()}c{c()}|{c()}){c()}:{c()}")    
-            if temp=="e":exit()
-            if temp=="c":
-                # last = last_step(real_l[int(open_browser)]8)
-                last = open_browser.replace("=","\=")
-                last = last.replace("&","\&")
-                last = last.replace(")","\)")
-                last = last.replace("(","\(")
-                #print(last)
-                os.system(command+last)
-            elif temp=="b":
-                runner="drive";continue
-            elif temp=="a":
-                
-                create_thread(open_browser)
-                
-                input("")
-            else:
-                downloader(open_browser,main_links)    
-            
-            runner="drive"
+                temp = input(f"\n{c()}Download {c()}in {c()}terminal {c()}or {c()}chrome {c()}({c()}a{c()}|{c()}t|{c()}c{c()}|{c()}){c()}:{c()}")    
+                if temp=="e":os.system("clear");exit()
+                print()
+                if temp=="c":
+                    # last = last_step(real_l[int(open_browser)]8)
+                    last = open_browser.replace("=","\=")
+                    last = last.replace("&","\&")
+                    last = last.replace(")","\)")
+                    last = last.replace("(","\(")
+                    #print(last)
+                    os.system(command+last)
+                elif temp=="b":
+                    if drive_links[0][0][0].find("pisode") ==-1:
+                        runner="quality";
+                    else:runner="drive"
+                    continue
+                elif temp=="a":
+                    
+                    create_thread(open_browser)
+                    
+                    input("")
+                else:
+                    downloader(open_browser,main_links)    
+                if drive_links[0][0][0].find("pisode") ==-1:
+                    runner="quality"
+                else:
+                    runner="drive"
+        except Exception as e:
+                if drive_links[0][0][0].find("pisode") ==-1:
+                    runner="quality"
+                else:
+                    runner="drive"
+                continue
             
 
 
@@ -2630,11 +2732,12 @@ while(True):
     
     choose=take(f"\n{c()}1.{c()} Ncell {c()}Ecare\n{c()}2.{c()} Ncell {c()}App{c()}\n3. {c()}Ncell{c()} Web\n{c()}4. {c()}MoviesVerse\n{c()}5.{c()} Update{c()}\n=>");
     os.system("clear");print(f"{c()}We{c()}lc{c()}om{c()}e {c()}to {c()}nc{c()}el{c()}l m{c()}od{c()}s{c()}\n__{c()}_______{c()}________{c()}____")
-    
-    if choose=="b" or choose==5:break;
-    elif choose=="5f":update(repo,"ncellpy",dust=1)
-    elif int(choose)==1:web();
-    elif int(choose)==2:app();
-    elif int(choose)==5:update(repo,"ncellpy",dust=0);
-    elif int(choose)==4:main()
-    elif int(choose)==3:webaxiata();
+    try:
+        if choose=="b" or choose==5:break;
+        elif choose=="5f":update(repo,"ncellpy",dust=1)
+        elif int(choose)==1:web();
+        elif int(choose)==2:app();
+        elif int(choose)==5:update(repo,"ncellpy",dust=0);
+        elif int(choose)==4:main()
+        elif int(choose)==3:webaxiata();
+    except Exception as e:pass
