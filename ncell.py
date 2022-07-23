@@ -1,4 +1,4 @@
-#version 20220723.6
+#version 20220724
 #change ncellapp to ncell_app 
 import random
 import os
@@ -2130,7 +2130,9 @@ def downloader(url,main_links):
         try:
             if movie_json[filename]['status'] =="completed" and  os.path.exists(f"{directory}/{filename}"):
                 if pathlib.Path(f"{directory}/{filename}").stat().st_size>1*1024*1024:
-                    print(f"{c()}File is already downlaoded\n");input()
+                    print(f"{c()}File is already downlaoded\n");
+                    ccc=input(f"\n{c()}Do{c()} you{c()} want{c()} to{c()} open{c()} it{c()} now(y|n{c()}):")
+                    if ccc=="y":os.system(command+f"{directory}/{filename}")
                     return 
         except Exception as e:pass
 
@@ -2169,7 +2171,8 @@ def downloader(url,main_links):
         # print(file_write(type="read"))
         clear()
         print(f"{c()}\nFile {c()}is {c()}downloaded {c()}successfully{c()}...{c()}\n")
-        input("")
+        ccc=input(f"\n{c()}Do{c()} you{c()} want{c()} to{c()} open{c()} it{c()} now(y|n{c()}):")
+        if ccc=="y":os.system(command+f"{directory}/{filename}")
     except Exception as e:print(f"{c()}Failed{c()} downloading{c()} the{c()} file...");input("")
 
 ###################################3
@@ -2637,7 +2640,7 @@ def main():
                     else:
                         runner="drive"
                     print(f"\n{c()}All{c()} the {c()}link {c()}are{c()} not{c()} working...\n");
-                    test=take_input_m(f"{c()}Enter{c()} no. {c()}times {c()}to {c()}retry{c()} (i|b|c|f): ")
+                    test=take_input_m(f"{c()}Enter{c()} no. {c()}times {c()}to {c()}retry or {c()}ch{c()}rom{c()}e{c()} (i|b|c|f): ")
                     # test = take_input_m(f"{c()}Do you want to continue in browser (y|n): " );
                     if test=="f":
                         open_browser =auto_checker(main_links,2)
