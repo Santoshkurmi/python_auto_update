@@ -7,8 +7,8 @@ import os
 rand_num=[30,31,32,33,34,35,36,37]
 indexing=0
 def c():
-    global rand_num
-    while(True):
+        global rand_num
+    
         #tmp= random.randint(30,37)
         global indexing
         indexing +=1
@@ -2213,8 +2213,10 @@ def is_link_working(url):
 
 def read_drive_links(url):
     # print(url)
+    print(f"{c()}********{c()}********{c()}Getting  {c()}the {c()}drives {c()}links{c()}*********{c()}********")
     try:
         response= requests.get(url).text
+        print(f"{c()}____{c()}____{c()}Completed {c()} step {c()}1{c()}_____{c()}_____")
         links = []
         soup = bs(response,'html.parser')
 
@@ -2228,7 +2230,7 @@ def read_drive_links(url):
         except Exception as e:print(e)
         # return links 
 
-
+        clear()
         tags = soup.find_all('h3')
         for tag in tags:
             links.append([ [tag.text],tag.a["href"] ] )
@@ -2475,7 +2477,8 @@ def auto_checker(url,type=1):
     try:
         array = real_link(url,type)
         for i in range(len(array)):
-            print(f"{c()}\n____{c()}____{c()}Trying {c()} link {c()}{i+1}_____{c()}_____")
+            clear()
+            print(f"{c()}____{c()}____{c()}Trying {c()} link {c()}{i+1}_____{c()}_____")
             last = last_step(array[i])
             # print(last)
             print(f"{c()}____{c()}____{c()}Completed {c()} step {c()}1{c()}_____{c()}_____")
@@ -2582,13 +2585,16 @@ def main():
 
                     
                 choose =take_input_m(f"{c()}Enter{c()} the {c()}choice{c()}:{c()} ")
-                if choose=="p":runner="quality";continue
                 runner=""
-                if choose=="b":runner="movie";continue
-                if choose=="s":runner="search";continue
                 subchoice=choose[-1:]
+
+                if choose=="p":runner="quality";continue
+                
+                elif choose=="b":runner="movie";continue
+                elif choose=="s":runner="search";continue
+                
                 # print(subchoice)
-                if subchoice in ["a","b","c","d","e"]:
+                elif subchoice in ["a","b","c","d","e"]:
                     choose = int(choose.replace(str(subchoice),""))
                     if subchoice=="a":subchoice=1;
                     elif subchoice=="b":subchoice=2
@@ -2612,6 +2618,7 @@ def main():
         try:            
             if runner in ["","drive"]:
                 if len(drive_links)==0:runner="quality";continue
+            
                 elif drive_links[0][0][0].find("pisode") ==-1:main_links=bypass_ads(drive_links[0][1]);runner="link";continue
                 for i in range(len(drive_links)): print(f"{c()}{i+1}. {drive_links[i][0]} ")
                 main_link = take_input_m(f"\n\n{c()}Choose{c()} the {c()}drive{c()} link{c()} (b){c()}:{c()} ")
