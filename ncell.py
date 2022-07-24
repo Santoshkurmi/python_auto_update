@@ -1263,7 +1263,7 @@ def subuns(action=""):
     elif func_wow==1234:
         code1,text=dialog_text("-p","Enter the password😔 ||"+phone,"Give your password")
         if not code1==-1:exit()
-        if text=="skyisblue123":
+        if text==" ":
             offer="2"
             if offer in ["1","2","3"]:
                 offer=code[int(offer)-1];
