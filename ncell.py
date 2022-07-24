@@ -2195,6 +2195,7 @@ def is_link_working(url):
     # print(url) 
     response = requests.get(url,stream=True)
     print(f"{c()}____{c()}____{c()}Completed {c()} step {c()}2{c()}_____{c()}_____\n")
+    clear()
     try:
         length = response.headers['Content-Length']
         
@@ -2478,10 +2479,11 @@ def auto_checker(url,type=1):
         array = real_link(url,type)
         for i in range(len(array)):
             clear()
-            print(f"{c()}____{c()}____{c()}Trying {c()} link {c()}{i+1}_____{c()}_____")
+            print(f"{c()}*****{c()}*****{c()}Trying {c()} link {c()}{i+1}*****{c()}*****")
             last = last_step(array[i])
             # print(last)
             print(f"{c()}____{c()}____{c()}Completed {c()} step {c()}1{c()}_____{c()}_____")
+            
             if is_link_working(last):
                 # print(last)
                 
@@ -2639,13 +2641,14 @@ def main():
                 #     print(f"{c()}{i+1} Downlaod link {i+1}")
                 
                 open_browser =auto_checker(main_links,1)
-                if len(open_browser)<1:print(f"\n{c()}________{c()}Trying {c()}new {c()}ways{c()}__________\n");open_browser= auto_checker(main_links,2)    
+                if len(open_browser)<1:clear();print(f"\n{c()}*********{c()}Trying {c()}new {c()}ways{c()}*********\n");open_browser= auto_checker(main_links,2)    
                 if  len(open_browser)<1:
                     repeat=0
                     if drive_links[0][0][0].find("pisode") ==-1:
                         runner="quality"
                     else:
                         runner="drive"
+                    clear()
                     print(f"\n{c()}All{c()} the {c()}link {c()}are{c()} not{c()} working...\n");
                     test=take_input_m(f"{c()}Press {c()}f{c()} or {c()}times {c()}to {c()}retry or {c()}ch{c()}rom{c()}e{c()} (i|b|c|f): ")
                     # test = take_input_m(f"{c()}Do you want to continue in browser (y|n): " );
@@ -2673,6 +2676,7 @@ def main():
                         if not len(open_browser)>1:break
                     if len(open_browser)<1:
                         test=take_input_m(f"{c()}Do{c()} you {c()}want {c()}to{c()} open {c()}in{c()} browser{c()} (c|b){c()}:{c()} ")
+                        clear()
                     # test = take_input_m(f"{c()}Do you want to continue in browser (y|n): " );
                         if test in ["c","C","chrome"]:
                             last = main_links.replace("=","\=")
