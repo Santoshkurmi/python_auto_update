@@ -1,20 +1,20 @@
-#version 20220724
+#version 20220724.2
 #change ncellapp to ncell_app 
 import random
 import os
 
 
-rand_num=[]
-
+rand_num=[30,31,32,33,34,35,36,37]
+indexing=0
 def c():
     global rand_num
     while(True):
-        tmp= random.randint(30,37)
-        if not tmp in rand_num:
-            rand_num.append(tmp)
-            if len(rand_num)>7:
-                rand_num=[]
-            return f"\u001b[{tmp};1m";
+        #tmp= random.randint(30,37)
+        global indexing
+        indexing +=1
+        indexing = indexing %8
+            
+        return f"\u001b[{rand_num[indexing]};1m";
 
 
 
@@ -2640,10 +2640,16 @@ def main():
                     else:
                         runner="drive"
                     print(f"\n{c()}All{c()} the {c()}link {c()}are{c()} not{c()} working...\n");
-                    test=take_input_m(f"{c()}Enter{c()} no. {c()}times {c()}to {c()}retry or {c()}ch{c()}rom{c()}e{c()} (i|b|c|f): ")
+                    test=take_input_m(f"{c()}Press {c()}f{c()} or {c()}times {c()}to {c()}retry or {c()}ch{c()}rom{c()}e{c()} (i|b|c|f): ")
                     # test = take_input_m(f"{c()}Do you want to continue in browser (y|n): " );
                     if test=="f":
-                        open_browser =auto_checker(main_links,2)
+                        if drive_links[0][0][0].find("pisode") ==-1:
+                            main_links = bypass_ads( drive_links[1][1] )
+                            open_browser =auto_checker(main_links,1)
+                            if len(open_browser) <1:
+                                open_browser =auto_checker(main_links,2)
+                        else:
+                            open_browser =auto_checker(main_links,2)
                     elif test in ["c","C","chrome"]:
                         last = main_links.replace("=","\=")
                         last = last.replace("&","\&")
